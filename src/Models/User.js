@@ -1,40 +1,38 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
-  Name: {
-    type: String,
-    required: true,
-  },
-  Email: {
-    type: String,
-    required: true
-  },
-  Age: {
+
+//flight number, departure and arrival times, dates, number of Economy seats, number of Business class seats, and airport.
+const flightSchema = new Schema({
+  flight_number: {
     type: Number,
     required: true,
   },
-  BornIn: {
+  departure: {
     type: String,
     required: true
   },
-  LivesIn: {
+  arrival_times: {
     type: String,
+    required: true,
+  },
+  dates:{
+    type:String,
     required: true
   },
-  MartialStatus: {
-    type: String,
+  number_of_Economy_seats: {
+    type: Number,
     required: true
   },
-  PhoneNumber: {
-    type: String,
+  number_of_Business_class_seats: {
+    type: Number,
     required: true
   },
-  Job: {
+  airport: {
     type: String,
     required: true
   }
 }, { timestamps: true });
 
-const User = mongoose.model('User', userSchema);
-module.exports = User;
+const Flight = mongoose.model('Flight', flightSchema);
+module.exports = Flight;
