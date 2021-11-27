@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Popup from "../components/popup";
+
 
 const Flight = props => (
   <tr>
@@ -12,7 +14,7 @@ const Flight = props => (
     <td>{props.flight.number_of_Business_class_seats}</td>
     <td>{props.flight.airport}</td>
     <td>
-      <Link to={"/edit/"+props.flight._id}>edit</Link> | <a href="#" onClick={() => { props.deleteFlight(props.flight._id) }}>delete</a>
+      <Link to={"/edit/"+props.flight._id}>edit</Link> | <a href="#" onClick={() => {props.deleteFlight(props.flight._id) }}>delete</a>
     </td>
   </tr>
 )
@@ -37,12 +39,53 @@ export default class FlightList extends Component {
   }
 
   deleteFlight(id) {
+    if(window.confirm('are you sure'))
+    {
     axios.delete('http://localhost:5000/flights/'+id)
       .then(response => { console.log(response.data)});
 
     this.setState({
       flights: this.state.flights.filter(el => el._id !== id)
     })
+  }
+  else{
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+  }
   }
 
   flightList() {
@@ -73,6 +116,7 @@ export default class FlightList extends Component {
           </tbody>
         </table>
       </div>
+      
     )
   }
 }

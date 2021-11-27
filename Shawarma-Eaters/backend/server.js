@@ -20,7 +20,7 @@ connection.once('open', () => {
 
 // const exercisesRouter = require('./routes/exercises');
 // const usersRouter = require('./routes/users');
-const flightRouter = require('./routes/flights');
+const flightRouter = require('./routes/FlightRoutes');
 const adminRouter = require('./routes/AdminRoutes');
 // app.use('/exercises', exercisesRouter);
 // app.use('/users', usersRouter);

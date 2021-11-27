@@ -1,8 +1,8 @@
 import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route} from "react-router-dom";
-// import Popup from "./components/popup";
-// import {useState} from 'react';
+ import Popup from "./components/popup";
+ import {useState} from 'react';
 import Navbar from "./components/navbar.component";
 import UpdateFlight from "./components/update-flight.component";
 import CreateFlights from "./components/create-flights.component";
@@ -13,7 +13,7 @@ import FlightList from './components/flight-list.component';
 import DeleteFlight from './components/flight-list.component';
 
 function App() {
-  // const [buttonPopup,SetButtonPopup]= useState(false);
+  const [buttonPopup,SetButtonPopup]= useState(false);
   return (
     <Router>
       <div className="container">
@@ -32,17 +32,17 @@ function App() {
 
       </div>
 
-      {/* <div className="application">
+       {/* <div className="application">
         <main>
           <h1>React Popup</h1>
           <br>
           </br>
-          <button>Open Popup</button>
+          <button onClick={Popup}>Open Popup</button>
         </main>
         <Popup trigger ={buttonPopup} setTrigger ={SetButtonPopup} >
             <h3>My Popup</h3>
           </Popup>
-      </div> */}
+      </div>  */}
     </Router>
   );
 }
