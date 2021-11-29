@@ -12,7 +12,8 @@ const Flight = props => (
     <td>{props.flight.dates.substring(0,10)}</td>
     <td>{props.flight.number_of_Economy_seats}</td>
     <td>{props.flight.number_of_Business_class_seats}</td>
-    <td>{props.flight.airport}</td>
+    <td>{props.flight.arrAirport}</td>
+    <td>{props.flight.depAirport}</td>
     <td>
       <Link to={"/edit/"+props.flight._id}>edit</Link> | <a href="#" onClick={() => {props.deleteFlight(props.flight._id) }}>delete</a>
     </td>
@@ -107,7 +108,8 @@ export default class FlightList extends Component {
               <th>Date</th>
               <th>Number of Economy Seats</th>
               <th>Number of Business Seats</th>
-              <th>Airport</th>
+              <th>Arrival Airport</th>
+              <th>Departure Airport</th>
               <th>Actions</th>
             </tr>
           </thead>
