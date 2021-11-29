@@ -153,6 +153,16 @@ export default class CreateFlights extends Component {
               />
         </div>
         <div className="form-group"> 
+          <label>Passportnumber: </label>
+          <input  type="text"
+              required
+              className="form-control"
+              value={this.state.passportnumber}
+              onChange={this.onChangePassport}
+              />
+        </div>
+        
+        <div className="form-group"> 
           <label>Email: </label>
           <input  type="text"
               required
@@ -161,6 +171,7 @@ export default class CreateFlights extends Component {
               onChange={this.onChangeEmail}
               />
         </div>
+        
         <div className="form-group"> 
           <label>Password: </label>
           <input  type="text"
