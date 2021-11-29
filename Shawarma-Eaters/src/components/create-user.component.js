@@ -5,7 +5,7 @@ import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
-export default class CreateFlights extends Component {
+export default class CreateUser extends Component {
   constructor(props) {
     super(props);
 

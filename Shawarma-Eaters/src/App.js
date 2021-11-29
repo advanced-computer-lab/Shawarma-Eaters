@@ -12,6 +12,7 @@ import LoginUser from './components/login/LoginUser';
 import FlightList from './components/flight-list.component';
 import DeleteFlight from './components/flight-list.component';
 
+import SearchPage from "./components/search-plus.component";
 import CreateUser from "./components/create-user.component";
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
       <Route path="/loginUser" component={LoginUser} /> 
       <Route path="/delete/:id" component={DeleteFlight} /> 
       <Route path="/createuser" component={CreateUser} />
+      <Route path="/searchplus" component={SearchPage} />
 
 
 

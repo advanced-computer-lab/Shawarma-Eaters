@@ -1,10 +1,34 @@
 const User = require('../models/user');
 
 const findDepartureFlight = (req,res) => {
-User.find({From, To, DepartureDate,Adults, Children, cabinclass})
+    if (cabinclass == "Economy" && number_of_Economy_seats >= adults + children){
+        User.find({depAirport: req.body.depairport,arrAirport: req.body.arrAirport, dates: req.body.dates})
+        .then(user => res.json(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+    }
+    if (cabinclass == "Business" && number_of_Business_class_seats >= adults + children){
+        User.find({depAirport: req.body.depairport,arrAirport: req.body.arrAirport, dates: req.body.dates})
+        .then(user => res.json(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+    }
+    else{
+        //popup
+    }
 }
 const findArrivalFlight = (req,res) => {
-    User.find({To, From , ReturnDate, Adults, Children, cabinclass})
+    if (cabinclass == "Economy" && number_of_Economy_seats >= adults + children){
+        User.find({depAirport: to,arrAirport: from, dates: returnDate}) 
+        .then(user => res.json(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+    }
+    if (cabinclass == "Business" && number_of_Business_class_seats >= adults + children){
+        User.find({depAirport: to,arrAirport: from, dates: returnDate})
+        .then(user => res.json(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+    }
+    else{
+        //popup
+    }
 }
 //
 const createUser = (req,res) => {
@@ -45,7 +69,9 @@ const getAllUsers = (req,res) => {
 module.exports=
 {
     createUser,
-    getAllUsers
+    getAllUsers,
+    findDepartureFlight,
+    findArrivalFlight
     // addAdmin,
     // getAdmin
 }
