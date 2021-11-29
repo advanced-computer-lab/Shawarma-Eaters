@@ -27,10 +27,14 @@ number_of_Business_class_seats: {
 type: Number,
 required: true
 },
-airport: {
+depAirport: {
 type: String,
 required: true
-}
+},
+arrAirport: {
+    type: String,
+    required: true
+    }
 }, { timestamps: true });
 
 

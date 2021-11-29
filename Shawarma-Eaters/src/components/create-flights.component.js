@@ -15,7 +15,8 @@ export default class CreateFlights extends Component {
     this.onChangeDate = this.onChangeDate.bind(this);
     this.onChangeEconSeats = this.onChangeEconSeats.bind(this);
     this.onChangeBusiSeats = this.onChangeBusiSeats.bind(this);
-    this.onChangeAirport = this.onChangeAirport.bind(this);
+    this.onChangeArrAirport = this.onChangeArrAirport.bind(this);
+    this.onChangeDepAirport = this.onChangeDepAirport.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
@@ -24,7 +25,8 @@ export default class CreateFlights extends Component {
       arrival_times: '',
       number_of_Economy_seats: 0,
       number_of_Business_class_seats: 0,
-      airport:'',
+      arrAirport:'',
+      depAirport:'',
       dates: new Date(),
       users: []
     }
@@ -83,9 +85,14 @@ export default class CreateFlights extends Component {
     })
   }
 
-  onChangeAirport(e){
+  onChangeArrAirport(e){
     this.setState({
-      airport:e.target.value
+      arrAirport:e.target.value
+    })
+  }
+  onChangeDepAirport(e){
+    this.setState({
+      depAirport:e.target.value
     })
   }
   
@@ -99,7 +106,8 @@ export default class CreateFlights extends Component {
         arrival_times: this.state.arrival_times,
         number_of_Economy_seats: this.state.number_of_Economy_seats,
         number_of_Business_class_seats: this.state.number_of_Business_class_seats,
-        airport:this.state.airport,
+        arrAirport:this.state.arrAirport,
+        depAirport:this.state.depAirport,
         dates: this.state.dates
       }
   
@@ -180,12 +188,21 @@ export default class CreateFlights extends Component {
               />
         </div>
         <div className="form-group">
-          <label>Airport: </label>
+          <label>Departure Airport: </label>
           <input 
               type="text" 
               className="form-control"
-              value={this.state.airport}
-              onChange={this.onChangeAirport}
+              value={this.state.depAirport}
+              onChange={this.onChangeDepAirport}
+              />
+        </div>
+        <div className="form-group">
+          <label>Arrival Airport: </label>
+          <input 
+              type="text" 
+              className="form-control"
+              value={this.state.arrAirport}
+              onChange={this.onChangeArrAirport}
               />
         </div>
         <div className="form-group">
@@ -203,12 +220,7 @@ export default class CreateFlights extends Component {
   
         </div>
         </form>
-        {/*   
-        <Prompt message="NO DONKEY?"/>
         
-        <div class="alert alert-success"> </div>
-      
-    <strong>Success!</strong> FLIGHT CREATED!!! */}
   </div>
   
 
