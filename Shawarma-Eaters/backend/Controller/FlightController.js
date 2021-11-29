@@ -45,7 +45,7 @@ const addFlight =  (req,res)=> {
 // .then(() => res.json('Flight added!'))
 // .catch(err => res.status(201).json(post)
 // );
-
+//
 
 const getAllFlights = (req,res) => {
     console.log('request came');

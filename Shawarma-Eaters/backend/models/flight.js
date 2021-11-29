@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
+//
 //flight number, departure and arrival times, dates, number of Economy seats, number of Business class seats, and airport.
 const flightSchema = new Schema({
 flight_number: {

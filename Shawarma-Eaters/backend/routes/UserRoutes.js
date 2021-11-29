@@ -7,3 +7,4 @@ router.route('/isThereAdmin').get(adminController.getAdmin);
 router.route('/add').post(adminController.addAdmin);
 
 module.exports = router;  
+//

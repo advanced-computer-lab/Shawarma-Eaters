@@ -1,5 +1,5 @@
 const Admin = require('../models/admin');
-
+//
 const addAdmin =  (req,res)=> {
 
 console.log('request came');

@@ -96,7 +96,7 @@ export default class CreateFlights extends Component {
       depAirport:e.target.value
     })
   }
-  
+  //
 
   onSubmit(e) {
     e.preventDefault();

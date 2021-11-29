@@ -6,3 +6,4 @@ router.route('/').get(adminController.getAllAdmins);
 router.route('/isThereAdmin').get(adminController.getAdmin);
 
 module.exports = router;  
+//

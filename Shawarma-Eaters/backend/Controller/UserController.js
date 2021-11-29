@@ -1,7 +1,7 @@
 const User = require('../models/user');
 
 // changes needed
-
+//
 const getAllAdmins = (req,res) => {
     console.log('request came GetALL');
     console.log(req.body); 
