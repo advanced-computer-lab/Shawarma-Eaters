@@ -1,5 +1,12 @@
 const User = require('../models/user');
 
+const findDepartureFlight = (req,res) => {
+User.find({From, To, DepartureDate,Adults, Children, cabinclass})
+}
+const findArrivalFlight = (req,res) => {
+    User.find({To, From , ReturnDate, Adults, Children, cabinclass})
+}
+
 const createUser = (req,res) => {
     console.log('trying to create usr');
     
