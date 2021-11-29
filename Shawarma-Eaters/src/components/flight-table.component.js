@@ -72,14 +72,8 @@ class FlightTable extends React.Component {
         width: 200
       },
       {
-        label: "Airport Departure Terminals",
-        field: "depAirport",
-        sort: 'asc',
-        width: 200
-      },
-      {
-        label: "Airport Arrival Terminals",
-        field: "arrAirport",
+        label: "Airport Terminals",
+        field: "airport",
         sort: 'asc',
         width: 200
       }

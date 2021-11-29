@@ -7,8 +7,7 @@ const addFlight =  (req,res)=> {
     const arrival_times = req.body.arrival_times;
     const number_of_Economy_seats = Number(req.body.number_of_Economy_seats);
     const number_of_Business_class_seats = Number(req.body.number_of_Business_class_seats);
-    const depAirport = req.body.depAirport;
-    const arrAirport = req.body.arrAirport;
+    const airport = req.body.airport;
     const dates = Date.parse(req.body.dates);
   
   
@@ -18,9 +17,7 @@ const addFlight =  (req,res)=> {
       arrival_times,
       number_of_Economy_seats,
       number_of_Business_class_seats,
-      depAirport,
-      arrAirport,
-      
+      airport,
       dates
     });
   
@@ -85,8 +82,7 @@ const updateFlightById = (req, res) => {
       flight.arrival_times = req.body.arrival_times;
       flight.number_of_Economy_seats = Number(req.body.number_of_Economy_seats);
       flight.number_of_Business_class_seats = Number(req.body.number_of_Business_class_seats);
-      flight.depAirport = req.body.depAirport;
-      flight.arrAirport = req.body.arrAirport;
+      flight.airport = req.body.airport;
       flight.dates = Date.parse(req.body.dates);
 
       flight.save()
