@@ -28,6 +28,7 @@ export default class CreateFlights extends Component {
       arrAirport:'',
       depAirport:'',
       dates: new Date(),
+      
       users: []
     }
   }

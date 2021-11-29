@@ -22,10 +22,13 @@ connection.once('open', () => {
 // const usersRouter = require('./routes/users');
 const flightRouter = require('./routes/FlightRoutes');
 const adminRouter = require('./routes/AdminRoutes');
+const guestRouter = require('./routes/GuestRoutes');
+
 // app.use('/exercises', exercisesRouter);
 // app.use('/users', usersRouter);
 app.use('/flights', flightRouter);
-app.use('/login',adminRouter )
+app.use('/guest', guestRouter);
+app.use('/login',adminRouter)
 //Mahmoud added this
 //app.get('/viewFlights',flightController.viewFlights);
 //--

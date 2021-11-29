@@ -12,6 +12,8 @@ import LoginUser from './components/login/LoginUser';
 import FlightList from './components/flight-list.component';
 import DeleteFlight from './components/flight-list.component';
 
+import CreateUser from "./components/create-user.component";
+
 function App() {
   const [buttonPopup,SetButtonPopup]= useState(false);
   return (
@@ -27,6 +29,8 @@ function App() {
       <Route path="/login" component={Login} /> 
       <Route path="/loginUser" component={LoginUser} /> 
       <Route path="/delete/:id" component={DeleteFlight} /> 
+      <Route path="/createuser" component={CreateUser} />
+
 
 
 
