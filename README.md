@@ -16,3 +16,6 @@ npm start
 ```
 node server.js 
 ```
+npm i express cors axios node mongoose body-parser bcryptjs validation
+npm i -D nodemon
+npm install react-scripts --save
