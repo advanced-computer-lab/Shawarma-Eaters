@@ -33,7 +33,5 @@ module.exports=
 {
     addBook,
     getBookById,
-    deleteBookById,
-    deleteBookById2,
-    updateBookById
+    deleteBookById
 }

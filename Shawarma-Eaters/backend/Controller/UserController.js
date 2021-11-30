@@ -70,7 +70,6 @@ const sendEmail = (req,res) => {
 module.exports=
 {
     getAllAdmins,
-    addAdmin,
     getAdmin,
     sendEmail
 }
