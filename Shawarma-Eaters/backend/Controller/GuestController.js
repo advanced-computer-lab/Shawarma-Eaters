@@ -2,12 +2,12 @@ const User = require('../models/user');
 
 const findDepartureFlight = (req,res) => {
     if (req.body.cabinclass == "Economy" ){
-        User.find({depAirport: req.body.departureAirport,arrAirport: req.body.arrivalAirport, dates: req.body.depratureDate, number_of_Economy_seats :{ $gte: req.body.adults + req.body.children}})
+        User.find({depAirport: req.body.departureAirport,arrAirport: req.body.arrivalAirport, dates: Date.parse(req.body.depratureDate), number_of_Economy_seats :{ $gte: Number(req.body.adults) + Number(req.body.children)}})
         .then(user => res.json(user))
         .catch(err => res.status(400).json('Error: ' + err));
     }
     else if (req.body.cabinclass == "Business" ){
-        User.find({depAirport: req.body.departureAirport,arrAirport: req.body.arrivalAirport, dates: req.body.depratureDate, number_of_Business_class_seats :{ $gte: req.body.adults + req.body.children}})
+        User.find({depAirport: req.body.departureAirport,arrAirport: req.body.arrivalAirport, dates: Date.parse(req.body.depratureDate), number_of_Business_class_seats :{ $gte: Number(req.body.adults) + Number(req.body.children)}})
         .then(user => res.json(user))
         .catch(err => res.status(400).json('Error: ' + err));
     }
@@ -15,12 +15,12 @@ const findDepartureFlight = (req,res) => {
 }
 const findArrivalFlight = (req,res) => {
     if (req.body.cabinclass == "Economy" ){
-        User.find({depAirport: req.body.arrivalAirport,arrAirport: req.body.departureAirport, dates: req.body.arrivalDate, number_of_Economy_seats :{ $gte: req.body.adults + req.body.children}}) 
+        User.find({depAirport: req.body.arrivalAirport,arrAirport: req.body.departureAirport, dates: Date.parse(req.body.arrivalDate), number_of_Economy_seats :{ $gte:Number(req.body.adults) + Number(req.body.children)}}) 
         .then(user => res.json(user))
         .catch(err => res.status(400).json('Error: ' + err));
     }
     else if (req.body.cabinclass == "Business" ){
-        User.find({depAirport: req.body.arrivalAirport,arrAirport: req.body.departureAirport, dates: req.body.arrivalDate, number_of_Business_class_seats :{ $gte: req.body.adults + req.body.children}})
+        User.find({depAirport: req.body.arrivalAirport,arrAirport: req.body.departureAirport, dates: Date.parse(req.body.arrivalDate), number_of_Business_class_seats :{ $gte: Number(req.body.adults) + Number(req.body.children)}})
         .then(user => res.json(user))
         .catch(err => res.status(400).json('Error: ' + err));
     }

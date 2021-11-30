@@ -2,21 +2,38 @@ const User = require('../models/user');
 
 // changes needed
 //
-const getAllAdmins = (req,res) => {
-    console.log('request came GetALL');
+const getUserById = (req, res) => {
+    User.findById(req.params.id)
+      .then(user => res.json(user))
+      .catch(err => res.status(400).json('Error: ' + err));
+}
+const getAllUsers = (req,res) => {
+    console.log('request came Get ALL');
     console.log(req.body); 
-    Admin.find()
-    .then(Admins => res.json(Admins))
+    User.find()
+    .then(Users => res.json(Users))
     .catch(err => res.status(400).json('Error: ' + err));
 }
-const getAdmin = (req,res) => {
-    Admin.find({$and:[{username : req.body.username},{password : req.body.password}]})
-    .then(Admins => {res.json(Admins); console.log('Success')})
-    .catch(err => res.status(400).json('Error: ' + err));
+const updateUserById = (req, res) => {
+    User.findById(req.params.id)
+        .then((user) => {
+
+      user.username = req.body.username;
+      user.firstname = req.body.firstname;
+      user.lastname = req.body.lastname;
+      user.email = req.body.email;
+      user.passportnumber = req.body.passportnumber;
+      user.password = req.body.password;
+
+      user.save()
+      .then(() => res.json('User+ updated!'))
+      .catch(err => res.status(400).json('Error: ' + err));
+  })
+  .catch(err => res.status(400).json('Error: ' + err));
 }
 module.exports=
 {
-    getAllAdmins,
-    addAdmin,
-    getAdmin
+    getUserById,
+    getAllUsers,
+    updateUserById
 }

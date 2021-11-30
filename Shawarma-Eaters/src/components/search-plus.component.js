@@ -24,7 +24,7 @@ export default class SearchPage extends Component {
         this.state = {
             departureAirport: '',
             arrivalAirport: '',
-            depratureDate:new Date(),
+            departureDate:new Date(),
             arrivalDate:new Date(),
             adults: 0,
             children:0,
@@ -47,7 +47,7 @@ export default class SearchPage extends Component {
    
      onChangeDepDate(date) {
        this.setState({
-        depratureDate: date
+        departureDate: date
        })
      }
    
@@ -82,7 +82,7 @@ export default class SearchPage extends Component {
       const Search = {
         departureAirport : this.state.departureAirport,
         arrivalAirport : this.state.arrivalAirport,
-        depratureDate : this.state.depratureDate,
+        departureDate : this.state.departureDate,
         arrivalDate : this.state.arrivalDate,
         adults : this.state.adults,
         children : this.state.children,
@@ -127,7 +127,7 @@ export default class SearchPage extends Component {
           <label> Departure Date: </label>
           <div>
             <DatePicker
-              selected={this.state.depratureDate}
+              selected={this.state.departureDate}
               onChange={this.onChangeDepDate}
             />
           </div>

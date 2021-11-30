@@ -117,20 +117,6 @@ export default class CreateUser extends Component {
               onChange={this.onChangeUsername}
               /> 
               </div>
-          {/* <select ref="userInput"
-              required
-              className="form-control"
-              value={this.state.username}
-              onChange={this.onChangeUsername}>
-              {
-                this.state.users.map(function(user) {
-                  return <option 
-                    key={user}
-                    value={user}>{user}
-                    </option>;
-                })
-              }
-          </select> */}
           
        
         <div className="form-group"> 
