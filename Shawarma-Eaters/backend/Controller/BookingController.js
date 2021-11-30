@@ -1,9 +1,17 @@
 const Book = require('../models/booking');
 
+const getAllBookings = (req,res) => {
+  console.log('request came GetALL');
+  console.log(req.body); 
+  Book.find()
+  .then(Book => res.json(Book))
+  .catch(err => res.status(400).json('Error: ' + err));
+}
+
 const addBook =  (req,res)=> {
 
-    const bookingNumber = '12';
-    const cost = 3000;
+    const bookingNumber = req.body.bookingNumber;
+    const cost = req.body.cost;
 
   
   
@@ -33,5 +41,6 @@ module.exports=
 {
     addBook,
     getBookById,
-    deleteBookById
+    deleteBookById,
+    getAllBookings
 }

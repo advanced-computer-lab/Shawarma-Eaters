@@ -1,9 +1,11 @@
 /*
 **Booking model contain all information of th booking passengers,booking price and booking flights reference
 */
-var mongoose     = require('mongoose');
-var schema       = mongoose.Schema;
-var booking 	 = new schema ({
+const mongoose = require('mongoose');
+
+const Schema = mongoose.Schema;
+
+var booking 	 = new Schema ({
 
 	bookingNumber	: {type:String ,unique:true},
 	// passengerDetails	: {type:String, ref: 'User'},
