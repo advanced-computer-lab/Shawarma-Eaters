@@ -1,0 +1,124 @@
+
+table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center !important;
+    column-width: 900;
+    margin-top: 5em;
+    padding-left: 20em;
+    margin-left: 1em;
+
+
+  }
+  
+  table td, table th {
+    
+    justify-content: flex-start;   
+    border: 1px solid #ddd;
+    padding: 8px;
+    white-space: normal;
+    
+  }
+  
+  table tr:nth-child(even){background-color: #f2f2f2;}
+
+  table tr:hover {background-color: rgb(221, 221, 221);box-shadow: 5px 2px 2px   #e4e3e3 ;}
+  
+  table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: hsl(158, 35%, 58%);
+    color: white;
+    position: sticky;
+  } 
+
+ 
+.bottDiv{
+  text-align: left !important;
+
+  display:inline-flex;
+  font-size: 0;
+  margin-left: -210px;
+}
+.EditButton ,.DeleteButton{
+  text-align: left !important;
+  font-weight: bold;
+  font-size: 10px;
+
+
+}
+
+.EditButton {
+  column-width: 90px;
+
+  text-align: left !important;
+  margin-right: auto;
+  float: inline-end;
+  margin-right:1em;
+  
+  font-weight: bold;
+  line-height: 150%;
+  font-size: 16px;
+  width: 100%;
+  margin-bottom: 0.5em;
+  padding-top: .6em;
+  padding-bottom: .6em;
+  color: #ffffff;
+  background-color: hsl(221, 98%, 50%);
+  border-radius: 5px;
+  border: solid #00ff00 1px;
+
+}
+.DeleteButton {
+  column-width: 90px;
+
+  font-size: 16px;
+  text-align: left !important;
+  margin-right: 30px;
+  margin-bottom: 0.5em;
+  padding-top: .6em;
+  padding-bottom: .6em;
+  color: #ffffff;
+  background-color: #c23016;
+  border-radius: 5px;
+  border: solid #ff3c00 1px;
+  /* box-shadow: 2px 2px 1px #ff0000; */
+
+}
+.buttons:active {
+    box-shadow: 1px 1px 0px #d12222;
+}
+
+.BOX{
+  box-shadow: 12px 5px 12px rgb(250, 249, 249) ;
+}
+.primary-nav::after {
+  content: '';
+  flex-grow: 1;
+  order: 0;
+}
+.right {
+  order: 1;
+}
+.left, .right {
+  border: 1px solid;
+  padding: 0 5px;
+}
+.primary-nav::after {
+  content: '';
+  flex-grow: 1;
+  order: 0;
+}
+.right {
+  order: 1;
+}
+
+#search {
+  margin: 0 auto;
+  display: block;
+  margin-right: 10em;
+  text-align:center;
+  margin-top: 3em;
+}

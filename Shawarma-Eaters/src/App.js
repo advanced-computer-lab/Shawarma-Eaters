@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route} from "react-router-dom";
 import Navbar from "./components/navbar.component";
 import UpdateFlight from "./components/update-flight.component";
 import CreateFlights from "./components/create-flights.component";
-import FlightTable from "./components/flight-table.component";
+import FlightTable from "./components/search/table";
 import Login from './components/login/Login';
 import LoginUser from './components/login/LoginUser';
 import FlightList from './components/flight-list.component';
@@ -22,7 +22,6 @@ function App() {
       <Route path="/" exact component={FlightTable} />
       <Route path="/edit/:id" component={UpdateFlight} />
       <Route path="/createflights" component={CreateFlights} />
-      <Route path="/flighttable" component={FlightTable} /> 
       <Route path="/flightlist" component={FlightList} /> 
       <Route path="/login" component={Login} /> 
       <Route path="/loginUser" component={LoginUser} /> 
