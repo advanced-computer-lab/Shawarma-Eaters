@@ -22,10 +22,14 @@ connection.once('open', () => {
 // const usersRouter = require('./routes/users');
 const flightRouter = require('./routes/FlightRoutes');
 const adminRouter = require('./routes/AdminRoutes');
+const UserRoutes = require('./routes/UserRoutes');
+
 // app.use('/exercises', exercisesRouter);
 // app.use('/users', usersRouter);
 app.use('/flights', flightRouter);
-app.use('/login',adminRouter )
+app.use('/login',adminRouter );
+app.use('/users',UserRoutes)
+
 //Mahmoud added this
 //app.get('/viewFlights',flightController.viewFlights);
 //--
