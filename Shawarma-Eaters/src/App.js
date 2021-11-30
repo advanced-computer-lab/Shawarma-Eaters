@@ -11,7 +11,7 @@ import Login from './components/login/Login';
 import LoginUser from './components/login/LoginUser';
 import FlightList from './components/flight-list.component';
 import DeleteFlight from './components/flight-list.component';
-
+import EmailSend from './components/SendMail/EmailSend';
 function App() {
   const [buttonPopup,SetButtonPopup]= useState(false);
   return (
@@ -24,6 +24,7 @@ function App() {
       <Route path="/createflights" component={CreateFlights} />
       <Route path="/flightlist" component={FlightList} /> 
       <Route path="/login" component={Login} /> 
+      <Route path = "/send" component = {EmailSend} />
       <Route path="/loginUser" component={LoginUser} /> 
       <Route path="/delete/:id" component={DeleteFlight} /> 
 

@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const nodemailer = require('nodemailer');
 
 // changes needed
 
@@ -17,32 +18,40 @@ const getAdmin = (req,res) => {
 const sendEmail = (req,res) => {
     console.log('email request came');
     console.log(req.body);
-    var transporter = nodemailer.createTransport("SMTP",{
-        
-        service: "Gmail",
+   
+   
+    let transporter = nodemailer.createTransport({
+        service: 'gmail',
         auth: {
-        user: 'anasayman5@gmail.com',
-        pass: 'anas200000000000'
+            user: process.env.EMAIL || 'acluser40@gmail.com', // TODO: your gmail account
+            pass: process.env.PASSWORD || 'aclgroup123' // TODO: your gmail password
         }
     });
-
-    var mailOptions = {
-        from: '"ACL PROJECT TEST" <anasayman5@gmail.com>',// sender address
-        to: 'saraayman5@gmail.com', // list of receivers
-        subject: 'ACL PROJECT TEST', // Subject line
-        text:'HELLO WORLD,ACL PROJECT TEST',
+//<li>Email: ${req.body.to}</li>
+    let mailOptions = {
+        from: 'acluser40@gmail.com', // TODO: email sender
+        to: 'anasayman5@gmail.com', // TODO: email receiver
+        subject: 'Nodemailer - Test2',
+        text: 'Wooohooo it works!!',
         html: `
         <div style="padding:10px;border-style: ridge">
         <p>You have a new contact request.</p>
         <h3>Contact Details</h3>
         <ul>
-            <li>Email: ${req.body.to}</li>
-            <li>Subject: ${req.body.subject}</li>
-            <li>Message: ${req.body.description}</li>
+            <li>Email: acluser40@gmail.com</li>   
+            <li>Subject: 'Nodemailer - Test2'</li>
+            <li>Message: 'Wooohooo it works!!'</li>
         </ul>
         `
+        
     };
-    
+    // const log = console.log;
+    // transporter.sendMail(mailOptions, (err, data) => {
+    //     if (err) {
+    //         return log('Error occurs');
+    //     }
+    //     return log('Email sent!!!');
+    // });
     transporter.sendMail(mailOptions, function(error, info){
         if (error)
         {
@@ -60,11 +69,8 @@ const sendEmail = (req,res) => {
 
 module.exports=
 {
-    sendEmail
-}
-module.exports=
-{
     getAllAdmins,
     addAdmin,
-    getAdmin
+    getAdmin,
+    sendEmail
 }
