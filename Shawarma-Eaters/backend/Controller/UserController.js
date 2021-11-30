@@ -2,6 +2,35 @@ const User = require('../models/user');
 
 // changes needed
 //
+const findDepartureFlight = (req,res) => {
+    if (req.body.cabinclass == "Economy" ){
+        User.find({depAirport: req.body.departureAirport,arrAirport: req.body.arrivalAirport, dates: Date.parse(req.body.depratureDate), number_of_Economy_seats :{ $gte: Number(req.body.adults) + Number(req.body.children)}})
+        .then(user => res.json(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+    }
+    else if (req.body.cabinclass == "Business" ){
+        User.find({depAirport: req.body.departureAirport,arrAirport: req.body.arrivalAirport, dates: Date.parse(req.body.depratureDate), number_of_Business_class_seats :{ $gte: Number(req.body.adults) + Number(req.body.children)}})
+        .then(user => res.json(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+    }
+    
+}
+const findArrivalFlight = (req,res) => {
+    if (req.body.cabinclass == "Economy" ){
+        User.find({depAirport: req.body.arrivalAirport,arrAirport: req.body.departureAirport, dates: Date.parse(req.body.arrivalDate), number_of_Economy_seats :{ $gte:Number(req.body.adults) + Number(req.body.children)}}) 
+        .then(user => res.json(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+    }
+    else if (req.body.cabinclass == "Business" ){
+        User.find({depAirport: req.body.arrivalAirport,arrAirport: req.body.departureAirport, dates: Date.parse(req.body.arrivalDate), number_of_Business_class_seats :{ $gte: Number(req.body.adults) + Number(req.body.children)}})
+        .then(user => res.json(user))
+        .catch(err => res.status(400).json('Error: ' + err));
+    }
+    else{
+        //popup
+    }
+  
+}
 const getUserById = (req, res) => {
     User.findById(req.params.id)
       .then(user => res.json(user))
@@ -33,7 +62,9 @@ const updateUserById = (req, res) => {
 }
 module.exports=
 {
+    findDepartureFlight,
+    findArrivalFlight,
     getUserById,
     getAllUsers,
-    updateUserById
+    updateUserById,
 }

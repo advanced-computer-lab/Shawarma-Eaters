@@ -34,7 +34,7 @@ required: true
 arrAirport: {
     type: String,
     required: true
-    }
+}
 }, { timestamps: true });
 
 
