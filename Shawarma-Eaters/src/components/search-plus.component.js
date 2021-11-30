@@ -93,7 +93,7 @@ export default class SearchPage extends Component {
       .catch(function (error) {
         console.log(error);
       })
-      alert('YOU DID IT YOU SEARCHED' );
+      alert('YOU DID IT YOU SEARCHED!!!!!' );
     }
      render() {
       return (
