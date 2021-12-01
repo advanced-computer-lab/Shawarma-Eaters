@@ -1,7 +1,46 @@
 const User = require('../models/user');
 
 // changes needed
-//
+// add popup in case of choosing other than economy and business
+const findDepartureFlight = (req,res) => {
+
+    let depdate = new Date(req.body.departureDate);
+    let depdateUpper = depdate.setHours(23,59,59,999);
+    let depdateLower = depdate.setHours(0,0,0,0) ;
+ if (req.body.cabinclass == "Economy" ){
+     console.log(depdate);
+     Flight.find({depAirport: req.body.departureAirport,arrAirport: req.body.arrivalAirport,dates:{$lt: new Date(depdateUpper),$gt: new Date(depdateLower)},  number_of_Economy_seats :{ $gte: Number(req.body.adults) + Number(req.body.children)}})
+     .then((flight) =>res.json(flight))
+     .catch(err => res.status(400).json('Error: ' + err));
+ }
+ else if (req.body.cabinclass == "Business" ){
+     Flight.find({depAirport: req.body.departureAirport,arrAirport: req.body.arrivalAirport,dates:{$lt: new Date(depdateUpper),$gt: new Date(depdateLower)}, number_of_Business_class_seats :{ $gte: Number(req.body.adults) + Number(req.body.children)}})
+     .then(flight => res.json(flight))
+     .catch(err => res.status(400).json('Error: ' + err));
+ }
+ else{
+     //POPUP
+ }
+}
+const findArrivalFlight = (req,res) => {
+    let arrdate = new Date(req.body.arrivalDate);
+    let arrdateUpper = arrdate.setHours(23,59,59,999);
+    let arrdateLower = arrdate.setHours(0,0,0,0) ;
+    if (req.body.cabinclass == "Economy" ){
+        Flight.find({depAirport: req.body.arrivalAirport,arrAirport: req.body.departureAirport, dates:{$lt: new Date(arrdateUpper),$gt: new Date(arrdateLower)}, number_of_Economy_seats :{ $gte:Number(req.body.adults) + Number(req.body.children)}}) 
+        .then(flight => res.json(flight))
+        .catch(err => res.status(400).json('Error: ' + err));
+    }
+    else if (req.body.cabinclass == "Business" ){
+        Flight.find({depAirport: req.body.arrivalAirport,arrAirport: req.body.departureAirport, dates:{$lt: new Date(arrdateUpper),$gt: new Date(arrdateLower)}, number_of_Business_class_seats :{ $gte: Number(req.body.adults) + Number(req.body.children)}})
+        .then(flight => res.json(flight))
+        .catch(err => res.status(400).json('Error: ' + err));
+    }
+    else{
+        //popup
+    }
+  
+}
 const getUserById = (req, res) => {
     User.findById(req.params.id)
       .then(user => res.json(user))
@@ -33,7 +72,9 @@ const updateUserById = (req, res) => {
 }
 module.exports=
 {
+    findDepartureFlight,
+    findArrivalFlight,
     getUserById,
     getAllUsers,
-    updateUserById
+    updateUserById,
 }
