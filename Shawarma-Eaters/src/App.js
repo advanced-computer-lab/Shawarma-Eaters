@@ -16,6 +16,8 @@ import EditUser from './components/update-user.component';
 import SearchPage from "./components/search-plus.component";
 import CreateUser from "./components/create-user.component";
 
+import Seats from './components/Seats/seats';
+
 function App() {
   const [buttonPopup,SetButtonPopup]= useState(false);
   return (
@@ -34,6 +36,9 @@ function App() {
       <Route path="/createuser" component={CreateUser} />
       <Route path="/searchplus" component={SearchPage} />
       <Route path="/edituser/:id" component={EditUser} />
+
+      <Route path="/seats" component={Seats} /> 
+
 
 
 

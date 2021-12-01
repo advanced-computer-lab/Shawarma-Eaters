@@ -1,0 +1,63 @@
+
+div.solid1 {
+    border-style: solid;
+    background-color: #111;
+
+}
+div.solid2 {
+    border-style: solid;
+    width: 300px;
+    height: 900px;
+    background-color: rgb(29, 118, 124);
+    position: absolute;
+    left: 900px;
+    top: 285px;
+
+}
+div.solid3 {
+    border-style: solid;
+    background-color: rgb(100, 26, 143);
+
+}
+
+button.button{
+    background-image: url("seat-icon.jpg");
+    position: static;
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+
+}
+
+
+
+
+div.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  grid-row-gap: 0px;
+  grid-gap: 0px;
+  background-color: #2196F3;
+  padding: 0px;
+  width: 60%;
+
+}
+
+div.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 0px ;
+  font-size: 30px;
+  object-fit: contain;
+
+}
+
+
+img {    
+    background-image: url("seat-icon.jpg");
+
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+  }
+
