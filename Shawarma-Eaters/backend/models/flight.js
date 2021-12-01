@@ -27,13 +27,21 @@ number_of_Business_class_seats: {
 type: Number,
 required: true
 },
+economy_seats:[{
+seatnumber:String,
+occupied:Boolean
+}], 
+business_seats:[{
+seatnumber:String,
+occupied:Boolean
+}],
 depAirport: {
 type: String,
 required: true
 },
 arrAirport: {
-    type: String,
-    required: true
+type: String,
+required: true
 }
 }, { timestamps: true });
 
