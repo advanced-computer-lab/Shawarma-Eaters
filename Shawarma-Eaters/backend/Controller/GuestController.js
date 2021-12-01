@@ -1,3 +1,4 @@
+//todo popup for other than economy and business
 const User = require('../models/user');
 const Flight = require('../models/flight');
 function parseDate(input) {
@@ -19,26 +20,26 @@ const findDepartureFlight = (req,res) => {
         .catch(err => res.status(400).json('Error: ' + err));
     }
     else if (req.body.cabinclass == "Business" ){
-        Flight.find({depAirport: req.body.departureAirport,arrAirport: req.body.arrivalAirport, dates: Date.parse(req.body.departureDate), number_of_Business_class_seats :{ $gte: Number(req.body.adults) + Number(req.body.children)}})
-        .then(user => res.json(user))
+        Flight.find({depAirport: req.body.departureAirport,arrAirport: req.body.arrivalAirport,dates:{$lt: new Date(depdateUpper),$gt: new Date(depdateLower)}, number_of_Business_class_seats :{ $gte: Number(req.body.adults) + Number(req.body.children)}})
+        .then(flight => res.json(flight))
         .catch(err => res.status(400).json('Error: ' + err));
     }
     else{
-        console.log("I'm in else")
-        Flight.find()
-        .then(user => res.json(user))
-        .catch(err => res.status(400).json('Error: ' + err));
+        //POPUP
     }
 }
 const findArrivalFlight = (req,res) => {
+    let arrdate = new Date(req.body.arrivalDate);
+    let arrdateUpper = arrdate.setHours(23,59,59,999);
+    let arrdateLower = arrdate.setHours(0,0,0,0) ;
     if (req.body.cabinclass == "Economy" ){
-        Flight.find({depAirport: req.body.arrivalAirport,arrAirport: req.body.departureAirport, dates: Date.parse(req.body.arrivalDate), number_of_Economy_seats :{ $gte:Number(req.body.adults) + Number(req.body.children)}}) 
-        .then(user => res.json(user))
+        Flight.find({depAirport: req.body.arrivalAirport,arrAirport: req.body.departureAirport, dates:{$lt: new Date(arrdateUpper),$gt: new Date(arrdateLower)}, number_of_Economy_seats :{ $gte:Number(req.body.adults) + Number(req.body.children)}}) 
+        .then(flight => res.json(flight))
         .catch(err => res.status(400).json('Error: ' + err));
     }
     else if (req.body.cabinclass == "Business" ){
-        Flight.find({depAirport: req.body.arrivalAirport,arrAirport: req.body.departureAirport, dates: Date.parse(req.body.arrivalDate), number_of_Business_class_seats :{ $gte: Number(req.body.adults) + Number(req.body.children)}})
-        .then(user => res.json(user))
+        Flight.find({depAirport: req.body.arrivalAirport,arrAirport: req.body.departureAirport, dates:{$lt: new Date(arrdateUpper),$gt: new Date(arrdateLower)}, number_of_Business_class_seats :{ $gte: Number(req.body.adults) + Number(req.body.children)}})
+        .then(flight => res.json(flight))
         .catch(err => res.status(400).json('Error: ' + err));
     }
     else{
