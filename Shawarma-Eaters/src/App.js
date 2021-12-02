@@ -36,7 +36,6 @@ function App() {
       <Route path="/createuser" component={CreateUser} />
       <Route path="/searchplus" component={SearchPage} />
       <Route path="/edituser/:id" component={EditUser} />
-
       <Route path="/seats" component={Seats} /> 
 
 

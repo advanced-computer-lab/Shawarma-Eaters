@@ -70,6 +70,11 @@ const updateUserById = (req, res) => {
   })
   .catch(err => res.status(400).json('Error: ' + err));
 }
+const deleteUserById = (req, res) => {
+    User.findByIdAndDelete(req.params.id)
+      .then(() => res.json('User deleted.'))
+      .catch(err => res.status(400).json('Error: ' + err));
+}
 module.exports=
 {
     findDepartureFlight,
@@ -77,4 +82,5 @@ module.exports=
     getUserById,
     getAllUsers,
     updateUserById,
+    deleteUserById
 }
