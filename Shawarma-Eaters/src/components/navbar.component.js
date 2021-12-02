@@ -18,9 +18,17 @@ export default class Navbar extends Component {
           <li className="navbar-item">
           <Link to="/createflights" className="nav-link">Create flights</Link>
           </li>
+
+          <li className="navbar-item">
+          <Link to="/MasterForm" className="nav-link">Select Departure flights</Link>
+          </li>
+
+
+
           {/* <li className="navbar-item">
           <Link to="/createflights" className="nav-link">Create flights</Link>
-          </li> */}
+          </li>          
+          */}
         </ul>
         </div>
       </nav>

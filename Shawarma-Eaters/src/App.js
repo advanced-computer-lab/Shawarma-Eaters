@@ -5,12 +5,22 @@ import { BrowserRouter as Router, Route} from "react-router-dom";
  import {useState} from 'react';
 import Navbar from "./components/navbar.component";
 import UpdateFlight from "./components/update-flight.component";
+
 import CreateFlights from "./components/create-flights.component";
 import FlightTable from "./components/flight-table.component";
 import Login from './components/login/Login';
 import LoginUser from './components/login/LoginUser';
 import FlightList from './components/flight-list.component';
 import DeleteFlight from './components/flight-list.component';
+
+
+
+import { Helmet } from "react-helmet";
+import MasterForm from "./components/MasterForm";
+import { Container, Row, Col } from "reactstrap";
+
+//Shawarma-Eaters\src\imgs\plane.jpg
+//Shawarma-Eaters\src\imgs\plane.jpg
 
 function App() {
   const [buttonPopup,SetButtonPopup]= useState(false);
@@ -27,6 +37,7 @@ function App() {
       <Route path="/login" component={Login} /> 
       <Route path="/loginUser" component={LoginUser} /> 
       <Route path="/delete/:id" component={DeleteFlight} /> 
+      <Route path="/MasterForm" component={MasterForm} />
 
 
 

@@ -51,40 +51,7 @@ export default class FlightList extends Component {
   else{
           
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
+  
   }
   }
 
