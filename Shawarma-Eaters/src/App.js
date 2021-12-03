@@ -12,6 +12,8 @@ import LoginUser from './components/login/LoginUser';
 import FlightList from './components/flight-list.component';
 import DeleteFlight from './components/flight-list.component';
 import EmailSend from './components/SendMail/EmailSend';
+import DisplayBookings from './components/MyBookings/test';
+
 function App() {
   const [buttonPopup,SetButtonPopup]= useState(false);
   return (
@@ -27,6 +29,8 @@ function App() {
       <Route path = "/send" component = {EmailSend} />
       <Route path="/loginUser" component={LoginUser} /> 
       <Route path="/delete/:id" component={DeleteFlight} /> 
+      <Route path="/myBookings/:id" component={DisplayBookings} /> 
+
 
 
 

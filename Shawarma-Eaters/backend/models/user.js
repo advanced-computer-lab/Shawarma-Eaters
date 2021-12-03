@@ -9,6 +9,7 @@ const userSchema = new Schema({
   lastname: { type: String, required: true },
   passportnumber:{ type: String, required: true },
   email: { type: String, required: true },
+  bookings : [{ type:Schema.Types.ObjectId, ref: 'Booking' }],
   // (type:HABD) reservations :{ type: reservations , required: false },
 });
 

@@ -31,6 +31,7 @@ const getBookById = (req, res) => {
       .catch(err => res.status(400).json('Error: ' + err));
 }
 const deleteBookById = (req, res) => {
+  console.log('deleteBookById is been requested');
     Book.findByIdAndDelete(req.params.id)
       .then(() => res.json('Book deleted.'))
       .catch(err => res.status(400).json('Error: ' + err));
