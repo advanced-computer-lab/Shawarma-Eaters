@@ -8,6 +8,8 @@ router.route('/update/:id').post(userController.updateUserById);
 router.route('/depFlights').post(userController.findDepartureFlight);
 router.route('/arrFlights').post(userController.findArrivalFlight);
 
+router.route('/:id').delete(userController.deleteUserById);
+
 
 module.exports = router;  
 //
