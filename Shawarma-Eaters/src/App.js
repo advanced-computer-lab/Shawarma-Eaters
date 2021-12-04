@@ -37,7 +37,7 @@ function App() {
       <Route path="/searchplus" component={SearchPage} />
       <Route path="/edituser/:id" component={EditUser} />
       <Route path="/seats" component={Seats} /> 
-      <Route path="/MasterForm" component={MasterForm} />
+      <Route path="/MasterForm" component={MasterForm} render={(props) => <MasterForm {...props}/>}/>
 
 
 

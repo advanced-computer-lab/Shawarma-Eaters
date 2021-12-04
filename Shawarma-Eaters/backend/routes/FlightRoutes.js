@@ -15,4 +15,3 @@ router.route('/:id').delete(flightController.deleteFlightById);
 
 module.exports = router;  
 //
-
