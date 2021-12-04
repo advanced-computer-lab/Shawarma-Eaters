@@ -17,7 +17,7 @@ import SearchPage from "./components/search-plus.component";
 import CreateUser from "./components/create-user.component";
 
 import Seats from './components/Seats/seats.component';
-
+import MasterForm from "./components/MasterForm";
 function App() {
   const [buttonPopup,SetButtonPopup]= useState(false);
   return (
@@ -37,6 +37,7 @@ function App() {
       <Route path="/searchplus" component={SearchPage} />
       <Route path="/edituser/:id" component={EditUser} />
       <Route path="/seats" component={Seats} /> 
+      <Route path="/MasterForm" component={MasterForm} />
 
 
 

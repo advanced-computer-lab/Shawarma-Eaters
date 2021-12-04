@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ReactDOM } from 'react';
-import { Prompt } from 'react-router-dom';
+import { Prompt ,Redirect} from 'react-router-dom';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
@@ -18,6 +18,7 @@ export default class SearchPage extends Component {
       this.onChangeChildren = this.onChangeChildren.bind(this);
       this.onChangeCabinClass = this.onChangeCabinClass.bind(this);
       this.onSubmit = this.onSubmit.bind(this);
+      
 
 
 
@@ -28,7 +29,8 @@ export default class SearchPage extends Component {
             arrivalDate:new Date(),
             adults: 0,
             children:0,
-            cabinclass:''
+            cabinclass:'',
+            redirectToMasterForm:false
         }
         
     }
@@ -79,7 +81,7 @@ export default class SearchPage extends Component {
      onSubmit(e) { 
       e.preventDefault();
 
-      const Search = {
+      const Dep_search = {
         departureAirport : this.state.departureAirport,
         arrivalAirport : this.state.arrivalAirport,
         departureDate : this.state.departureDate,
@@ -88,14 +90,40 @@ export default class SearchPage extends Component {
         children : this.state.children,
         cabinclass : this.state.cabinclass
       }
-      axios.post('http://localhost:5000/guest/depFlights',Search)
+      axios.post('http://localhost:5000/guest/depFlights',Dep_search)
       .then(result => console.log(result))
       .catch(function (error) {
         console.log(error);
       })
+
+
+      const Return_search = {
+        departureAirport :   this.state.arrivalAirport,
+        arrivalAirport :this.state.departureAirport ,
+        departureDate : this.state.departureDate,
+        arrivalDate : this.state.arrivalDate,
+        adults : this.state.adults,
+        children : this.state.children,
+        cabinclass : this.state.cabinclass
+      }
+      axios.post('http://localhost:5000/guest/arrFlights',Return_search)
+      .then(result => console.log(result))
+      .catch(function (error) {
+        console.log(error);
+      })
+
+      this.setState({
+        redirectToMasterForm: true
+       });
+     
       alert('YOU DID IT YOU SEARCHED!!!!!' );
+      
       }
      render() {
+      const redirectToMasterForm = this.state.redirectToMasterForm;
+      if (redirectToMasterForm) {
+        return (<Redirect to='/MasterForm' />)
+      }
       return (
       <div class="IMGdiv">
         <div class="Forumdiv">
