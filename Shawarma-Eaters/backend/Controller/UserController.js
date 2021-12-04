@@ -92,7 +92,7 @@ const deleteUserBookById = (req, res) => {
       .catch(err => res.status(400).json('Error: ' + err));
 }
 
-const sendEmail = (req,res) => {
+const sendEmail = async (req,res) => {
     var email = 'unKown';
     var userDetails = {_id: "1",
     username: 'unkown',
@@ -101,9 +101,9 @@ const sendEmail = (req,res) => {
     email: 'unkown',
     passportnumber: 'unkown',
     password: 'unkown',
-   };
-    //res.json({status: true, respMesg: 'AAAAEmail Sent Successfully'})
-    User.findById(req.params.id)
+    };
+   // res.json({status: true, respMesg: 'AAAAEmail Sent Successfully'})
+    await User.findById(req.params.id)
           .then((user) => {email = user.email;userDetails = user})
           .catch(err => res.status(400).json('Error: ' + err));
     console.log(email)
@@ -144,7 +144,7 @@ const sendEmail = (req,res) => {
     transporter.sendMail(mailOptions, function(error, info){
         if (error)
         {
-       // res.json({status: true, respMesg: "Email Didn't Sent Successfully"})
+            res.json({status: true, respMesg: "Email Didn't Sent Successfully"})
            return console.log('there an error', error)
         } 
         else

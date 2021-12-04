@@ -26,7 +26,7 @@ function App() {
       <Route path="/createflights" component={CreateFlights} />
       <Route path="/flightlist" component={FlightList} /> 
       <Route path="/login" component={Login} /> 
-      <Route path = "/send" component = {EmailSend} />
+      <Route path = "/send/:id" component = {EmailSend} />
       <Route path="/loginUser" component={LoginUser} /> 
       <Route path="/delete/:id" component={DeleteFlight} /> 
       <Route path="/myBookings/:id" component={DisplayBookings} /> 
