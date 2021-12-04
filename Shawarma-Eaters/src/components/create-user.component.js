@@ -4,6 +4,8 @@ import { Prompt } from 'react-router-dom';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import "./search.css";
+
 
 export default class CreateUser extends Component {
   constructor(props) {
@@ -28,7 +30,6 @@ export default class CreateUser extends Component {
       users: []
     }
   }
-
   // componentDidMount() {
   //   axios.get('http://localhost:5000/users/')
   //     .then(response => {
@@ -44,44 +45,36 @@ export default class CreateUser extends Component {
   //     })
 
   // }
-
   onChangeUsername(e) {
    this.setState({
     username: e.target.value
    })
   }
-
   onChangeFirstname(e) {
     this.setState({
       firstname: e.target.value
     })
   }
-
   onChangeLastname(e) {
     this.setState({
       lastname: e.target.value
     })
   }
-
   onChangeEmail(e) {
     this.setState({
       email: e.target.value
     })
   }
-
   onChangePassport(e) {
     this.setState({
       passportnumber: e.target.value
     })
   }
-
   onChangePassword(e){
     this.setState({
       password:e.target.value
     })
   }
-  
-
   onSubmit(e) {
     e.preventDefault();
 
@@ -101,14 +94,13 @@ export default class CreateUser extends Component {
 
     window.location = '/';
   }
-
   render() {
     return (
     <div>
       <h3>Sign Up</h3>
       <form onSubmit={this.onSubmit}>
 
-        <div className="form-group"> 
+        <div  className="form-group"> 
           <label>User Name: </label>
           <input  type="text"
               required

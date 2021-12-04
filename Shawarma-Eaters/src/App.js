@@ -16,7 +16,7 @@ import EditUser from './components/update-user.component';
 import SearchPage from "./components/search-plus.component";
 import CreateUser from "./components/create-user.component";
 
-import Seats from './components/Seats/seats';
+import Seats from './components/Seats/seats.component';
 
 function App() {
   const [buttonPopup,SetButtonPopup]= useState(false);

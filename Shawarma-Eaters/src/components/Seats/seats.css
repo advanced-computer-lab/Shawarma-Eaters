@@ -1,8 +1,7 @@
 
 div.solid1 {
     border-style: solid;
-    background-color: #111;
-
+    background-color: rgb(160, 156, 156);
 }
 div.solid2 {
     border-style: solid;
@@ -12,52 +11,64 @@ div.solid2 {
     position: absolute;
     left: 900px;
     top: 285px;
-
 }
-div.solid3 {
-    border-style: solid;
-    background-color: rgb(100, 26, 143);
-
-}
-
-button.button{
-    background-image: url("seat-icon.jpg");
-    position: static;
-    width: 100px;
-    height: 100px;
+/* button.button{
+    background-image: url("seat available.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    width: 45px;
+    height: 55px;
     object-fit: contain;
+} */
+div.grid-container > button{
+    background-image: url("seat available.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    width: 45px;
+    height: 55px;
+    object-fit: contain;
+    border-radius: 9px;
+    margin-top: -10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    transform: skew(-13deg);
 
+
+    
 }
-
-
-
-
 div.grid-container {
   display: grid;
-  grid-template-columns: auto auto auto auto auto;
-  grid-row-gap: 0px;
+  grid-template-columns: auto auto auto auto auto ;
+  row-gap: 0px;
   grid-gap: 0px;
-  background-color: #2196F3;
-  padding: 0px;
-  width: 60%;
+  background-color: #f5f5f5;
+   padding: 0;
+  width: fit-content;
+  height: fit-content; 
+  grid-auto-flow:dense;
 
 }
 
 div.grid-container > div {
-  background-color: rgba(255, 255, 255, 0.8);
-  text-align: center;
+  background-color: rgba(212, 26, 26, 0.8);
+  text-align: left;
   padding: 0px ;
-  font-size: 30px;
-  object-fit: contain;
+  font-size: 20px;
+  /* object-fit: contain; */
 
 }
 
 
-img {    
-    background-image: url("seat-icon.jpg");
+#bus{
+    background-color: #ffe031;
 
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
+}
+
+.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
   }
+
+
 

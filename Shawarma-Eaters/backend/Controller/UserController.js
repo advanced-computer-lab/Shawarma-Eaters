@@ -19,6 +19,8 @@ const findDepartureFlight = (req,res) => {
      .catch(err => res.status(400).json('Error: ' + err));
  }
  else{
+    console.log('No departure found');
+
      //POPUP
  }
 }
@@ -37,6 +39,8 @@ const findArrivalFlight = (req,res) => {
         .catch(err => res.status(400).json('Error: ' + err));
     }
     else{
+        console.log('No arrival found');
+
         //popup
     }
   
@@ -75,6 +79,9 @@ const deleteUserById = (req, res) => {
       .then(() => res.json('User deleted.'))
       .catch(err => res.status(400).json('Error: ' + err));
 }
+
+ 
+
 module.exports=
 {
     findDepartureFlight,

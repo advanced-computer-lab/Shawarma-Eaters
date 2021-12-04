@@ -76,7 +76,7 @@ export default class SearchPage extends Component {
        })
      }
     
-     onSubmit(e) {
+     onSubmit(e) { 
       e.preventDefault();
 
       const Search = {
@@ -94,36 +94,39 @@ export default class SearchPage extends Component {
         console.log(error);
       })
       alert('YOU DID IT YOU SEARCHED!!!!!' );
-    }
+      }
      render() {
       return (
-      <div>
-        <h3>Search</h3>
+      <div class="IMGdiv">
+        <div class="Forumdiv">
+        <h1>Search</h1>
         <form onSubmit={this.onSubmit}>
   
-          <div className="form-group"> 
+          <div class="depAirdiv" className="form-group"> 
             <label>Departure Airport: </label>
-            <input  type="text"
+            <input  class="depAirdiv" type="text"
                 required
                 className="form-control"
                 value={this.state.departureAirport}
                 onChange={this.onChangeDepAirport}
+                placeholder="From"
                 /> 
                 </div>
    
             
          
-          <div className="form-group"> 
-          <label> Arrival Airport: </label>
+          <div id="arrAirdiv" className="form-group"> 
+          <label>  Arrival Airport: </label>
             <input  type="text"
                 required
                 className="form-control"
                 value={this.state.arrivalAirport}
                 onChange={this.onChangeArrAirport}
+                placeholder="To"
                 /> 
           </div>
   
-          <div className="form-group">
+          <div class="depDatediv" className="form-group">
           <label> Departure Date: </label>
           <div>
             <DatePicker
@@ -132,7 +135,7 @@ export default class SearchPage extends Component {
             />
           </div>
           </div>
-          <div className="form-group"> 
+          <div class="arrDatediv" className="form-group"> 
             <label>Arrival Date: </label>
             <div>
             <DatePicker
@@ -143,41 +146,52 @@ export default class SearchPage extends Component {
           </div>
           
           <div className="form-group"> 
-            <label>Adults: </label>
+            <label>Number of Adults: </label>
             <input  type="text"
                 required
                 className="form-control"
-                value={this.state.adults}
+                // value={this.state.adults}
                 onChange={this.onChangeAdults}
+                //placeholder="Number of Adults:"
+
                 /> 
           </div>
           
           <div className="form-group"> 
-            <label>Children: </label>
+            <label>Number of Children: </label>
             <input  type="text"
                 required
                 className="form-control"
-                value={this.state.children}
+                //value={this.state.children}
                 onChange={this.onChangeChildren}
+                //placeholder="Number of Children:"
+
                 /> 
           </div>
           <div className="form-group"> 
-            <label>Cabin Class: </label>
-            <input  type="text"
+            <label>Cabin Class:</label>
+            {/* <input  type="text"
                 required
                 className="form-control"
                 value={this.state.cabinclass}
                 onChange={this.onChangeCabinClass}
-                /> 
-          </div>
+                />  */}
           
-  
+              <input type="radio" id="Business" onChange={this.onChangeCabinClass} value="Business"/>
+              <label for="Business">Business</label>
+              <input type="radio" id="Economy" onChange={this.onChangeCabinClass} value="Economy"/>
+              <label for="Economy">Economy</label>
+              <br></br>
+              <br></br>
+              
+              
+        </div>
           <div className="form-group">
             <input type="submit" value="Search" className="btn btn-primary" />
     
           </div>
           </form>
-          
+          </div>
     </div>
     
   
