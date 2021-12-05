@@ -88,14 +88,14 @@ const DisplayBookings = () => {
             console.log(booking.returnFlightId)
             if(depFlight !== undefined && arrFlight !== undefined){
             return (
-                    <Card>
+                    <Card className = 'card'>
                     {/* <CardImg className="card-img-top" top width="100%"  alt="Card image cap" /> */}
 
                     <div class="container">
                                     <div class="row">
                                         <div class="col-sm">
                                         <CardBody>
-                        <CardTitle tag="h5">
+                        <CardTitle tag="h5" class = 'txtColor'>
                             Booking Number : {booking.bookingNumber}
                         </CardTitle>
                         <div class="flex-container">
@@ -103,7 +103,7 @@ const DisplayBookings = () => {
                             <div> <img src={round_trip} width="50" height="50" /> </div>
                             <div > <h5>{depFlight.arrAirport}</h5> <small> </small></div>
                         </div>
-                        <CardSubtitle
+                        {/* <CardSubtitle
                         className="mb-2 text-muted" 
                         tag="h6"
                         >
@@ -112,7 +112,7 @@ const DisplayBookings = () => {
 
                         <Label>From : {depFlight.depAirport}</Label> <br></br>
                     
-                        <Label>To : {depFlight.arrAirport} </Label> <br></br>
+                        <Label>To : {depFlight.arrAirport} </Label> <br></br> */}
                         
                     
                         
@@ -120,7 +120,7 @@ const DisplayBookings = () => {
                         
                     </CardBody>
                                         </div>
-                                        <div class="col-sm">
+                                        <div class="col-sm btnPart btn">
                                         <Button size="small"  color="primary" onClick={()=> {}}>
                             View Details
                         </Button>                        </div>

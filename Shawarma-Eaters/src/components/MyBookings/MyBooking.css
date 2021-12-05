@@ -8,3 +8,24 @@
     padding: 20px;
     font-size: 30px;
   }
+
+  .card{
+    background-color: #e04741;
+    border-style: solid;
+margin-bottom: 10px;}
+
+.btnPart{  
+    text-align: right;  
+    width: 100%;  
+    height: 100%;  
+    padding-top: 100px;
+    padding-right: 120px;  
+    }  
+    .btn{  
+    font-size: 25px;
+    height:100%;
+    width:200px;  
+    }  
+    .txtColor{
+        background-color: #ffff;
+    }
