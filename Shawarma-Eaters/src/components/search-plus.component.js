@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { ReactDOM } from 'react';
-import { Prompt } from 'react-router-dom';
+import { Prompt ,Redirect,useLocation,BrowserRouter } from 'react-router-dom';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+
+import MasterForm from './MasterForm.js';
 // Departure Airport, Arrival Airport, Departure Date, Arrival Date, Adults, Children, Cabin class
+let data=[];
 export default class SearchPage extends Component {
    constructor(props) {
       super(props);
@@ -18,6 +21,7 @@ export default class SearchPage extends Component {
       this.onChangeChildren = this.onChangeChildren.bind(this);
       this.onChangeCabinClass = this.onChangeCabinClass.bind(this);
       this.onSubmit = this.onSubmit.bind(this);
+      
 
 
 
@@ -28,12 +32,15 @@ export default class SearchPage extends Component {
             arrivalDate:new Date(),
             adults: 0,
             children:0,
-            cabinclass:''
+            cabinclass:'',
+            redirectToMasterForm:false,
+            depArray:[],
+            retArray:[]
         }
         
     }
 
-    onChangeDepAirport(e) {
+     onChangeDepAirport(e) {
       this.setState({
         departureAirport: e.target.value
       })
@@ -79,7 +86,7 @@ export default class SearchPage extends Component {
      onSubmit(e) { 
       e.preventDefault();
 
-      const Search = {
+      const Dep_search = {
         departureAirport : this.state.departureAirport,
         arrivalAirport : this.state.arrivalAirport,
         departureDate : this.state.departureDate,
@@ -88,15 +95,80 @@ export default class SearchPage extends Component {
         children : this.state.children,
         cabinclass : this.state.cabinclass
       }
-      axios.post('http://localhost:5000/guest/depFlights',Search)
-      .then(result => console.log(result))
+      axios.post('http://localhost:5000/guest/depFlights',Dep_search)
+      .then(result =>{
+        
+         this.setState({
+          depArray: result.data
+         })
+         
+      }
+      
+         )
       .catch(function (error) {
         console.log(error);
       })
-      alert('YOU DID IT YOU SEARCHED!!!!!' );
+
+
+      const Return_search = {
+        departureAirport :   this.state.arrivalAirport,
+        arrivalAirport :this.state.departureAirport ,
+        departureDate : this.state.departureDate,
+        arrivalDate : this.state.arrivalDate,
+        adults : this.state.adults,
+        children : this.state.children,
+        cabinclass : this.state.cabinclass
       }
+      axios.post('http://localhost:5000/guest/arrFlights',Return_search)
+      .then(result =>{
+        
+        this.setState({
+         retArray: result.data
+        })}
+        )
+      .catch(function (error) {
+        console.log(error+" yes error in axios post arrFlights");
+      })
+     
+      
+
+      this.setState({
+        redirectToMasterForm: true
+       });
+       
+     
+      alert('YOU DID IT YOU SEARCHED!!!!!' );
+      
+      }
+
+
      render() {
+      
+      const redirectToMasterForm = this.state.redirectToMasterForm;
+      if (redirectToMasterForm) {
+        console.log(this.state.redirectToMasterForm);
+        console.log("depArray:");
+        console.log(this.state.depArray);
+        console.log("retArray:");
+      console.log(this.state.retArray);
+        
+        return (  
+          <>
+          <Redirect
+            to={{
+            pathname: "/MasterForm",
+            state: { depArray: this.state.depArray,
+              retArray:this.state.retArray
+            }
+          }}
+        />
+          </>
+
+        
+        )
+      }
       return (
+        
       <div class="IMGdiv">
         <div class="Forumdiv">
         <h1>Search</h1>
