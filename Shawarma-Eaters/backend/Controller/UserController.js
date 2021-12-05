@@ -1,7 +1,6 @@
 const User = require('../models/user');
 const nodemailer = require('nodemailer');
 
-// changes needed
 
 
 // changes needed
@@ -23,6 +22,8 @@ const findDepartureFlight = (req,res) => {
      .catch(err => res.status(400).json('Error: ' + err));
  }
  else{
+    console.log('No departure found');
+
      //POPUP
  }
 }
@@ -41,6 +42,8 @@ const findArrivalFlight = (req,res) => {
         .catch(err => res.status(400).json('Error: ' + err));
     }
     else{
+        console.log('No arrival found');
+
         //popup
     }
   

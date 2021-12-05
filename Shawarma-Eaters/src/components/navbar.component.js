@@ -5,8 +5,8 @@ export default class Navbar extends Component {
 
   render() {
     return (
-      <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
-        <Link to="/" className="navbar-brand">    Available Flights</Link>
+      <nav class="navbar" className="navbar navbar-dark bg-dark navbar-expand-lg">
+        <Link to="/" className="navbar-brand">    ShawarmaAir</Link>
         <div className="collpase navbar-collapse">
         <ul className="navbar-nav mr-auto">
           <li className="navbar-item">
@@ -18,9 +18,16 @@ export default class Navbar extends Component {
           <li className="navbar-item">
           <Link to="/createflights" className="nav-link">Create flights</Link>
           </li>
-          {/* <li className="navbar-item">
-          <Link to="/createflights" className="nav-link">Create flights</Link>
-          </li> */}
+          <li className="navbar-item">
+          <Link to="/createuser" className="nav-link">SIGN UP</Link>
+          </li> 
+          <li className="navbar-item">
+          <Link to="/searchplus" className="nav-link">Search page</Link>
+          </li> 
+          <li className="navbar-item">
+          <Link to="/edituser" className="nav-link">Edit user</Link>
+          </li> 
+          
         </ul>
         </div>
       </nav>

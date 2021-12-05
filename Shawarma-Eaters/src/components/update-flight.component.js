@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
-
+//
 export default class UpdateFlight extends Component {
   constructor(props) {
     super(props);
@@ -124,7 +124,7 @@ export default class UpdateFlight extends Component {
 
   render() {
     return (
-    <div>
+    <div class="Forumdiv">
       <h3>Update Flight Information</h3>
       <form onSubmit={this.onSubmit}>
         

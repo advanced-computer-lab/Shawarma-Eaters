@@ -1,0 +1,146 @@
+
+div.solid1 {
+    border-style: solid;
+    background-color: rgb(160, 156, 156);
+}
+div.solid2 {
+    border-style: solid;
+    width: 300px;
+    height: 900px;
+    background-color: rgb(29, 118, 124);
+    position: absolute;
+    left: 900px;
+    top: 285px;
+}
+div.pbody{
+    /* border-style:  double none; */
+    width: 300px;
+    height: 900px;
+    background-color: rgba(144, 187, 190, 0.425);
+    position: absolute;
+    left: 300px;
+    top: 285px;
+    border-top-left-radius: 400px;
+    border-top-right-radius: 400px;
+    border-top: 5px double black;
+
+
+}
+.reserved{ 
+    background-image: url("seat reserved.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    width: 45px;
+    height: 55px;
+    object-fit: contain;
+    border-radius: 9px;
+    cursor: not-allowed;
+    opacity: 0.7;
+    pointer-events: none;
+
+}
+.selected{
+    background-image: url("seat reserved.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    width: 45px;
+    height: 55px;
+    object-fit: contain;
+    border-radius: 9px;
+    
+
+}
+.available{ 
+    background-image: url("seat available.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    width: 45px;
+    height: 55px;
+    object-fit: contain;
+    border-radius: 9px;
+
+}
+
+ button.button{
+    background-image: url("seat available.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    width: 45px;
+    height: 55px;
+    object-fit: contain;
+    cursor: not-allowed;
+    border-radius: 9px;
+
+} /*
+div.grid-container > button{
+    background-image: url("seat available.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    width: 45px;
+    height: 55px;
+    object-fit: contain;
+    border-radius: 9px;
+    margin-top: -10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    transform: skew(-13deg);
+
+
+    
+}*/
+div.grid-containerBus {
+    display: grid;
+    grid-template-columns: auto auto auto  ;
+    row-gap: 3px;
+    grid-gap: 8px;
+    /* background-color: #f5f5f5; */
+    padding: 2;
+    width: fit-content;
+    height: fit-content; 
+    /* grid-auto-flow:dense; */
+    position: relative;
+    left: -40px;
+
+
+
+}
+div.grid-containerEcon {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto  ;
+    row-gap: 3px;
+    grid-gap: 3px;
+    /* background-color: #f5f5f5; */
+    padding:0 ;
+    width: fit-content;
+    height: fit-content; 
+    grid-auto-flow:dense;
+    position: relative;
+    left: -80px;
+}
+
+div.grid-container > div {
+  background-color: rgba(212, 26, 26, 0.8);
+  text-align: left;
+  padding: 0px ;
+  font-size: 20px;
+  /* object-fit: contain; */
+
+}
+
+
+#bus{
+    background-color: #ffe031;
+
+}
+
+.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+
+

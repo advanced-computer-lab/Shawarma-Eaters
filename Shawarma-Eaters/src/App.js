@@ -11,6 +11,17 @@ import Login from './components/login/Login';
 import LoginUser from './components/login/LoginUser';
 import FlightList from './components/flight-list.component';
 import DeleteFlight from './components/flight-list.component';
+
+import EditUser from './components/update-user.component';
+import SearchPage from "./components/search-plus.component";
+import CreateUser from "./components/create-user.component";
+
+import Seats from './components/Seats/seats.component';
+import MasterForm from "./components/MasterForm";
+
+import UserProfile from "./components/profile/profile.component";
+
+
 import EmailSend from './components/SendMail/EmailSend';
 import DisplayBookings from './components/MyBookings/test';
 
@@ -21,7 +32,7 @@ function App() {
       <div className="container">
       <Navbar />
       <br/>
-      <Route path="/" exact component={FlightTable} />
+      <Route path="/" exact component={SearchPage} />
       <Route path="/edit/:id" component={UpdateFlight} />
       <Route path="/createflights" component={CreateFlights} />
       <Route path="/flightlist" component={FlightList} /> 
@@ -30,6 +41,13 @@ function App() {
       <Route path="/loginUser" component={LoginUser} /> 
       <Route path="/delete/:id" component={DeleteFlight} /> 
       <Route path="/myBookings/:id" component={DisplayBookings} /> 
+      <Route path="/createuser" component={CreateUser} />
+      <Route path="/searchplus" component={SearchPage} />
+      <Route path="/edituser/:id" component={EditUser} />
+      <Route path="/seats" component={Seats} /> 
+      <Route path="/MasterForm" component={MasterForm} render={(props) => <MasterForm {...props}/>}/>
+      <Route path="/profile" component={UserProfile} /> 
+
 
 
 
@@ -52,3 +70,4 @@ function App() {
 }
 
 export default App;
+//
