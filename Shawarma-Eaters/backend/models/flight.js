@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
+//
 //flight number, departure and arrival times, dates, number of Economy seats, number of Business class seats, and airport.
 const flightSchema = new Schema({
 flight_number: {
@@ -27,14 +27,22 @@ number_of_Business_class_seats: {
 type: Number,
 required: true
 },
+economy_seats:[{
+seatnumber:String,
+occupied:Boolean
+}], 
+business_seats:[{
+seatnumber:String,
+occupied:Boolean
+}],
 depAirport: {
 type: String,
 required: true
 },
 arrAirport: {
-    type: String,
-    required: true
-    }
+type: String,
+required: true
+}
 }, { timestamps: true });
 
 

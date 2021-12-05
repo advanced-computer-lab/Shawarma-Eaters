@@ -28,6 +28,7 @@ export default class CreateFlights extends Component {
       arrAirport:'',
       depAirport:'',
       dates: new Date(),
+      
       users: []
     }
   }
@@ -95,7 +96,7 @@ export default class CreateFlights extends Component {
       depAirport:e.target.value
     })
   }
-  
+  //
 
   onSubmit(e) {
     e.preventDefault();
@@ -121,7 +122,7 @@ export default class CreateFlights extends Component {
 
   render() {
     return (
-    <div>
+    <div class="Forumdiv">
       <h3>Create New Flight</h3>
       <form onSubmit={this.onSubmit}>
 

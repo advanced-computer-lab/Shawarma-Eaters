@@ -22,17 +22,28 @@ connection.once('open', () => {
 // const usersRouter = require('./routes/users');
 const flightRouter = require('./routes/FlightRoutes');
 const adminRouter = require('./routes/AdminRoutes');
+<<<<<<< HEAD
+const guestRouter = require('./routes/GuestRoutes');
+const userRouter = require('./routes/UserRoutes');
+=======
 const UserRoutes = require('./routes/UserRoutes');
 const BookingRoutes = require('./routes/BookingRoutes');
 
+>>>>>>> origin/person2
 
 // app.use('/exercises', exercisesRouter);
 // app.use('/users', usersRouter);
 app.use('/flights', flightRouter);
+<<<<<<< HEAD
+app.use('/guest', guestRouter);
+app.use('/login',adminRouter);
+app.use('/user',userRouter);
+=======
 app.use('/login',adminRouter );
 app.use('/users',UserRoutes);
 app.use('/booking',BookingRoutes)
 
+>>>>>>> origin/person2
 //Mahmoud added this
 //app.get('/viewFlights',flightController.viewFlights);
 //--

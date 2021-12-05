@@ -51,41 +51,6 @@ export default class FlightList extends Component {
   }
   else{
           
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
   }
   }
 
@@ -94,7 +59,7 @@ export default class FlightList extends Component {
       return <Flight flight={currentflight} deleteFlight={this.deleteFlight} key={currentflight._id}/>;
     })
   }
-
+//
   render() {
     return (
       <div>
