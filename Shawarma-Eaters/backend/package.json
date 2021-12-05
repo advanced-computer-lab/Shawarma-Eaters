@@ -23,9 +23,7 @@
     "validation": "^0.0.1"
   },
   "description": "",
-  
   "devDependencies": {
     "nodemon": "^2.0.15"
   }
 }
-
