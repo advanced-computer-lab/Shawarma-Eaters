@@ -18,6 +18,10 @@ import CreateUser from "./components/create-user.component";
 
 import Seats from './components/Seats/seats.component';
 import MasterForm from "./components/MasterForm";
+
+import UserProfile from "./components/profile/profile.component";
+
+
 function App() {
   const [buttonPopup,SetButtonPopup]= useState(false);
   return (
@@ -25,7 +29,7 @@ function App() {
       <div className="container">
       <Navbar />
       <br/>
-      <Route path="/" exact component={FlightTable} />
+      <Route path="/" exact component={SearchPage} />
       <Route path="/edit/:id" component={UpdateFlight} />
       <Route path="/createflights" component={CreateFlights} />
       <Route path="/flighttable" component={FlightTable} /> 
@@ -38,6 +42,7 @@ function App() {
       <Route path="/edituser/:id" component={EditUser} />
       <Route path="/seats" component={Seats} /> 
       <Route path="/MasterForm" component={MasterForm} render={(props) => <MasterForm {...props}/>}/>
+      <Route path="/profile" component={UserProfile} /> 
 
 
 

@@ -100,7 +100,7 @@ export default class EditUser extends Component {
   }
   render() {
     return (
-    <div>
+    <div class="Forumdiv">
       <h3>Update User Information</h3>
       <form onSubmit={this.onSubmit}>
 

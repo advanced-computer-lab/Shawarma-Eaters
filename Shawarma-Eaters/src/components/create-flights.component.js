@@ -122,7 +122,7 @@ export default class CreateFlights extends Component {
 
   render() {
     return (
-    <div>
+    <div class="Forumdiv">
       <h3>Create New Flight</h3>
       <form onSubmit={this.onSubmit}>
 

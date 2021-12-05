@@ -4,7 +4,7 @@ import { Prompt } from 'react-router-dom';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
-import "./search.css";
+import "./styles.css";
 
 
 export default class CreateUser extends Component {
@@ -96,7 +96,7 @@ export default class CreateUser extends Component {
   }
   render() {
     return (
-    <div>
+    <div class="Forumdiv">
       <h3>Sign Up</h3>
       <form onSubmit={this.onSubmit}>
 

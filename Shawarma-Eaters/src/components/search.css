@@ -3,12 +3,12 @@ div.IMGdiv{
     /* background-repeat: no-repeat; */
     background-size: contain;
     width: 100%;
-    height: 750px;
+    height: 850px;
 }
-div.Forumdiv{
+div.searchForum{
     float: left;
     width: 500px;
-    height: 680px;
+    height: fit-content;
     background-color: #3570a3;
     border-style: solid;
     position: relative;
@@ -21,7 +21,7 @@ label{
         margin: 0px 10px;
 }
 h1{
-    margin: 10px 100px ;
+    margin: 0px 100px ;
 }
 input[type=text] {
     width: 40%;

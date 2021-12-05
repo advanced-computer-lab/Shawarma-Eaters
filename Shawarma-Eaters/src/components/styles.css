@@ -2,3 +2,29 @@
   font-family: sans-serif;
   text-align: center;
 }
+div.Forumdiv{
+  float: left;
+  width: 800px;
+  height: fit-content;
+  background-color: #3570a3;
+  border-style: solid;
+  position: relative;
+  left: 30px;
+  top: 30px;
+  box-sizing: border-box;
+  border-radius: 6px;
+}
+input[type=text] {
+  width: 40%;
+  margin: 10px 10px;
+}
+
+input[type=submit] {    
+  margin: 10px 10px;
+  width: 65%;}
+label{
+    margin: 10px 10px;
+}
+h1{
+margin: 10px 100px ;
+}

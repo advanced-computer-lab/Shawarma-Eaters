@@ -4,6 +4,7 @@ import { Prompt ,Redirect,useLocation,BrowserRouter } from 'react-router-dom';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import "./search.css";
 
 import MasterForm from './MasterForm.js';
 // Departure Airport, Arrival Airport, Departure Date, Arrival Date, Adults, Children, Cabin class
@@ -170,7 +171,7 @@ export default class SearchPage extends Component {
       return (
         
       <div class="IMGdiv">
-        <div class="Forumdiv">
+        <div class="searchForum">
         <h1>Search</h1>
         <form onSubmit={this.onSubmit}>
   
