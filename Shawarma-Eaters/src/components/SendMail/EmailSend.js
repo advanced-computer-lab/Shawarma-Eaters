@@ -31,7 +31,7 @@ const EmailSend = () => {
 }
   const sendMail =  async() => {  //async before ()
     console.log(window.location.pathname.substr(6));
-    const response = await axios  //await before axios
+    const response = await axios 
       .get("http://localhost:5000/users/sendingMail/"+getId(1)).then(window.location = '/myBookings/'+getId(1))
       .catch((err) => console.log(err));}
 return (
