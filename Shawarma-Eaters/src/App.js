@@ -6,11 +6,13 @@ import { BrowserRouter as Router, Route} from "react-router-dom";
 import Navbar from "./components/navbar.component";
 import UpdateFlight from "./components/update-flight.component";
 import CreateFlights from "./components/create-flights.component";
-import FlightTable from "./components/flight-table.component";
+import FlightTable from "./components/search/table";
 import Login from './components/login/Login';
 import LoginUser from './components/login/LoginUser';
 import FlightList from './components/flight-list.component';
 import DeleteFlight from './components/flight-list.component';
+import EmailSend from './components/SendMail/EmailSend';
+import DisplayBookings from './components/MyBookings/test';
 
 import EditUser from './components/update-user.component';
 import SearchPage from "./components/search-plus.component";
@@ -32,11 +34,12 @@ function App() {
       <Route path="/" exact component={SearchPage} />
       <Route path="/edit/:id" component={UpdateFlight} />
       <Route path="/createflights" component={CreateFlights} />
-      <Route path="/flighttable" component={FlightTable} /> 
       <Route path="/flightlist" component={FlightList} /> 
       <Route path="/login" component={Login} /> 
+      <Route path = "/send" component = {EmailSend} />
       <Route path="/loginUser" component={LoginUser} /> 
       <Route path="/delete/:id" component={DeleteFlight} /> 
+<<<<<<< HEAD
       <Route path="/createuser" component={CreateUser} />
       <Route path="/searchplus" component={SearchPage} />
       <Route path="/edituser/:id" component={EditUser} />
@@ -44,6 +47,9 @@ function App() {
       <Route path="/MasterForm" component={MasterForm} render={(props) => <MasterForm {...props}/>}/>
       <Route path="/profile" component={UserProfile} /> 
 
+=======
+      <Route path="/myBookings/:id" component={DisplayBookings} /> 
+>>>>>>> origin/person2
 
 
 
