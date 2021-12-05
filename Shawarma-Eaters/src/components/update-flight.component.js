@@ -124,7 +124,7 @@ export default class UpdateFlight extends Component {
 
   render() {
     return (
-    <div>
+    <div class="Forumdiv">
       <h3>Update Flight Information</h3>
       <form onSubmit={this.onSubmit}>
         
