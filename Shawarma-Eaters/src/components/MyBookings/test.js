@@ -1,11 +1,27 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from 'axios';
-import Items from './item'
- 
+import round_trip from './round_trip.png';
+import './MyBooking.css'
+import {
+    Form,
+    Button,
+    Card,
+    CardHeader,
+    CardBody,
+    CardTitle,
+    CardText,
+    CardFooter,
+    CardImg,
+    CardSubtitle,FormGroup, Label, Input
+  } from "reactstrap"; 
 const DisplayBookings = () => { 
 
     const [bookings,setBookings] = useState([{}]);
+    const [debFlight,setdebFlight] = useState([{}]);
+    const [arrFlight,setarrFlight] = useState([{}]);
+
+    
     const getId = (idx) =>{
         let path = window.location.pathname;
         let find = 0;
@@ -40,13 +56,15 @@ const DisplayBookings = () => {
     console.log(window.location.pathname)
     
     const response = await axios
-        .get(`http://localhost:5000/users/userBookings/`+window.location.pathname.substr(12)).then(booking => setBookings(booking.data))
+        .get(`http://localhost:5000/users/userBookings/`+getId(1)).then(booking => setBookings(booking.data))//.then(set)
         .catch((err) => console.log(err))
-        console.log(bookings);
+        console.log(bookings[0]);
     }
 
 
-
+    useEffect(() => {
+        GetBookings();
+      },[]);
 
 
     const DeletingBookings = async () => {
@@ -58,22 +76,251 @@ const DisplayBookings = () => {
             .catch((err) => console.log(err))
             console.log(bookings);
         }
+        console.log('testttt',bookings)
 
+        const theItems = bookings.map( (booking) =>
+        {
+           
+            
+              
+            var depFlight = booking.outgoingFlightId;
+            var arrFlight = booking.returnFlightId;
+            console.log(booking.returnFlightId)
+            if(depFlight !== undefined && arrFlight !== undefined){
+            return (
+                    <Card>
+                    {/* <CardImg className="card-img-top" top width="100%"  alt="Card image cap" /> */}
 
+                    <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm">
+                                        <CardBody>
+                        <CardTitle tag="h5">
+                            Booking Number : {booking.bookingNumber}
+                        </CardTitle>
+                        <div class="flex-container">
+                            <div > <h5>  {depFlight.depAirport}</h5> <small>  </small></div>
+                            <div> <img src={round_trip} width="50" height="50" /> </div>
+                            <div > <h5>{depFlight.arrAirport}</h5> <small> </small></div>
+                        </div>
+                        <CardSubtitle
+                        className="mb-2 text-muted" 
+                        tag="h6"
+                        >
+                        Booking details:
+                        </CardSubtitle>
 
+                        <Label>From : {depFlight.depAirport}</Label> <br></br>
+                    
+                        <Label>To : {depFlight.arrAirport} </Label> <br></br>
+                        
+                    
+                        
+
+                        
+                    </CardBody>
+                                        </div>
+                                        <div class="col-sm">
+                                        <Button size="small"  color="primary" onClick={()=> {}}>
+                            View Details
+                        </Button>                        </div>
+
+                                </div>
+                            </div>
+                
+                    </Card>
+      
+
+   
+
+      
+            )
+            }
+        })
 
     
 
       
 return (
     <>
-                    <button onClick={() =>GetBookings()}>DELETE</button>
-        <div>
-            <Items items = {bookings}/>
-        </div>
+                  
+             <div>
+                <h1>My Bookings</h1>
+            <FormGroup>
+
+                {theItems}
+            </FormGroup>
+            </div>
         <h1>SENDING MAIL WHEN THE DELETE BUTTON IS THE PREESED</h1>
     </>
 )
 };
  
 export default DisplayBookings;
+
+
+// import React, { Component } from "react";
+// import {
+//   Form,
+//   Button,
+//   Card,
+//   CardHeader,
+//   CardBody,
+//   CardTitle,
+//   CardText,
+//   CardFooter,
+//   CardImg,
+//   CardSubtitle
+// } from "reactstrap";
+
+// import axios from 'axios';
+
+
+
+// import StepProgressBar from "react-step-progress";
+// // import the stylesheet
+// import "react-step-progress/dist/index.css";
+
+// import MultiStepProgressBar from "./MultiStepProgressBar";
+
+// //import plane from '../imgs/plane.jpg';
+// //import  '../imgs/img.css';
+
+// import { FormGroup, Label, Input } from "reactstrap";
+
+
+// let selected_flight_no=0;
+
+// class MasterForm extends Component {
+//   constructor(props) {
+//     super(props);
+
+//     // Set the intiial input values
+//     this.state = {
+//       bookings: []
+      
+//     };
+
+//     // // Bind new functions for next and previous
+//     // this._next = this._next.bind(this);
+//     // this._prev = this._prev.bind(this);
+//   }
+
+//   componentDidMount() {
+//     axios.get('http://localhost:5000/users/userBookings/'+getId(2))
+//       .then(response => {
+//         this.setState({ bookings: response.data })
+//       })
+//       .catch((error) => {
+//         console.log(error);
+//       });
+     
+//   }
+
+//   // Trigger an alert on form submission
+//   handleSubmit = event => {
+//     event.preventDefault();
+//     if (selected_flight_no==0){
+//       alert(`You did not select your departure flight !`);
+//     }
+//     else{
+//     alert(`Your Departure Flight detail: \n 
+//       Your Flight Number: ${selected_flight_no}`);
+//     }
+//   };
+
+  
+
+
+
+  
+
+//   step1Content() {
+    
+    
+  
+//     return (  
+//     <div>
+//       <p>Please select prefered departure flight</p>
+//       <FormGroup>
+
+//   { this.state.bookings.map(currentflight =>(
+    
+      
+//       <Card>
+//     <CardImg className="card-img-top" top width="100%" src={plane} alt="Card image cap" />
+//     <CardBody>
+//         <CardTitle tag="h5">
+//         Departure Flight
+//         </CardTitle>
+//         <CardSubtitle
+//           className="mb-2 text-muted"
+//           tag="h6"
+//         >
+//           Flight details:
+//         </CardSubtitle>
+
+//         <Label>Flight Number : {currentflight.flight_number}</Label> <br></br>
+     
+//         <Label>Departure : {currentflight.departure}</Label> <br></br>
+           
+//         <Label>Economy seats : {currentflight.number_of_Economy_seats}</Label>  <br></br>      
+
+//         <Label>Business class seats : {currentflight.number_of_Business_class_seats}</Label>  <br></br>
+          
+
+//             <Button size="small" color="primary" onClick={()=> {selected_flight_no=currentflight.flight_number ; alert("Flight Selected !\nPlease proceed to the next page");}}>
+//             Select
+//           </Button>
+//       </CardBody>
+//       </Card>
+      
+
+//       )
+//   )}
+//         </FormGroup>
+      
+//     </div>
+    
+//     );
+//   }
+
+
+//   render() {
+//     return (
+//       <>
+//         <Form onSubmit={this.handleSubmit}>
+//           <Card>
+//             <CardHeader>Choose your departure and return flight</CardHeader>
+//             <CardBody>
+//               <CardTitle>
+//                 <MultiStepProgressBar currentStep={this.state.currentStep} />
+//               </CardTitle>
+              
+
+//               {this.step1Content()}
+              
+//               <Step2
+//                 currentStep={this.state.currentStep}
+
+//               />
+//               <Step3
+//                 currentStep={this.state.currentStep}  
+//               />
+
+
+
+//             </CardBody>
+//             <CardFooter>
+//               {this.previousButton}
+//               {this.nextButton}
+//               {this.submitButton}
+//             </CardFooter>
+//           </Card>
+//         </Form>
+//       </>
+//     );
+//   }
+// }
+
+// export default MasterForm;
