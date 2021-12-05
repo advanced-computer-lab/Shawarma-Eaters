@@ -1,4 +1,10 @@
 import React, { Component } from "react";
+import { useState,useEffect } from 'react';
+import { ReactDOM } from 'react';
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
+import "./search.css";
+import "./ticket.css";
 import {
   Form,
   Button,
@@ -28,8 +34,8 @@ const step3Content = <h1>Summary of Dep and Return flight</h1>;
 
 
 
-let depFlight_id=0;
-let retFlight_id=0;
+let depFlight={};
+let retFlight={};
 
 
 class MasterForm extends Component {
@@ -39,6 +45,7 @@ class MasterForm extends Component {
 
     // Set the intiial input values
     this.state = {
+      user: {},
       dep_flights: [],
       ret_flights: []
       
@@ -52,6 +59,15 @@ class MasterForm extends Component {
   
 
   componentDidMount(props) {
+
+    axios.get('http://localhost:5000/users/61a8d3f3ef7267e7fe6a6d4c/%27')
+      .then(response => {
+        this.setState({ user: response.data })
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
     
     this.setState({
       dep_flights: this.props.location.state.depArray,
@@ -70,11 +86,11 @@ class MasterForm extends Component {
 
   //Departure
   step1Validator() {
-    return (depFlight_id==0)?false:true;
+    return (depFlight=={})?false:true;
   }
   //Return
   step2Validator() {
-    return (retFlight_id==0)?false:true;
+    return (retFlight=={})?false:true;
   }
   
   //Summary
@@ -123,7 +139,7 @@ class MasterForm extends Component {
         <Label>Business class seats : {currentflight.number_of_Business_class_seats}</Label>  <br></br>
           
 
-            <Button size="small" color="primary" onClick={()=> {depFlight_id=currentflight._id ; alert("Flight Selected !\nPlease proceed to the next page");}}>
+            <Button size="small" color="primary" onClick={()=> {depFlight=currentflight ; alert("Flight Selected !\nPlease proceed to the next page");}}>
             Select
           </Button>
       </CardBody>
@@ -182,7 +198,7 @@ class MasterForm extends Component {
         <Label>Business class seats : {currentflight.number_of_Business_class_seats}</Label>  <br></br>
           
 
-            <Button size="small" color="primary" onClick={()=> {retFlight_id=currentflight._id ; alert("Flight Selected !\nPlease proceed to the next page");}}>
+            <Button size="small" color="primary" onClick={()=> {retFlight=currentflight; alert("Flight Selected !\nPlease proceed to the next page");}}>
             Select
           </Button>
       </CardBody>
@@ -196,6 +212,250 @@ class MasterForm extends Component {
     </div>
     
     );
+  
+  }
+
+  step3Content() {
+    
+    if(depFlight.length==0 || retFlight.length==0) {
+      return (<div>
+        <h1>Sorry no flights selected </h1> <br></br>
+        <h1>Please go back to our search page</h1>
+        </div>)
+    }
+    
+    return(
+     <> 
+    <div class="ticket">
+  <div id="banner">
+    <div id="topbanner"></div>
+    <span id="mainbanner">
+      <img src="https://lukw4l.de/utils/media/assets/flightticket/plane_logo.png"></img>
+      Shawarma Eaters Airlines
+    </span>
+    <span id="tearoffbanner">
+      <img src="https://lukw4l.de/utils/media/assets/flightticket/plane_logo.png"></img>
+      Shawarma Eaters Airlines
+    </span>
+  </div>
+  <div id="barcode">
+  <Label>Flight Number : {depFlight.flight_number}</Label> <br></br>
+  </div>
+  <div id="data">
+    <div id="maindata">
+       <div class="box">
+        <span class="header">
+          Passenger Name
+        </span>
+        <span class="body">
+        <Label>Username : {this.state.user.firstname && this.state.user.lastname}</Label> <br></br>
+        </span> 
+      </div>
+      <div class="box">
+        <span class="header">
+          Flight Number
+        </span>
+        <span class="body">
+        <Label>Flight Number : {depFlight.flight_number}</Label> <br></br>
+        </span>
+      </div>
+      <div class="box">
+        <span class="header">
+          From
+        </span>
+        <span class="body">
+        <Label>depAirport : {depFlight.depAirport}</Label> <br></br>
+        </span>
+      </div>
+      <div class="box">
+        <span class="header">
+          Date
+        </span>
+        <span class="body">
+        <Label>Departure : {depFlight.departure}</Label> <br></br>
+        </span>
+      </div>
+      <div class="box">
+        <span class="header">
+          To
+        </span>
+        <span class="body">
+        <Label>arrAirport : {depFlight.arrAirport}</Label> <br></br>
+        </span>
+      </div>
+      <div class="box">
+      </div>
+     
+
+      <div id="tearoffdata">
+        <div class="box">
+          <span class="header">
+            Passenger Name
+          </span>
+          <span class="body">
+          <Label>Username : {this.state.user.firstname && this.state.user.lastname}</Label> <br></br>
+          </span>
+        </div>
+        <div class="box">
+          <span class="header">
+            Flight Number
+          </span>
+          <span class="body">
+          <Label>Flight Number : {depFlight.flight_number}</Label> <br></br>
+          </span>
+        </div>
+        <div class="box">
+          <span class="header">
+            Date
+          </span>
+          <span class="body">
+          <Label>Departure : {depFlight.departure}</Label> <br></br>
+          </span>
+        </div>
+       
+        <div class="box seat">
+          <span class="header">
+            Seat
+          </span>
+          <span class="body">
+          <Label>Seat :{depFlight.economy_seats}</Label> <br></br>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div id="holes">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  </div>
+  <div class="ticket">
+  <div id="banner">
+    <div id="topbanner"></div>
+    <span id="mainbanner">
+      <img src="https://lukw4l.de/utils/media/assets/flightticket/plane_logo.png"></img>
+      Shawarma Eaters Airlines
+    </span>
+    <span id="tearoffbanner">
+      <img src="https://lukw4l.de/utils/media/assets/flightticket/plane_logo.png"></img>
+      Shawarma Eaters Airlines
+    </span>
+  </div>
+  <div id="barcode">
+  <Label>Flight Number : {retFlight.flight_number}</Label> <br></br>
+  </div>
+  <div id="data">
+    <div id="maindata">
+       <div class="box">
+        <span class="header">
+          Passenger Name
+        </span>
+        <span class="body">
+        <Label>Username : {this.state.user.firstname && this.state.user.lastname}</Label> <br></br>
+        </span> 
+      </div>
+      <div class="box">
+        <span class="header">
+          Flight Number
+        </span>
+        <span class="body">
+        <Label>Flight Number : {retFlight.flight_number}</Label> <br></br>
+        </span>
+      </div>
+      <div class="box">
+        <span class="header">
+          From
+        </span>
+        <span class="body">
+        <Label>depAirport : {retFlight.depAirport}</Label> <br></br>
+        </span>
+      </div>
+      <div class="box">
+        <span class="header">
+          Date
+        </span>
+        <span class="body">
+        <Label>Departure : {retFlight.departure}</Label> <br></br>
+        </span>
+      </div>
+      <div class="box">
+        <span class="header">
+          To
+        </span>
+        <span class="body">
+        <Label>arrAirport : {retFlight.arrAirport}</Label> <br></br>
+        </span>
+      </div>
+      <div class="box">
+      </div>
+     
+
+      <div id="tearoffdata">
+        <div class="box">
+          <span class="header">
+            Passenger Name
+          </span>
+          <span class="body">
+          <Label>Username : {this.state.user.firstname && this.state.user.lastname}</Label> <br></br>
+          </span>
+        </div>
+        <div class="box">
+          <span class="header">
+            Flight Number
+          </span>
+          <span class="body">
+          <Label>Flight Number : {retFlight.flight_number}</Label> <br></br>
+          </span>
+        </div>
+        <div class="box">
+          <span class="header">
+            Date
+          </span>
+          <span class="body">
+          <Label>Departure : {retFlight.departure}</Label> <br></br>
+          </span>
+        </div>
+       
+        <div class="box seat">
+          <span class="header">
+            Seat
+          </span>
+          <span class="body">
+          <Label>Seat :{retFlight.economy_seats}</Label> <br></br>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div id="holes">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  </div>
+  </> 
+  
+
+
+
+  )
   }
 
 
@@ -207,8 +467,8 @@ class MasterForm extends Component {
     event.preventDefault();
     
     alert(`Your Departure Flight detail: \n 
-      Your Departure Flight ID: ${depFlight_id} \n 
-      Your Return Flight ID: ${retFlight_id}`);
+      Your Departure Flight ID: ${depFlight} \n 
+      Your Return Flight ID: ${retFlight}`);
     
   };
 

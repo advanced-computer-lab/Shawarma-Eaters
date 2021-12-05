@@ -40,7 +40,11 @@ function App() {
       <Route path = "/send/:id" component = {EmailSend} />
       <Route path="/loginUser" component={LoginUser} /> 
       <Route path="/delete/:id" component={DeleteFlight} /> 
+<<<<<<< HEAD
       <Route path="/myBookings/:id" component={DisplayBookings} /> 
+=======
+<<<<<<< HEAD
+>>>>>>> origin/Sprint-2-person-1
       <Route path="/createuser" component={CreateUser} />
       <Route path="/searchplus" component={SearchPage} />
       <Route path="/edituser/:id" component={EditUser} />
@@ -48,6 +52,12 @@ function App() {
       <Route path="/MasterForm" component={MasterForm} render={(props) => <MasterForm {...props}/>}/>
       <Route path="/profile" component={UserProfile} /> 
 
+<<<<<<< HEAD
+=======
+=======
+      <Route path="/myBookings/:id" component={DisplayBookings} /> 
+>>>>>>> origin/person2
+>>>>>>> origin/Sprint-2-person-1
 
 
 
