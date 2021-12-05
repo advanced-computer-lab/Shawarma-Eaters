@@ -16,6 +16,17 @@ export const BasicTable = () => {
 
   const [flight, setflight] = useState([]);
 
+  window.onload = function() {
+    if(!window.location.hash) {
+      window.location = window.location + '#loaded';
+      window.location.reload();
+    }
+  }
+  function LoadOnce() 
+{ 
+window.location.reload(); 
+} 
+
   const fetchflight = async () => {
     const response = await axios
       .get("http://localhost:5000/flights/")
@@ -28,14 +39,26 @@ export const BasicTable = () => {
     }
   };
 
+  const deleteFlight =  (id)=>  
+  {
 
+    if(window.confirm('are you sure'))
+    {
+      axios.delete('http://localhost:5000/flights/'+id)
+        .then(response => { console.log(response.data)});
+        setflight( flight.filter(el => el._id !==id));
+       
+        // const flights = flight.filter(el => el._id !== "61a69956695c4f40cc03380d");
+        // setflight = [...flights]; 
+    }
+  };
 
 
 const flightColumns = useMemo(
   () =>
     flight[0]
       ? Object.keys(flight[0])
-          .filter((key) => key !== "updatedAt" &&  key !== "createdAt" &&  key !== "_id" &&  key !== "dates" &&  key !== "__v")
+          .filter((key) => key !== "updatedAt" &&  key !== "createdAt" &&   key !== "dates" &&  key !== "__v" && key !== 'business_seats' &&  key !== 'economy_seats')  //key !== "_id" && 
           .map((key) => {
             let head = key;
             if(key == "arrival_times")
@@ -59,7 +82,7 @@ const flightColumns = useMemo(
                 Cell: ({ value }) => <img src={value} />,
                 maxWidth: 600,
               };
-
+              console.log(flight)
             return { Header: head, accessor: key,Filter:ColumnFilter,maxWidth: 500, minWidth: 190   , width: 400 };
           })
       : [],
@@ -67,6 +90,11 @@ const flightColumns = useMemo(
 );
 
 const flightData = useMemo(() => [...flight], [flight]);
+
+const editFlight =  ()=>  
+  {
+    setflight( [flight])  
+  };
 
 const tableHooks = (hooks) => {
   hooks.visibleColumns.push((columns) => [
@@ -78,9 +106,15 @@ const tableHooks = (hooks) => {
       ,Cell: ({ row }) => 
       (
         <div class = "bottDiv">
-          
-        <button class = "EditButton" onClick={() => alert("Editing: ")}>   Edit      </button>
-        <button  class = "DeleteButton" onClick={() => alert("Deleting: ")}>Delete</button>
+        
+        {/* <a href={"/edit/"+row.values._id}>
+          {console.log('hi1')} */}
+        <button class = "EditButton" onClick={()=> window.location.href="/edit/"+row.values._id}>Edit</button>
+        {setflight(flight)}
+        
+        {/* </a>   */}
+        <button  class = "DeleteButton" onClick={()=>deleteFlight(row.values._id)}>Delete</button>
+       
 
     </div>
         
@@ -106,13 +140,25 @@ const tableInstance = useTable({columns : flightColumns,data : flightData},table
   useEffect(() => {
     fetchflight();
   }, []);
+
+  
+  // const handleDeleteClick = (contactId) => {
+  //   const newContacts = [...contacts];
+
+  //   const index = contacts.findIndex((contact) => contact.id === contactId);
+
+  //   newContacts.splice(index, 1);
+
+  //   setContacts(newContacts);
+  // };
+  
   
   return (
     
     <>
       <div className = 'BOX'>
         <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
-        <table style={{marginRight: 100 + 'em'}} class="primary-nav" {...getTableProps()}>
+        <table style={{marginRight: 100 + 'em'}} class="primary-nav" {...getTableProps()} >
         <thead>
           {headerGroups.map(headerGroup => (
             <tr {...headerGroup.getHeaderGroupProps()}>
@@ -129,7 +175,7 @@ const tableInstance = useTable({columns : flightColumns,data : flightData},table
             </tr>
           ))}
         </thead>
-          <tbody {...getTableBodyProps()}>
+          <tbody {...getTableBodyProps()} > 
             {rows.map(row => {
               prepareRow(row)
               return (

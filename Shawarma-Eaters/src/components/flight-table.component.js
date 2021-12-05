@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 2731a888219f703aeec49ad429efc787ec6d7648
 // Mahmoud made this file 
 //this page shows available flights
 import axios from 'axios';
@@ -110,3 +114,8 @@ class FlightTable extends React.Component {
 
 export default  FlightTable;
 //
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> origin/person2
+>>>>>>> 2731a888219f703aeec49ad429efc787ec6d7648

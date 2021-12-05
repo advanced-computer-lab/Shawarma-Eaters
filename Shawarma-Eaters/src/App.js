@@ -11,6 +11,11 @@ import Login from './components/login/Login';
 import LoginUser from './components/login/LoginUser';
 import FlightList from './components/flight-list.component';
 import DeleteFlight from './components/flight-list.component';
+<<<<<<< HEAD
+=======
+import EmailSend from './components/SendMail/EmailSend';
+import DisplayBookings from './components/MyBookings/test';
+>>>>>>> 2731a888219f703aeec49ad429efc787ec6d7648
 
 import EditUser from './components/update-user.component';
 import SearchPage from "./components/search-plus.component";
@@ -22,7 +27,10 @@ import MasterForm from "./components/MasterForm";
 import UserProfile from "./components/profile/profile.component";
 
 
+<<<<<<< HEAD
 import EmailSend from './components/SendMail/EmailSend';
+=======
+>>>>>>> 2731a888219f703aeec49ad429efc787ec6d7648
 function App() {
   const [buttonPopup,SetButtonPopup]= useState(false);
   return (
@@ -38,6 +46,7 @@ function App() {
       <Route path = "/send" component = {EmailSend} />
       <Route path="/loginUser" component={LoginUser} /> 
       <Route path="/delete/:id" component={DeleteFlight} /> 
+<<<<<<< HEAD
       <Route path="/createuser" component={CreateUser} />
       <Route path="/searchplus" component={SearchPage} />
       <Route path="/edituser/:id" component={EditUser} />
@@ -45,6 +54,9 @@ function App() {
       <Route path="/MasterForm" component={MasterForm} render={(props) => <MasterForm {...props}/>}/>
       <Route path="/profile" component={UserProfile} /> 
 
+=======
+      <Route path="/myBookings/:id" component={DisplayBookings} /> 
+>>>>>>> origin/person2
 
 
 
