@@ -10,7 +10,8 @@
   }
 
   .card{
-    background-color: #e04741;
+    border-radius: 25px;
+    background-color: #0bb2ff;
     border-style: solid;
 margin-bottom: 10px;}
 
@@ -20,12 +21,17 @@ margin-bottom: 10px;}
     height: 100%;  
     padding-top: 100px;
     padding-right: 120px;  
+    
     }  
-    .btn{  
+    .btn2{  
+    background-color: #ff0000;
     font-size: 25px;
     height:100%;
     width:200px;  
     }  
     .txtColor{
-        background-color: #ffff;
-    }
+        border-radius: 25px;
+  background: #ffffff;
+  padding: 20px;
+  width: 60%;
+  height: 50px;    }

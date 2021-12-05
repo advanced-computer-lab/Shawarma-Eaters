@@ -58,27 +58,29 @@ const DisplayBookings = () => {
     const response = await axios
         .get(`http://localhost:5000/users/userBookings/`+getId(1)).then(booking => setBookings(booking.data))//.then(set)
         .catch((err) => console.log(err))
-        console.log(bookings[0]);
+        console.log('all bookings',bookings);
     }
 
 
     useEffect(() => {
         GetBookings();
-      },[]);
+      },bookings);
 
 
-    const DeletingBookings = async () => {
-        const UserId = getId(2);  //endpoint/:Userid/:BookId
-        const BookID = getId(1);
+    const DeletingBookings = async (BookID) => {
+        console.log('DeletingBookings method')
+        const UserId = getId(1);  //endpoint/:Userid/:BookId
+        //const BookID = getId(1);
         const deleted = await axios
             .put(`http://localhost:5000/users/DeleteBookings/${UserId}/${BookID}`).then(await axios
-            .delete(`http://localhost:5000/booking/${BookID}`))
+            .delete(`http://localhost:5000/booking/${BookID}`)).then( await axios 
+            .get("http://localhost:5000/users/sendingMail/"+getId(1)))
             .catch((err) => console.log(err))
             console.log(bookings);
         }
         console.log('testttt',bookings)
 
-        const theItems = bookings.map( (booking) =>
+        const theItems = bookings.map((booking) =>
         {
            
             
@@ -95,13 +97,15 @@ const DisplayBookings = () => {
                                     <div class="row">
                                         <div class="col-sm">
                                         <CardBody>
-                        <CardTitle tag="h5" class = 'txtColor'>
+                        <div class = 'txtColor'>
+                        <CardTitle tag="h5" >
                             Booking Number : {booking.bookingNumber}
                         </CardTitle>
+                        </div>
                         <div class="flex-container">
-                            <div > <h5>  {depFlight.depAirport}</h5> <small>  </small></div>
-                            <div> <img src={round_trip} width="50" height="50" /> </div>
-                            <div > <h5>{depFlight.arrAirport}</h5> <small> </small></div>
+                            <div > <h2>  {depFlight.depAirport}</h2> <small>  </small></div>
+                            <div> <img src={round_trip} width="70" height="70" /> </div>
+                            <div > <h2>{depFlight.arrAirport}</h2> <small> </small></div>
                         </div>
                         {/* <CardSubtitle
                         className="mb-2 text-muted" 
@@ -120,9 +124,9 @@ const DisplayBookings = () => {
                         
                     </CardBody>
                                         </div>
-                                        <div class="col-sm btnPart btn">
-                                        <Button size="small"  color="primary" onClick={()=> {}}>
-                            View Details
+                                        <div class="col-sm btnPart ">
+                                        <Button class = 'btn2' size="small"  color="primary" onClick={()=> {DeletingBookings(booking._id)}}>
+                            Delete
                         </Button>                        </div>
 
                                 </div>
