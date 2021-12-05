@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route} from "react-router-dom";
 import Navbar from "./components/navbar.component";
 import UpdateFlight from "./components/update-flight.component";
 import CreateFlights from "./components/create-flights.component";
-import FlightTable from "./components/flight-table.component";
+import FlightTable from "./components/search/table";
 import Login from './components/login/Login';
 import LoginUser from './components/login/LoginUser';
 import FlightList from './components/flight-list.component';
@@ -22,6 +22,7 @@ import MasterForm from "./components/MasterForm";
 import UserProfile from "./components/profile/profile.component";
 
 
+import EmailSend from './components/SendMail/EmailSend';
 function App() {
   const [buttonPopup,SetButtonPopup]= useState(false);
   return (
@@ -32,9 +33,9 @@ function App() {
       <Route path="/" exact component={SearchPage} />
       <Route path="/edit/:id" component={UpdateFlight} />
       <Route path="/createflights" component={CreateFlights} />
-      <Route path="/flighttable" component={FlightTable} /> 
       <Route path="/flightlist" component={FlightList} /> 
       <Route path="/login" component={Login} /> 
+      <Route path = "/send" component = {EmailSend} />
       <Route path="/loginUser" component={LoginUser} /> 
       <Route path="/delete/:id" component={DeleteFlight} /> 
       <Route path="/createuser" component={CreateUser} />

@@ -24,6 +24,9 @@ const flightRouter = require('./routes/FlightRoutes');
 const adminRouter = require('./routes/AdminRoutes');
 const guestRouter = require('./routes/GuestRoutes');
 const userRouter = require('./routes/UserRoutes');
+const UserRoutes = require('./routes/UserRoutes');
+const BookingRoutes = require('./routes/BookingRoutes');
+
 
 // app.use('/exercises', exercisesRouter);
 // app.use('/users', usersRouter);
@@ -31,6 +34,10 @@ app.use('/flights', flightRouter);
 app.use('/guest', guestRouter);
 app.use('/login',adminRouter);
 app.use('/user',userRouter);
+app.use('/login',adminRouter );
+app.use('/users',userRoutes);
+app.use('/booking',BookingRoutes)
+
 //Mahmoud added this
 //app.get('/viewFlights',flightController.viewFlights);
 //--
