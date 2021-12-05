@@ -125,7 +125,7 @@ const DisplayBookings = () => {
                     </CardBody>
                                         </div>
                                         <div class="col-sm btnPart ">
-                                        <Button class = 'btn2' size="small"  color="primary" onClick={()=> {DeletingBookings(booking._id)}}>
+                                        <Button className = 'btnBook' size="small"  color="primary" onClick={()=> {DeletingBookings(booking._id)}}>
                             Delete
                         </Button>                        </div>
 
