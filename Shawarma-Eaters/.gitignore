@@ -1,8 +1,6 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
+
 node_modules
->>>>>>> origin/Sprint-2-person-1
+
 # Logs
 logs
 *.log
@@ -120,12 +118,9 @@ dist
 .yarn/unplugged
 .yarn/build-state.yml
 .yarn/install-state.gz
-<<<<<<< HEAD
+
 .pnp.*
-=======
-.pnp.*
-=======
+
 .env
 node_modules
->>>>>>> origin/person2
->>>>>>> origin/Sprint-2-person-1
+
