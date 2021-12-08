@@ -2,6 +2,21 @@ const User = require('../models/user');
 
 // changes needed
 // add popup in case of choosing other than economy and business
+const addAdmin =  (req,res)=> {
+
+    console.log('request came');
+    console.log(req.body);
+    const admin =new Admin(
+        {
+            username : req.body.username,
+            password : req.body.password
+        }
+    );
+    admin.save()
+    .then(() => res.json('Admin added!'))
+    .catch(err => res.status(400).json('Error: ' + err));
+    };
+    
 const findDepartureFlight = (req,res) => {
 
     let depdate = new Date(req.body.departureDate);
@@ -79,6 +94,18 @@ const deleteUserById = (req, res) => {
       .then(() => res.json('User deleted.'))
       .catch(err => res.status(400).json('Error: ' + err));
 }
+const getAllAdmins = (req,res) => {
+    console.log('request came GetALL');
+    console.log(req.body); 
+    Admin.find()
+    .then(Admins => res.json(Admins))
+    .catch(err => res.status(400).json('Error: ' + err));
+}
+const getAdmin = (req,res) => {
+    Admin.find({$and:[{username : req.body.username},{password : req.body.password}]})
+    .then(Admins => {res.json(Admins); console.log('Success')})
+    .catch(err => res.status(400).json('Error: ' + err));
+}
 
  
 
@@ -86,8 +113,11 @@ module.exports=
 {
     findDepartureFlight,
     findArrivalFlight,
+    getAdmin,
     getUserById,
     getAllUsers,
+    getAllAdmins,
     updateUserById,
-    deleteUserById
+    deleteUserById,
+    addAdmin
 }

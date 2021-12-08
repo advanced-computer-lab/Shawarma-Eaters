@@ -71,13 +71,22 @@ const DisplayBookings = () => {
         console.log('DeletingBookings method')
         const UserId = getId(1);  //endpoint/:Userid/:BookId
         //const BookID = getId(1);
-        const deleted = await axios
+        const deleted = 
+        await axios
             .put(`http://localhost:5000/users/DeleteBookings/${UserId}/${BookID}`).then(await axios
             .delete(`http://localhost:5000/booking/${BookID}`)).then( await axios 
             .get("http://localhost:5000/users/sendingMail/"+getId(1)))
             .catch((err) => console.log(err))
             console.log(bookings);
-        }
+      
+    }
+    const Check = (id)=>
+    {
+        if(window.confirm('are you sure')){
+            DeletingBookings(id)
+          }
+    
+    }
         console.log('testttt',bookings)
 
         const theItems = bookings.map((booking) =>
@@ -125,7 +134,7 @@ const DisplayBookings = () => {
                     </CardBody>
                                         </div>
                                         <div class="col-sm btnPart ">
-                                        <Button className = 'btnBook' size="small"  color="primary" onClick={()=> {DeletingBookings(booking._id)}}>
+                                        <Button className = 'btnBook' size="small"  color="primary" onClick={()=> {Check(booking._id)}}>
                             Delete
                         </Button>                        </div>
 
@@ -134,7 +143,7 @@ const DisplayBookings = () => {
                 
                     </Card>
       
-
+     
    
 
       
@@ -147,9 +156,10 @@ const DisplayBookings = () => {
       
 return (
     <>
+    <h1>My Bookings</h1>
                   
              <div>
-                <h1>My Bookings</h1>
+                
             <FormGroup>
 
                 {theItems}

@@ -87,82 +87,84 @@ export default class SearchPage extends Component {
      onSubmit(e) { 
       e.preventDefault();
 
-      const Dep_search = {
-        departureAirport : this.state.departureAirport,
-        arrivalAirport : this.state.arrivalAirport,
-        departureDate : this.state.departureDate,
-        arrivalDate : this.state.arrivalDate,
-        adults : this.state.adults,
-        children : this.state.children,
-        cabinclass : this.state.cabinclass
-      }
-      axios.post('http://localhost:5000/guest/depFlights',Dep_search)
-      .then(result =>{
-        
-         this.setState({
-          depArray: result.data
-         })
+      // const Dep_search = {
+      //   departureAirport : this.state.departureAirport,
+      //   arrivalAirport : this.state.arrivalAirport,
+      //   departureDate : this.state.departureDate,
+      //   arrivalDate : this.state.arrivalDate,
+      //   adults : this.state.adults,
+      //   children : this.state.children,
+      //   cabinclass : this.state.cabinclass
+      // }
+      // axios.post('http://localhost:5000/guest/depFlights',Dep_search)
+      // .then(result =>{
+      //   console.log('the Dep search:',Dep_search);
+      //   console.log('result data of dep search:',result.data);
+      //    this.setState({
+      //     depArray: result.data
+      //    })
          
-      }
+      // }
       
-         )
-      .catch(function (error) {
-        console.log(error);
-      })
+      //    )
+      // .catch(function (error) {
+      //   console.log(error);
+      // })
 
 
-      const Return_search = {
-        departureAirport :   this.state.arrivalAirport,
-        arrivalAirport :this.state.departureAirport ,
-        departureDate : this.state.departureDate,
-        arrivalDate : this.state.arrivalDate,
-        adults : this.state.adults,
-        children : this.state.children,
-        cabinclass : this.state.cabinclass
-      }
-      axios.post('http://localhost:5000/guest/arrFlights',Return_search)
-      .then(result =>{
-        
-        this.setState({
-         retArray: result.data
-        })}
-        )
-      .catch(function (error) {
-        console.log(error+" yes error in axios post arrFlights");
-      })
+      // const Return_search = {
+      //   departureAirport :   this.state.arrivalAirport,
+      //   arrivalAirport :this.state.departureAirport ,
+      //   departureDate : this.state.departureDate,
+      //   arrivalDate : this.state.arrivalDate,
+      //   adults : this.state.adults,
+      //   children : this.state.children,
+      //   cabinclass : this.state.cabinclass
+      // }
+      // axios.post('http://localhost:5000/guest/arrFlights',Return_search)
+      // .then(result =>{
+      //   console.log('Result data of return search:',result.data)
+      //   console.log('the Return search :',Return_search)
+      //   this.setState({
+      //    retArray: result.data
+      //   })}
+      //   )
+      // .catch(function (error) {
+      //   console.log(error+" yes error in axios post arrFlights");
+      // })
      
       
 
       this.setState({
         redirectToMasterForm: true
        });
-       
+      //  localStorage.setItem("depArray",this.state.depArray);
+      //  localStorage.setItem("retArray",this.state.retArray );
+
+
      
-      alert('YOU DID IT YOU SEARCHED!!!!!' );
+     alert('YOU DID IT YOU SEARCHED!!!!!' );
       
       }
 
 
      render() {
-      
-      const redirectToMasterForm = this.state.redirectToMasterForm;
-      if (redirectToMasterForm) {
-        console.log(this.state.redirectToMasterForm);
+      console.log(this.state.redirectToMasterForm);
         console.log("depArray:");
         console.log(this.state.depArray);
         console.log("retArray:");
       console.log(this.state.retArray);
+      const redirectToMasterForm = this.state.redirectToMasterForm;
+      if (redirectToMasterForm) {
+        
         
         return (  
           <>
-          <Redirect
-            to={{
-            pathname: "/MasterForm",
-            state: { depArray: this.state.depArray,
-              retArray:this.state.retArray
-            }
-          }}
-        />
+            <Redirect
+              to={{
+              pathname: "/MasterForm",
+            }}
+          />
           </>
 
         

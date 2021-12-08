@@ -1,21 +1,11 @@
 const User = require('../models/user');
 const nodemailer = require('nodemailer');
 
-
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
->>>>>>> origin/Sprint-2-person-1
-
 // changes needed
 // add popup in case of choosing other than economy and business
 const findDepartureFlight = (req,res) => {
 
-<<<<<<< HEAD
-=======
->>>>>>> origin/person2
->>>>>>> origin/Sprint-2-person-1
+
     let depdate = new Date(req.body.departureDate);
     let depdateUpper = depdate.setHours(23,59,59,999);
     let depdateLower = depdate.setHours(0,0,0,0) ;
@@ -31,16 +21,11 @@ const findDepartureFlight = (req,res) => {
      .catch(err => res.status(400).json('Error: ' + err));
  }
  else{
-<<<<<<< HEAD
     console.log('No departure found');
 
-=======
-<<<<<<< HEAD
     console.log('No departure found');
 
-=======
->>>>>>> origin/person2
->>>>>>> origin/Sprint-2-person-1
+
      //POPUP
  }
 }
@@ -59,16 +44,10 @@ const findArrivalFlight = (req,res) => {
         .catch(err => res.status(400).json('Error: ' + err));
     }
     else{
-<<<<<<< HEAD
         console.log('No arrival found');
 
-=======
-<<<<<<< HEAD
         console.log('No arrival found');
 
-=======
->>>>>>> origin/person2
->>>>>>> origin/Sprint-2-person-1
         //popup
     }
   
@@ -78,21 +57,13 @@ const getUserById = (req, res) => {
       .then(user => res.json(user))
       .catch(err => res.status(400).json('Error: ' + err));
 }
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
->>>>>>> origin/Sprint-2-person-1
+
 const getUserBookingById = (req, res) => {
     User.findById(req.params.id).populate({path : 'bookings',populate :[{path : 'outgoingFlightId'},{path : 'returnFlightId'}]})//.populate('outgoingFlightId').populate('returnFlightId')
       .then(user => res.json(user.bookings))
       .catch(err => res.status(400).json('Error: ' + err));
 }
 
-<<<<<<< HEAD
-=======
->>>>>>> origin/person2
->>>>>>> origin/Sprint-2-person-1
 const getAllUsers = (req,res) => {
     console.log('request came Get ALL');
     console.log(req.body); 
@@ -121,16 +92,8 @@ const deleteUserById = (req, res) => {
     User.findByIdAndDelete(req.params.id)
       .then(() => res.json('User deleted.'))
       .catch(err => res.status(400).json('Error: ' + err));
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
 }
 
- 
-
-=======
->>>>>>> origin/Sprint-2-person-1
-}
 const deleteUserBookById = (req, res) => {
     console.log('deleteUserBookById is been requested' ); 
     User.updateMany({ _id: req.params.id}, {$pull: { bookings :req.params.book}})  //delete the booking from the array of bookings in user properties
@@ -176,7 +139,7 @@ const sendEmail = async (req,res) => {
         from: 'acluser40@gmail.com', // TODO: email sender
         to: email, // TODO: email receiver
         subject: 'Nodemailer - Test2',
-        text: `Hello,${userDetails.firstname} ${userDetails.lastname} you have been canceled your reservation and the refunded amount is `,
+        text: `Hello,${userDetails.firstname} ${userDetails.lastname} you have been canceled your reservation and the refunded amount is $499 `,
        
         
     };
@@ -202,10 +165,6 @@ const sendEmail = async (req,res) => {
     });
 }
 
-<<<<<<< HEAD
-=======
->>>>>>> origin/person2
->>>>>>> origin/Sprint-2-person-1
 module.exports=
 {
     findDepartureFlight,
@@ -213,20 +172,9 @@ module.exports=
     getUserById,
     getAllUsers,
     updateUserById,
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-    deleteUserById
-}
-=======
->>>>>>> origin/Sprint-2-person-1
     deleteUserById,
     sendEmail,
     getUserBookingById,
     deleteUserBookById
 }
 
-<<<<<<< HEAD
-=======
->>>>>>> origin/person2
->>>>>>> origin/Sprint-2-person-1

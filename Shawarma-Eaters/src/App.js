@@ -19,8 +19,11 @@ import CreateUser from "./components/create-user.component";
 import Seats from './components/Seats/seats.component';
 import MasterForm from "./components/MasterForm";
 
-import UserProfile from "./components/profile/profile.component";
+import BasicTable from "./components/search/table";
 
+
+import UserProfile from "./components/profile/profile.component";
+import iternary from "./components/iternary.component";
 
 import EmailSend from './components/SendMail/EmailSend';
 import DisplayBookings from './components/MyBookings/test';
@@ -35,29 +38,21 @@ function App() {
       <Route path="/" exact component={SearchPage} />
       <Route path="/edit/:id" component={UpdateFlight} />
       <Route path="/createflights" component={CreateFlights} />
-      <Route path="/flightlist" component={FlightList} /> 
+      <Route path="/flightlist" component={BasicTable} /> 
       <Route path="/login" component={Login} /> 
       <Route path = "/send/:id" component = {EmailSend} />
       <Route path="/loginUser" component={LoginUser} /> 
       <Route path="/delete/:id" component={DeleteFlight} /> 
-<<<<<<< HEAD
       <Route path="/myBookings/:id" component={DisplayBookings} /> 
-=======
-<<<<<<< HEAD
->>>>>>> origin/Sprint-2-person-1
+
       <Route path="/createuser" component={CreateUser} />
       <Route path="/searchplus" component={SearchPage} />
       <Route path="/edituser/:id" component={EditUser} />
       <Route path="/seats" component={Seats} /> 
-      <Route path="/MasterForm" component={MasterForm} render={(props) => <MasterForm {...props}/>}/>
+      <Route path="/MasterForm" component={MasterForm} />
       <Route path="/profile" component={UserProfile} /> 
+      <Route path="/iternary" component={iternary} />
 
-<<<<<<< HEAD
-=======
-=======
-      <Route path="/myBookings/:id" component={DisplayBookings} /> 
->>>>>>> origin/person2
->>>>>>> origin/Sprint-2-person-1
 
 
 

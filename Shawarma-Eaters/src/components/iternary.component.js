@@ -29,44 +29,24 @@ import  '../imgs/img.css';
 
 import { FormGroup, Label, Input } from "reactstrap";
 import { Prompt ,Redirect,useLocation,BrowserRouter,withRouter } from 'react-router-dom';
-const step3Content = <h1>Summary of Dep and Return flight</h1>;
 
 
+export default class iternary extends Component {
+    constructor(props) {
+        super(props);
+    
+        // Set the intiial input values
+        this.state = {
+          user: {},
+          dep_flights: [],
+          depFlight:{},
+          retFlight:{}
+          
+        };
+    }
 
 
-// let depFlight={};
-// let retFlight={};
-
-
-class MasterForm extends Component {
-  handleSubmit = ()=> window.location='/myBookings/61a8d3f3ef7267e7fe6a6d4c';
-  constructor(props) {
-    super(props);
-
-    // Set the intiial input values
-    this.state = {
-      user: {},
-      dep_flights: [],
-      depFlight:{},
-      retFlight:{}
-      
-    };
-
-    // Bind new functions for next and previous
-    //Do I need bind?
-   
-
-  }
-  
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevState.depFlight !== this.state.depFlight) {
-  //     console.log('pokemons state has changed.')
-  //   }
-  //   if (prevState.retFlight !== this.state.depFlight) {
-  //     console.log('pokemons state has changed.')
-  //   }
-  // }
-
+    
   componentDidMount() {
 
     axios.get('http://localhost:5000/users/61a8d3f3ef7267e7fe6a6d4c/')
@@ -85,160 +65,13 @@ class MasterForm extends Component {
         console.log(error);
       })
 
-      // axios.get('http://localhost:5000/flights/')
-      // .then(response => {
-      //   this.setState({ retFlight: response.data })
-      // })
-      // .catch((error) => {
-      //   console.log(error);
-      // })
-
-
-    // this.setState({
-    //   dep_flights: localStorage.getItem("depArray"),
-    //   dep_flights:localStorage.getItem("retArray"),
-    //  });
-
-    // console.log(this.props);
     console.log("depArray in master form:",this.state.dep_flights);
     //console.log("retArray in master form:",this.state.dep_flights);
 
-      
 
-
-     
-  }
-
-  //Departure
-  step1Validator() {
-    return true;
-  }
-  //Return
-  step2Validator() {
-    return true;
-  }
-  
-  //Summary
-   step3Validator() {
-    return true;
   }
 
 
-  step1Content() {
-    // if(this.state.dep_flights.length==0) {
-    //   return (<div>
-    //     <h1>Sorry no flights match your search in our database </h1> <br></br>
-    //     <h1>Please go back to our search page</h1>
-    //     </div>)
-    // }
-    console.log("11inside content dep flights:");
-    console.log(this.state.dep_flights);
-  
-    return (  
-    <div>
-      <p>Please select prefered departure flight</p>
-      <FormGroup>
-
-  { this.state.dep_flights.map(currentflight =>(
-    
-      
-      <Card>
-    <CardImg className="card-img-top" top width="100%" src={plane} alt="Card image cap" />
-    <CardBody>
-        <CardTitle tag="h5">
-        Departure Flight
-        </CardTitle>
-        <CardSubtitle
-          className="mb-2 text-muted"
-          tag="h6"
-        >
-          Flight details:
-        </CardSubtitle>
-
-        <Label>Flight Number : {currentflight.flight_number}</Label> <br></br>
-     
-        <Label>Departure : {currentflight.departure}</Label> <br></br>
-           
-        <Label>Economy seats : {currentflight.number_of_Economy_seats}</Label>  <br></br>      
-
-        <Label>Business class seats : {currentflight.number_of_Business_class_seats}</Label>  <br></br>
-          
-
-            <Button size="small" color="primary" onClick={()=> {this.setState({ depFlight: currentflight }) ; alert("Flight Selected !\nPlease proceed to the next page");}}>
-            Select
-          </Button>
-      </CardBody>
-      </Card>
-      
-
-      )
-  )}
-        </FormGroup>
-      
-    </div>
-    
-    );
-  }
-
-
-
-  step2Content() {
-
-    if(this.state.dep_flights.length==0) {
-      return (<div>
-        <h1>Sorry no flights match your search in our database </h1> <br></br>
-        <h1>Please go back to our search page</h1>
-        </div>)
-    }
-    console.log("inside content ret flights:");
-    console.log(this.state.dep_flights);
-  
-    return (  
-    <div>
-      <p>Please select prefered return flight</p>
-      <FormGroup>
-
-  { this.state.dep_flights.map(currentflight =>(
-    
-      
-      <Card>
-    <CardImg className="card-img-top" top width="100%" src={plane} alt="Card image cap" />
-    <CardBody>
-        <CardTitle tag="h5">
-        Return Flight
-        </CardTitle>
-        <CardSubtitle
-          className="mb-2 text-muted"
-          tag="h6"
-        >
-          Flight details:
-        </CardSubtitle>
-
-        <Label>Flight Number : {currentflight.flight_number}</Label> <br></br>
-     
-        <Label>Departure : {currentflight.departure}</Label> <br></br>
-           
-        <Label>Economy seats : {currentflight.number_of_Economy_seats}</Label>  <br></br>      
-
-        <Label>Business class seats : {currentflight.number_of_Business_class_seats}</Label>  <br></br>
-          
-
-            <Button size="small" color="primary" onClick={()=> { this.setState({ retFlight: currentflight });  alert("Flight Selected !\nPlease proceed to the next page");}}>
-            Select
-          </Button>
-      </CardBody>
-      </Card>
-      
-
-      )
-  )}
-        </FormGroup>
-      
-    </div>
-    
-    );
-  
-  }
 
   step3Content() {
     console.log('selected dep flight:',this.state.depFlight);
@@ -254,7 +87,6 @@ class MasterForm extends Component {
     
     return(
      <> 
-     <h1>Please proceed to seats page to select your seat</h1>
     <div class="ticket">
   <div id="banner">
     <div id="topbanner"></div>
@@ -268,7 +100,7 @@ class MasterForm extends Component {
     </span>
   </div>
   <div id="barcode">
-  <Label>Flight Number : WG33</Label> <br></br>
+  <Label>Flight Number : {this.state.depFlight.flight_number}</Label> <br></br>
   </div>
   <div id="data">
     <div id="maindata">
@@ -277,7 +109,7 @@ class MasterForm extends Component {
           Passenger Name
         </span>
         <span class="body">
-        <Label>Username : Anas Anas</Label> <br></br>
+        <Label>Username : {this.state.user.firstname && this.state.user.lastname}</Label> <br></br>
         </span> 
       </div>
       <div class="box">
@@ -384,14 +216,14 @@ class MasterForm extends Component {
   </div>
   <div id="data">
     <div id="maindata">
-       {/* <div class="box">
+       <div class="box">
         <span class="header">
           Passenger Name
         </span>
         <span class="body">
         <Label>Username : {this.state.user.firstname && this.state.user.lastname}</Label> <br></br>
         </span> 
-      </div> */}
+      </div>
       <div class="box">
         <span class="header">
           Flight Number
@@ -429,14 +261,14 @@ class MasterForm extends Component {
      
 
       <div id="tearoffdata">
-        {/* <div class="box">
+        <div class="box">
           <span class="header">
             Passenger Name
           </span>
           <span class="body">
           <Label>Username : {this.state.user.firstname && this.state.user.lastname}</Label> <br></br>
           </span>
-        </div> */}
+        </div>
         <div class="box">
           <span class="header">
             Flight Number
@@ -488,71 +320,15 @@ class MasterForm extends Component {
   }
 
 
-
-
-  // Trigger an alert on form submission
-  //make it normal func if didnt work
-  // handleSubmit = ()=> window.location('/');
-  //  event => {
-  //   // event.preventDefault();
-  //   //window.location('/myBookings/61a8d3f3ef7267e7fe6a6d4c')
-  //   return(<>
-  //     <Redirect
-  //       to={{
-  //       pathname: "/myBookings/61a8d3f3ef7267e7fe6a6d4c"
-  //     }}
-  //   />
-  //   </>)
-  //   // alert(`Your Departure Flight detail: \n 
-  //   //   Your Departure Flight ID: ${this.state.depFlight} \n 
-  //   //   Your Return Flight ID: ${this.state.retFlight}`);
-    
-  // };
-
-
   render() {
-    //const { match, location, history } = this.props
+      return (
+        <FormGroup>
+            {this.step3Content()}
+        </FormGroup>
+      )
 
-    if(this.state.dep_flights.length!=0)  {
-    return (
-      <div class="MasterForm">
 
-      <StepProgressBar 
-        startingStep={0}
-        wrapperClass="progress-wrapper-custom"
-        onSubmit={this.handleSubmit}
-        submitBtnName="Submit"
-        previousBtnName="Previous"
-        nextBtnName="Next"
-        steps={[
-          {
-            label: "Step 1",
-            name: "step 1",
-            content: this.step1Content(),
-            validator:this.step1Validator
-          },
-          {
-            label: "Step 2",
-            name: "step 2",
-            content: this.step2Content(),
-            validator: this.step2Validator
-          },
-          {
-            label: "Step 3",
-            name: "step 3",
-            content: this.step3Content(),
-            validator: this.step3Validator
-          }
-        ]}
-      />
-    </div>
-    );}
-    else
-  {
-    return <div></div>
   }
-  }
-  
 }
 
-export default MasterForm;
+
