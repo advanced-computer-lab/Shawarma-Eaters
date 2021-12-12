@@ -27,7 +27,7 @@ div.pbody{
 
 }
 .reserved{ 
-    background-image: url("seat reserved.png");
+    background-image: url("seat_reserved.png");
     background-size: contain;
     background-repeat: no-repeat;
     position: relative;
@@ -37,11 +37,13 @@ div.pbody{
     border-radius: 9px;
     cursor: not-allowed;
     opacity: 0.7;
-    pointer-events: none;
+    /* pointer-events: none; */
+    display : "block";
+
 
 }
 .selected{
-    background-image: url("seat reserved.png");
+    background-image: url("seat_reserved.png");
     background-size: contain;
     background-repeat: no-repeat;
     position: relative;
@@ -49,6 +51,7 @@ div.pbody{
     height: 55px;
     object-fit: contain;
     border-radius: 9px;
+    display : "block";
     
 
 }
@@ -61,6 +64,7 @@ div.pbody{
     height: 55px;
     object-fit: contain;
     border-radius: 9px;
+    display : "block";
 
 }
 
@@ -74,6 +78,8 @@ div.pbody{
     object-fit: contain;
     cursor: not-allowed;
     border-radius: 9px;
+    display : "block";
+
 
 } /*
 div.grid-container > button{

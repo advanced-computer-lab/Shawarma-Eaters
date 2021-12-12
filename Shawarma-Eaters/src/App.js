@@ -53,6 +53,7 @@ function App() {
       <Route path="/profile" component={UserProfile} /> 
       <Route path="/iternary" component={iternary} />
 
+      <Route path="/realFlightList" component={FlightList} />
 
 
 

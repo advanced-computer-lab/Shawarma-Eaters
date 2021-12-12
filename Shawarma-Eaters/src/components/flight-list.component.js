@@ -17,6 +17,7 @@ const Flight = props => (
     <td>
       <Link to={"/edit/"+props.flight._id}>edit</Link> | <a href="#" onClick={() => {props.deleteFlight(props.flight._id) }}>delete</a>
     </td>
+    <td> {props.flight.economy_seats._id} </td>
   </tr>
 )
 
@@ -76,6 +77,7 @@ export default class FlightList extends Component {
               <th>Arrival Airport</th>
               <th>Departure Airport</th>
               <th>Actions</th>
+              <th>Seats</th>
             </tr>
           </thead>
           <tbody>
