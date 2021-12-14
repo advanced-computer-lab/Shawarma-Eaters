@@ -13,7 +13,8 @@ body {
   
     .Login form {
       margin: 0 auto;
-      max-width: 320px;
+      max-width: 350px;
+     
     }
   }
   form {
@@ -24,9 +25,56 @@ body {
       position: relative;
       left: 110px;
     }
+    .register
+    {
+      position: relative;
+      margin-bottom: 15px;
+
+    }
     Button
     {
       position: relative;
       left: 119px;
 
     }
+    .LoginForm{
+      margin-top: 100px;
+      max-width: 600px;
+      height: 400px;
+       padding: 1%;
+      box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+      background-color: #f2f3f7;
+      ;
+    }
+    .success{
+      padding: px 0px;
+      border-radius: 5px;
+      margin: auto;
+      border: 1px outset rgb(0, 0, 0);
+      background-color: rgb(66, 223, 35); 
+      text-align: left;
+      height: 40px;
+
+
+    }
+    .password{
+      padding: px 0px;
+      border-radius: 5px;
+      margin: auto;
+      border: 1px outset rgb(0, 0, 0);
+      background-color: rgb(255, 152, 133); 
+      text-align: left;
+      height: 40px;
+      
+
+    }
+    .pass{
+      padding: 7px 10px;
+
+    }
+    img {
+      max-width: 50%;
+      max-height: 50%;
+  }
+
+ 

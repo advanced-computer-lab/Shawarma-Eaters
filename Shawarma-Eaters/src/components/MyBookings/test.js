@@ -165,7 +165,6 @@ return (
                 {theItems}
             </FormGroup>
             </div>
-        <h1>SENDING MAIL WHEN THE DELETE BUTTON IS THE PREESED</h1>
     </>
 )
 };

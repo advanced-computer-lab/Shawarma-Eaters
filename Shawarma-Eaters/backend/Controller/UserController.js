@@ -1,5 +1,7 @@
 const User = require('../models/user');
 const nodemailer = require('nodemailer');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt')
 
 // changes needed
 // add popup in case of choosing other than economy and business
@@ -165,8 +167,32 @@ const sendEmail = async (req,res) => {
     });
 }
 
+const login = async (req, res) => {
+    User.findOne({username : req.body.username}).then(async user =>  {
+        if (user == null) 
+        {
+          console.log(req.body,req.body.name)
+          return res.send('Wrong User')  //res.status(400).send('Cannot find user')
+        }
+        try {
+            if(await bcrypt.compare(req.body.password, user.password)) {
+              res.send('Success')
+            } else {
+              res.send('Wrong Password')
+            }
+          } catch {
+            res.status(500).send()
+          }
+    })
+  }
+  
+ 
+
+
+
 module.exports=
 {
+    login,
     findDepartureFlight,
     findArrivalFlight,
     getUserById,

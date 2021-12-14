@@ -1,0 +1,19 @@
+GET http://localhost:5000/users
+
+###
+
+POST http://localhost:5000/guest/createUser 
+Content-Type: application/json
+
+{
+"username": "omar","firstname" : "Omar","lastname":"walid" ,"email":"anasayman5@gmail.com" ,"passportnumber":"121221212" , "password": "omar"
+}
+
+###
+
+POST http://localhost:5000/users/login 
+Content-Type: application/json
+
+{
+"username": "omar3", "password": "omar1"
+}

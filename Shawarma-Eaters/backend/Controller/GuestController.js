@@ -1,5 +1,7 @@
 //todo popup for other than economy and business
 const User = require('../models/user');
+// const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
 const Flight = require('../models/flight');
 function parseDate(input) {
 
@@ -48,15 +50,16 @@ const findArrivalFlight = (req,res) => {
   
 }
 //
-const createUser = (req,res) => {
+const createUser = async (req,res) => {
     console.log('trying to create user');
-    
+    try{
+    const hashedPassword = await bcrypt.hash(req.body.password, 10)
     const username = req.body.username;
     const firstname = req.body.firstname;
     const lastname = req.body.lastname;
     const email = req.body.email;   
     const passportnumber = req.body.passportnumber;
-    const password = req.body.password;
+    const password = hashedPassword;
 
     const newUser = new User({
         username,
@@ -69,7 +72,11 @@ const createUser = (req,res) => {
     newUser.save()
     .then(() => res.json('User added!'))
     .catch(err => res.status(400).json('Error: ' + err));
-  };
+  }
+  catch{
+    res.status(500).send()
+
+  }};
 
 const getAllUsers = (req,res) => {
     console.log('ALL aboard');

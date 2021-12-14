@@ -91,9 +91,7 @@ border: solid #ff3c00 1px;
   box-shadow: 1px 1px 0px #d12222;
 }
 
-.BOX{
-box-shadow: 12px 5px 12px rgb(250, 249, 249) ;
-}
+
 .primary-nav::after {
 content: '';
 flex-grow: 1;

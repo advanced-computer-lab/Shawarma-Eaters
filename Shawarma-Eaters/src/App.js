@@ -7,7 +7,7 @@ import Navbar from "./components/navbar.component";
 import UpdateFlight from "./components/update-flight.component";
 import CreateFlights from "./components/create-flights.component";
 import FlightTable from "./components/search/table";
-import Login from './components/login/Login';
+//import Login from './components/login/Login';
 import LoginUser from './components/login/LoginUser';
 import FlightList from './components/flight-list.component';
 import DeleteFlight from './components/flight-list.component';
@@ -27,6 +27,8 @@ import iternary from "./components/iternary.component";
 
 import EmailSend from './components/SendMail/EmailSend';
 import DisplayBookings from './components/MyBookings/test';
+import Login from './components/login/signUp';
+
 
 function App() {
   const [buttonPopup,SetButtonPopup]= useState(false);
