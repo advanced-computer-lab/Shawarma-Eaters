@@ -9,6 +9,8 @@ import "./search.css";
 import MasterForm from './MasterForm.js';
 // Departure Airport, Arrival Airport, Departure Date, Arrival Date, Adults, Children, Cabin class
 let data=[];
+let flag1=false;
+let flag2=false;
 export default class SearchPage extends Component {
    constructor(props) {
       super(props);
@@ -36,9 +38,31 @@ export default class SearchPage extends Component {
             cabinclass:'',
             redirectToMasterForm:false,
             depArray:[],
-            retArray:[]
+            retArray:[],
+            allFlights:[]
         }
         
+    }
+    
+    componentDidMount() {
+      axios.get('http://localhost:5000/flights/')
+      .then(response => {
+        this.setState({ allFlights: response.data });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+//window.localStorage.clear();
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+      if (prevState.depArray.length !== this.state.depArray.length) {
+        console.log('depArray state has changed.')
+      }
+      if (prevState.retArray.length !== this.state.retArray.length) {
+        console.log('retArray state has changed.')
+      }
     }
 
      onChangeDepAirport(e) {
@@ -87,82 +111,128 @@ export default class SearchPage extends Component {
      onSubmit(e) { 
       e.preventDefault();
 
-      // const Dep_search = {
-      //   departureAirport : this.state.departureAirport,
-      //   arrivalAirport : this.state.arrivalAirport,
-      //   departureDate : this.state.departureDate,
-      //   arrivalDate : this.state.arrivalDate,
-      //   adults : this.state.adults,
-      //   children : this.state.children,
-      //   cabinclass : this.state.cabinclass
-      // }
-      // axios.post('http://localhost:5000/guest/depFlights',Dep_search)
-      // .then(result =>{
-      //   console.log('the Dep search:',Dep_search);
-      //   console.log('result data of dep search:',result.data);
-      //    this.setState({
-      //     depArray: result.data
-      //    })
-         
-      // }
-      
-      //    )
-      // .catch(function (error) {
-      //   console.log(error);
-      // })
+      const Dep_search = {
+        departureAirport : this.state.departureAirport,
+        arrivalAirport : this.state.arrivalAirport,
+        departureDate : this.state.departureDate,
+        arrivalDate : this.state.arrivalDate,
+        adults : this.state.adults,
+        children : this.state.children,
+        cabinclass : this.state.cabinclass
+      }
+      axios.post('http://localhost:5000/guest/depFlights',Dep_search)
+      .then(result =>{
+         this.setState({
+          depArray: result.data
+         }, 
+         () =>{
+          console.log("result data of dep search:",result.data);
+          window.localStorage.setItem("depArray", JSON.stringify(this.state.depArray) );
+          flag2=true;
+         }
+         ) 
+      }
+         )
+      .catch(function (error) {
+        console.log(error);
+      });
 
 
-      // const Return_search = {
-      //   departureAirport :   this.state.arrivalAirport,
-      //   arrivalAirport :this.state.departureAirport ,
-      //   departureDate : this.state.departureDate,
-      //   arrivalDate : this.state.arrivalDate,
-      //   adults : this.state.adults,
-      //   children : this.state.children,
-      //   cabinclass : this.state.cabinclass
-      // }
+
+
+
+
+
+      const Return_search = {
+        departureAirport :   this.state.arrivalAirport,
+        arrivalAirport :this.state.departureAirport ,
+        departureDate : this.state.departureDate,
+        arrivalDate : this.state.arrivalDate,
+        adults : this.state.adults,
+        children : this.state.children,
+        cabinclass : this.state.cabinclass
+      }
+
+      const myarr= this.state.allFlights.filter(
+        (flight) =>{
+          const myArray = flight.dates.split("-");
+          if (Return_search.cabinclass=="Economy"){
+            return ( myArray[0] == Return_search.departureDate.getFullYear() &
+            myArray[1] ==Return_search.departureDate.getMonth()+1 &
+            (myArray[2].substring(0,2).startsWith("0"))?myArray[2].substring(1,2) == Return_search.departureDate.getDate():myArray[2].substring(0,2)==Return_search.departureDate.getDate()
+    &
+                    flight.arrivalAirport == Return_search.arrivalAirport &
+                    flight.departureAirport == Return_search.departureAirport &
+                    flight.number_of_Economy_seats>= (Return_search.children + Return_search.adults));
+            }
+            else{
+              return ( myArray[0] == Return_search.departureDate.getFullYear() &
+              myArray[1] ==Return_search.departureDate.getMonth()+1 &
+              (myArray[2].substring(0,2).startsWith("0"))?myArray[2].substring(1,2) == Return_search.departureDate.getDate():myArray[2].substring(0,2)==Return_search.departureDate.getDate()
+             & 
+                flight.arrivalAirport == Return_search.arrivalAirport &
+                flight.departureAirport == Return_search.departureAirport &
+                flight.number_of_Business_class_seats>= (Return_search.children + Return_search.adults));
+               }
+
+        }
+      );
+
+      this.setState({
+        retArray: myarr
+      }, ()=>{       
+      console.log("result data of ret search:",myarr);
+      window.localStorage.setItem("retArray", JSON.stringify(this.state.retArray) );
+      flag1=true;
+      });
+
+
+
+
+
+
+      this.setState({
+        redirectToMasterForm:true
+      });
+//       ret sr d date(date):     Wed Dec 01 2021 02:31:30 GMT+0200 (Eastern European Standard Time)
+//       all flight date(string):   2021-12-01T21:17:10.268Z
+
       // axios.post('http://localhost:5000/guest/arrFlights',Return_search)
       // .then(result =>{
       //   console.log('Result data of return search:',result.data)
-      //   console.log('the Return search :',Return_search)
       //   this.setState({
       //    retArray: result.data
-      //   })}
+      //   }, window.localStorage.setItem("retArray",JSON.stringify( (result.data==null || result.data.length== 0) ? [] : result.data  ) ))}
       //   )
       // .catch(function (error) {
       //   console.log(error+" yes error in axios post arrFlights");
       // })
-     
-      
-
-      this.setState({
-        redirectToMasterForm: true
-       });
-      //  localStorage.setItem("depArray",this.state.depArray);
-      //  localStorage.setItem("retArray",this.state.retArray );
 
 
-     
-     alert('YOU DID IT YOU SEARCHED!!!!!' );
+    // alert('YOU DID IT YOU SEARCHED!!!!!' );
+    
       
       }
 
 
      render() {
-      console.log(this.state.redirectToMasterForm);
+      const redirectToMasterForm = this.state.redirectToMasterForm;
+      if (redirectToMasterForm) {
         console.log("depArray:");
         console.log(this.state.depArray);
         console.log("retArray:");
       console.log(this.state.retArray);
-      const redirectToMasterForm = this.state.redirectToMasterForm;
-      if (redirectToMasterForm) {
-        
-        
+        //window.localStorage.clear();
+             
+       console.log("local dep ",JSON.parse( window.localStorage.getItem("depArray")));
+       console.log("local ret ",JSON.parse(window.localStorage.getItem("retArray")));
         return (  
           <>
             <Redirect
               to={{
               pathname: "/MasterForm",
+              state: { depArray: this.state.depArray,
+                        retArray: this.state.retArray  }
             }}
           />
           </>
@@ -170,6 +240,8 @@ export default class SearchPage extends Component {
         
         )
       }
+     
+      
       return (
         
       <div class="IMGdiv">

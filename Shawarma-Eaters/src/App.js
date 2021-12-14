@@ -49,7 +49,11 @@ function App() {
       <Route path="/searchplus" component={SearchPage} />
       <Route path="/edituser/:id" component={EditUser} />
       <Route path="/seats" component={Seats} /> 
+
       <Route path="/MasterForm" component={MasterForm} />
+      <Route path="MasterForm" render={(props) => <MasterForm {...props}/>}/>
+
+
       <Route path="/profile" component={UserProfile} /> 
       <Route path="/iternary" component={iternary} />
 

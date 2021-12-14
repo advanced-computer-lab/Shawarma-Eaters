@@ -25,6 +25,9 @@ const findDepartureFlight = (req,res) => {
         .catch(err => res.status(400).json('Error: ' + err));
     }
     else{
+        console.log('No arrival found');
+
+        console.log('No arrival found');
         //POPUP
     }
 }
@@ -34,15 +37,19 @@ const findArrivalFlight = (req,res) => {
     let arrdateLower = arrdate.setHours(0,0,0,0) ;
     if (req.body.cabinclass == "Economy" ){
         Flight.find({depAirport: req.body.arrivalAirport,arrAirport: req.body.departureAirport, number_of_Economy_seats :{ $gte:Number(req.body.adults) + Number(req.body.children)}}) 
-        .then(flight => res.json(flight)).then(console.log(flight))
+        .then(flight => res.json(flight))
         .catch(err => res.status(400).json('Error: ' + err));
     }
     else if (req.body.cabinclass == "Business" ){
         Flight.find({depAirport: req.body.arrivalAirport,arrAirport: req.body.departureAirport, dates:{$lt: new Date(arrdateUpper),$gt: new Date(arrdateLower)}, number_of_Business_class_seats :{ $gte: Number(req.body.adults) + Number(req.body.children)}})
-        .then(flight => res.json(flight))
+        .then(flight => 
+            res.json(flight))
         .catch(err => res.status(400).json('Error: ' + err));
     }
     else{
+        console.log('No arrival found');
+
+        console.log('No arrival found');
         //popup
     }
   

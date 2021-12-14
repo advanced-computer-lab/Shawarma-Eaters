@@ -34,8 +34,8 @@ const step3Content = <h1>Summary of Dep and Return flight</h1>;
 
 
 
-// let depFlight={};
-// let retFlight={};
+ let depFlights_test=[];
+ let retFlights_test=[];
 
 
 class MasterForm extends Component {
@@ -47,6 +47,7 @@ class MasterForm extends Component {
     this.state = {
       user: {},
       dep_flights: [],
+      ret_flights: [],
       depFlight:{},
       retFlight:{}
       
@@ -67,23 +68,23 @@ class MasterForm extends Component {
   //   }
   // }
 
-  componentDidMount() {
+  componentDidMount(props) {
 
-    axios.get('http://localhost:5000/users/61a8d3f3ef7267e7fe6a6d4c/')
-      .then(response => {
-        this.setState({ user: response.data })
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // axios.get('http://localhost:5000/users/61a8d3f3ef7267e7fe6a6d4c/')
+    //   .then(response => {
+    //     this.setState({ user: response.data })
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
 
-      axios.get('http://localhost:5000/flights/')
-      .then(response => {
-        this.setState({ dep_flights: response.data })
-      })
-      .catch((error) => {
-        console.log(error);
-      })
+    //   axios.get('http://localhost:5000/flights/')
+    //   .then(response => {
+    //     this.setState({ dep_flights: response.data })
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   })
 
       // axios.get('http://localhost:5000/flights/')
       // .then(response => {
@@ -93,29 +94,44 @@ class MasterForm extends Component {
       //   console.log(error);
       // })
 
+      //window.sessionStorage.setItem;
 
     // this.setState({
     //   dep_flights: localStorage.getItem("depArray"),
     //   dep_flights:localStorage.getItem("retArray"),
     //  });
 
-    // console.log(this.props);
-    console.log("depArray in master form:",this.state.dep_flights);
-    //console.log("retArray in master form:",this.state.dep_flights);
+    //console.log( JSON.parse(window.localStorage.getItem("depArray")));
+    //console.log(JSON.parse(window.localStorage.getItem("retArray")));
+    depFlights_test=JSON.parse(window.localStorage.getItem("depArray"));
+    retFlights_test=JSON.parse(window.localStorage.getItem("retArray"));
 
-      
+    this.setState({ 
+      dep_flights:  depFlights_test,
+      ret_flights: retFlights_test
+    });
+    //window.localStorage.clear();
 
+    
+    console.log('using local depFlights_test in master form:' ,depFlights_test);
+    console.log('using local retFlights_test in master form:' ,retFlights_test);
+    console.log("using depArray in master form:",this.props.location.state.depArray);
+    console.log("using retArray in master form:",this.props.location.state.retArray);
 
+      console.log(this.props);
+
+    window.localStorage.clear();
      
   }
 
   //Departure
+  
   step1Validator() {
-    return true;
+    return (this.state.dep_flights.length==0)?false:true;
   }
   //Return
   step2Validator() {
-    return true;
+    return (this.state.ret_flights.length==0)?false:true;;
   }
   
   //Summary
@@ -125,12 +141,12 @@ class MasterForm extends Component {
 
 
   step1Content() {
-    // if(this.state.dep_flights.length==0) {
-    //   return (<div>
-    //     <h1>Sorry no flights match your search in our database </h1> <br></br>
-    //     <h1>Please go back to our search page</h1>
-    //     </div>)
-    // }
+    if(this.state.dep_flights.length==0) {
+      return (<div>
+        <h1>Sorry no flights match your search in our database </h1> <br></br>
+        <h1>Please go back to our search page</h1>
+        </div>);
+    }
     console.log("11inside content dep flights:");
     console.log(this.state.dep_flights);
   
@@ -180,25 +196,23 @@ class MasterForm extends Component {
     );
   }
 
-
-
   step2Content() {
 
-    if(this.state.dep_flights.length==0) {
+    if(this.state.ret_flights.length==0) {
       return (<div>
         <h1>Sorry no flights match your search in our database </h1> <br></br>
         <h1>Please go back to our search page</h1>
         </div>)
     }
     console.log("inside content ret flights:");
-    console.log(this.state.dep_flights);
+    console.log(this.state.ret_flights);
   
     return (  
     <div>
       <p>Please select prefered return flight</p>
       <FormGroup>
 
-  { this.state.dep_flights.map(currentflight =>(
+  { this.state.ret_flights.map(currentflight =>(
     
       
       <Card>
@@ -513,7 +527,7 @@ class MasterForm extends Component {
   render() {
     //const { match, location, history } = this.props
 
-    if(this.state.dep_flights.length!=0)  {
+
     return (
       <div class="MasterForm">
 
@@ -546,11 +560,8 @@ class MasterForm extends Component {
         ]}
       />
     </div>
-    );}
-    else
-  {
-    return <div></div>
-  }
+    );
+
   }
   
 }
