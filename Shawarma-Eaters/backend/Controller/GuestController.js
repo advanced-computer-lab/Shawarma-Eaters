@@ -35,12 +35,12 @@ const findArrivalFlight = (req,res) => {
     let arrdateUpper = arrdate.setHours(23,59,59,999);
     let arrdateLower = arrdate.setHours(0,0,0,0) ;
     if (req.body.cabinclass == "Economy" ){
-        Flight.find({depAirport: req.body.arrivalAirport,arrAirport: req.body.departureAirport, number_of_Economy_seats :{ $gte:Number(req.body.adults) + Number(req.body.children)}}) 
-        .then(flight => res.json(flight)).then(console.log(flight))
+        Flight.find({depAirport: req.body.arrivalAirport,arrAirport: req.body.departureAirport,dates:{$lt: new Date(arrdateUpper),$gte: new Date(arrdateLower)}, number_of_Economy_seats :{ $gte:Number(req.body.adults) + Number(req.body.children)}}) 
+        .then(flight => res.json(flight))
         .catch(err => res.status(400).json('Error: ' + err));
     }
     else if (req.body.cabinclass == "Business" ){
-        Flight.find({depAirport: req.body.arrivalAirport,arrAirport: req.body.departureAirport, dates:{$lt: new Date(arrdateUpper),$gt: new Date(arrdateLower)}, number_of_Business_class_seats :{ $gte: Number(req.body.adults) + Number(req.body.children)}})
+        Flight.find({depAirport: req.body.arrivalAirport,arrAirport: req.body.departureAirport,dates:{$lt: new Date(arrdateUpper),$gte: new Date(arrdateLower)}, number_of_Business_class_seats :{ $gte: Number(req.body.adults) + Number(req.body.children)}})
         .then(flight => res.json(flight))
         .catch(err => res.status(400).json('Error: ' + err));
     }
@@ -70,11 +70,11 @@ const createUser = async (req,res) => {
         password
     });
     newUser.save()
-    .then(() => res.json('User added!'))
-    .catch(err => res.status(400).json('Error: ' + err));
+    .then(() => {console.log('success')}) //res.json('User added!'),
+    .catch(err => {console.log('error')});//res.status(400).json('Error: ' + err),
   }
   catch{
-    res.status(500).send()
+    console.log('error') //res.status(500).send()
 
   }};
 

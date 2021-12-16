@@ -46,9 +46,8 @@ class MasterForm extends Component {
     // Set the intiial input values
     this.state = {
       user: {},
-      dep_flights: [],
-      depFlight:{},
-      retFlight:{}
+      dep_flights:[],
+      ret_flights:[]
       
     };
 
@@ -68,7 +67,7 @@ class MasterForm extends Component {
   // }
 
   componentDidMount() {
-
+    console.log('propsssssss',this.props);
     axios.get('http://localhost:5000/users/61a8d3f3ef7267e7fe6a6d4c/')
       .then(response => {
         this.setState({ user: response.data })
@@ -77,33 +76,19 @@ class MasterForm extends Component {
         console.log(error);
       });
 
-      axios.get('http://localhost:5000/flights/')
-      .then(response => {
-        this.setState({ dep_flights: response.data })
-      })
-      .catch((error) => {
-        console.log(error);
-      })
+      axios.post('http://localhost:5000/guest/depFlights',this.props.depArray).then(result => this.setState({ dep_flights:  result}));
+      axios.post('http://localhost:5000/guest/arrFlights',this.props.retArray).then(result => this.setState({ retFlights:  result}));
 
-      // axios.get('http://localhost:5000/flights/')
-      // .then(response => {
-      //   this.setState({ retFlight: response.data })
-      // })
-      // .catch((error) => {
-      //   console.log(error);
-      // })
-
-
-    // this.setState({
-    //   dep_flights: localStorage.getItem("depArray"),
-    //   dep_flights:localStorage.getItem("retArray"),
-    //  });
+     
 
     // console.log(this.props);
-    console.log("depArray in master form:",this.state.dep_flights);
+    console.log(this.state.depFlight);
+    console.log(this.state.retFlight);
+
     //console.log("retArray in master form:",this.state.dep_flights);
 
-      
+   
+      console.log(this.props);
 
 
      
@@ -549,7 +534,7 @@ class MasterForm extends Component {
     );}
     else
   {
-    return <div></div>
+    return <div>anas</div>
   }
   }
   

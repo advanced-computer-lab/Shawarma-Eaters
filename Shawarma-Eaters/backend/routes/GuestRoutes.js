@@ -5,7 +5,7 @@ const router = require('express').Router();
 router.route('/').get(guestController.getAllUsers);
 
 
-router.route('/createUser').post(guestController.createUser);
+router.route('/makeUser').post(guestController.createUser);
 router.route('/depFlights').post(guestController.findDepartureFlight);
 router.route('/arrFlights').post(guestController.findArrivalFlight);
 

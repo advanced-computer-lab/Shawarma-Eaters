@@ -133,7 +133,7 @@ export default function Login() {
           <br></br>
         </Form.Group>
         <div className = "register">
-            Don't have account?         <a href="http://localhost:3000/createuser" >Register</a>
+          Don't have account?         <a href="http://localhost:3000/createuser" >Register</a>
         </div>
         <div className = "loginAs">
             <a href="http://localhost:3000/login" >        Login as Admin</a>

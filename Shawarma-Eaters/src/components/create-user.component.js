@@ -19,7 +19,7 @@ export default class CreateUser extends Component {
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassport = this.onChangePassport.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+    this.submit = this.submit.bind(this);
 
     this.state = {
       username: '',
@@ -32,7 +32,8 @@ export default class CreateUser extends Component {
       users: []
     }
   }
-   submit() {
+
+    submit() {
     const user = {
       username: this.state.username,
       firstname: this.state.firstname,
@@ -44,25 +45,22 @@ export default class CreateUser extends Component {
   
     console.log('user',user);
   
-    axios.post('http://localhost:5000/guest/createUser', user)
-      .then(res => console.log(res.data)).catch(error => console.log(console.log(error)));
-  
-    window.location = '/loginUser';
+    axios.post('http://localhost:5000/guest/makeUser', user);
+     window.location = '/';
+//  
   }
  
   // componentDidMount() {
-  //   axios.get('http://localhost:5000/users/')
-  //     .then(response => {
-  //       if (response.data.length > 0) {
-  //         this.setState({
-  //           users: response.data.map(user => user.username),
-  //           username: response.data[0].username
-  //         })
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     })
+  //   const user = {
+  //     username: this.state.username,
+  //     firstname: this.state.firstname,
+  //     lastname: this.state.lastname,
+  //     email: this.state.email,
+  //     passportnumber: this.state.passportnumber,
+  //     password:this.state.password
+  //     }
+  //   axios.post('http://localhost:5000/guest/createUser', user)
+      
 
   // }
   onChangeUsername(e) {
@@ -95,23 +93,7 @@ export default class CreateUser extends Component {
       password:e.target.value
     })
   }
-  onSubmit(e) {
-    e.preventDefault();
-    const user = {
-      username: this.state.username,
-      firstname: this.state.firstname,
-      lastname: this.state.lastname,
-      email: this.state.email,
-      passportnumber: this.state.passportnumber,
-      password:this.state.password
-      }
   
-    console.log(user);
-
-    axios.post('http://localhost:5000/guest/createUser', user)
-      .then(res => console.log(res.data));
-
-  }
   render() {
     return (
     <body>
@@ -146,9 +128,7 @@ export default class CreateUser extends Component {
                 <div class="col form-group">
                     <input type="password" class="form-control" name="password" placeholder="Password" required="required"  value={this.state.password} onChange={this.onChangePassword}/>
                 </div>
-                <div class="col form-group">
-                    <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" required="required"/>
-                </div>
+               
             </div>
             
             

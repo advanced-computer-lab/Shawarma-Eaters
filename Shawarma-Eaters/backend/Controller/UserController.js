@@ -176,15 +176,27 @@ const login = async (req, res) => {
         }
         try {
             if(await bcrypt.compare(req.body.password, user.password)) {
-              res.send('Success')
+                res.send('Success');
+                const username = req.body.username;
+                const user = { name: username };
+                const accessToken = generateAccessToken(user);
+                console.log({ accessToken: accessToken})
+                //res.json()
             } else {
               res.send('Wrong Password')
             }
+            
           } catch {
             res.status(500).send()
           }
     })
+    
+}
+function generateAccessToken(user) {
+    return jwt.sign(user, process.env.ACCESS_SECRET_TOKEN)
   }
+
+   
   
  
 
