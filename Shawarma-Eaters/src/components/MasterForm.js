@@ -206,13 +206,13 @@ class MasterForm extends Component {
   //Departure
   
   step1Validator() {
-    return true;
-   // return (this.state.dep_flights.length==0)?false:true;
+   // return true;
+   return (this.state.dep_flights.length==0)?false:true;
   }
   //Return
   step2Validator() {
-    return true;
-   // return (this.state.ret_flights.length==0)?false:true;;
+    //return true;
+   return (this.state.ret_flights.length==0)?false:true;;
   }
   
   //Summary
