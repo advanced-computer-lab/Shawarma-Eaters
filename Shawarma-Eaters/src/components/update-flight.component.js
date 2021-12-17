@@ -75,7 +75,6 @@ export default class UpdateFlight extends Component {
     })
   }
 
-
   onChangeEconSeats(e) {
     this.setState({
       number_of_Economy_seats: e.target.value

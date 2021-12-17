@@ -3,6 +3,12 @@ import React, { Component } from 'react';
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from 'axios';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+  } from "react-router-dom";
 //import CheckIcon from '@mui/icons-material/Check';
 // import ToggleButton from '@mui/material/ToggleButton';
 import "./seats.css";
@@ -71,7 +77,9 @@ export default class seats extends Component{
     }
 componentDidMount() {
 
+    
 }
+
  econSeat(s){
 
     console.log('econseat clicked'+ s);
@@ -209,7 +217,12 @@ Date: 12/01/2022
         })}
     </tbody> */}
 
-  
+{/* <Link
+  to={{
+    pathname: "/summary",
+    state: { seats: this.state.seatnumber }
+  }}
+/> */}
   
 </div> 
 

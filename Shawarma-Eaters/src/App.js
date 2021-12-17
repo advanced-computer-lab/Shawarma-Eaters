@@ -51,7 +51,7 @@ function App() {
       <Route path="/seats" component={Seats} /> 
 
       <Route path="/MasterForm" component={MasterForm} />
-      <Route path="MasterForm" render={(props) => <MasterForm {...props}/>}/>
+      {/* <Route path="MasterForm" render={(props) => <MasterForm {...props}/>}/> */}
 
 
       <Route path="/profile" component={UserProfile} /> 

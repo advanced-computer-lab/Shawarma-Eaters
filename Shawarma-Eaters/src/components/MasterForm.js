@@ -33,11 +33,6 @@ const step3Content = <h1>Summary of Dep and Return flight</h1>;
 
 
 
-
- let depFlights_test=[];
- let retFlights_test=[];
-
-
 class MasterForm extends Component {
   handleSubmit = ()=> window.location='/myBookings/61a8d3f3ef7267e7fe6a6d4c';
   constructor(props) {
@@ -68,7 +63,15 @@ class MasterForm extends Component {
   //   }
   // }
 
-  componentDidMount(props) {
+  // Alex
+  //  United States
+  //  "cabinclass": "Economy",
+  //  "arrivalDate":"12/15/2021",
+  //  "departureDate":"12/15/2021",
+  //  "adults":1,
+  //  "children":2
+  
+   /*componentDidMount(props) {
 
     // axios.get('http://localhost:5000/users/61a8d3f3ef7267e7fe6a6d4c/')
     //   .then(response => {
@@ -124,14 +127,92 @@ class MasterForm extends Component {
      
   }
 
+  */
+  
+  
+  /*
+  How componentWillMount() work:
+      As you know, the life-cycle hook componentWillMount triggers before the initial render, 
+      and the function will only trigger once in the lifespan of a component.
+      It is used to update the state value before the DOM is rendered, creating a state variable, as shown below.
+
+      constructor() {
+          super();
+          this.state = {
+            message: "This is initial message"
+          };
+      }
+
+      As shown above, there is one state variable called message with a default string. 
+      Now update the message as shown below.
+
+      componentWillMount() {
+          this.setState({ message: "This is an updated message" });
+      }
+
+      Once the component gets initiated, 
+      the current state value will be overridden with the updated value,
+       but keep in mind this happens once in a lifetime of a component.
+  */
+ //For more info go to this link
+ //https://reactjs.org/docs/react-component.html#shouldcomponentupdate
+  componentWillMount() {
+    axios.post('http://localhost:5000/guest/depFlights',this.props.depSearch).then(result => this.setState({ dep_flights:  result.data})).catch((error) => {
+      console.log(error);
+    });
+    axios.post('http://localhost:5000/guest/arrFlights',this.props.retSearch).then(result => this.setState({ ret_flights:  result.data})).catch((error) => {
+      console.log(error);
+    });
+  console.log('propsssssss',this.props);
+  
+  axios.get('http://localhost:5000/users/61a8d3f3ef7267e7fe6a6d4c/')
+    .then(response => {
+      this.setState({ user: response.data })
+    })
+    .catch((error) => {
+      console.log(error);
+    });  
+  
+  }
+  
+  
+  componentDidMount() {
+    axios.post('http://localhost:5000/guest/depFlights',this.props.depSearch).then(result => this.setState({ dep_flights:  result.data})).catch((error) => {
+        console.log(error);
+      });
+      axios.post('http://localhost:5000/guest/arrFlights',this.props.retSearch).then(result => this.setState({ ret_flights:  result.data})).catch((error) => {
+        console.log(error);
+      });
+    console.log('propsssssss',this.props);
+
+    axios.get('http://localhost:5000/users/61a8d3f3ef7267e7fe6a6d4c/')
+      .then(response => {
+        this.setState({ user: response.data })
+      })
+      .catch((error) => {
+        console.log(error);
+      });     
+
+      
+
+    //console.log("retArray in master form:",this.state.dep_flights);
+
+
+     
+  }
+
+
+
   //Departure
   
   step1Validator() {
-    return (this.state.dep_flights.length==0)?false:true;
+    return true;
+   // return (this.state.dep_flights.length==0)?false:true;
   }
   //Return
   step2Validator() {
-    return (this.state.ret_flights.length==0)?false:true;;
+    return true;
+   // return (this.state.ret_flights.length==0)?false:true;;
   }
   
   //Summary
@@ -141,7 +222,9 @@ class MasterForm extends Component {
 
 
   step1Content() {
+    console.log("this.state.dep_flights.length=",this.state.dep_flights.length);
     if(this.state.dep_flights.length==0) {
+      //this.setState({});
       return (<div>
         <h1>Sorry no flights match your search in our database </h1> <br></br>
         <h1>Please go back to our search page</h1>
@@ -155,7 +238,8 @@ class MasterForm extends Component {
       <p>Please select prefered departure flight</p>
       <FormGroup>
 
-  { this.state.dep_flights.map(currentflight =>(
+  { 
+  this.state.dep_flights.map(currentflight =>(
     
       
       <Card>
@@ -188,7 +272,8 @@ class MasterForm extends Component {
       
 
       )
-  )}
+  )
+  }
         </FormGroup>
       
     </div>
@@ -197,8 +282,10 @@ class MasterForm extends Component {
   }
 
   step2Content() {
+    console.log("this.state.ret_flights.length=",this.state.ret_flights.length);
 
     if(this.state.ret_flights.length==0) {
+      //this.setState({});
       return (<div>
         <h1>Sorry no flights match your search in our database </h1> <br></br>
         <h1>Please go back to our search page</h1>
@@ -265,6 +352,7 @@ class MasterForm extends Component {
     //     <h1>Please go back to our search page</h1>
     //     </div>)
     // }
+
     
     return(
      <> 
