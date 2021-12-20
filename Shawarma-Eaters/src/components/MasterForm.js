@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { useState,useEffect } from 'react';
-import { ReactDOM } from 'react';
+import ReactDOM  from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import "./search.css";
@@ -27,6 +27,7 @@ import SearchPage from "./search-plus.component";
 import plane from '../imgs/plane.jpg';
 import  '../imgs/img.css';
 
+
 import { FormGroup, Label, Input } from "reactstrap";
 import { Prompt ,Redirect,useLocation,BrowserRouter,withRouter } from 'react-router-dom';
 const step3Content = <h1>Summary of Dep and Return flight</h1>;
@@ -47,21 +48,22 @@ class MasterForm extends Component {
       retFlight:{}
       
     };
+    this.step1Validator = this.step1Validator.bind(this);
+    this.step2Validator = this.step2Validator.bind(this);
+    this.step3Validator = this.step3Validator.bind(this);
 
+    this.step1Content = this.step1Content.bind(this);
+    this.step2Content = this.step2Content.bind(this);
+    this.step3Content = this.step3Content.bind(this);
+
+    this.fetchData = this.fetchData.bind(this);
     // Bind new functions for next and previous
     //Do I need bind?
    
 
   }
   
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevState.depFlight !== this.state.depFlight) {
-  //     console.log('pokemons state has changed.')
-  //   }
-  //   if (prevState.retFlight !== this.state.depFlight) {
-  //     console.log('pokemons state has changed.')
-  //   }
-  // }
+
 
   // Alex
   //  United States
@@ -156,34 +158,53 @@ class MasterForm extends Component {
   */
  //For more info go to this link
  //https://reactjs.org/docs/react-component.html#shouldcomponentupdate
-  componentWillMount() {
-    axios.post('http://localhost:5000/guest/depFlights',this.props.depSearch).then(result => this.setState({ dep_flights:  result.data})).catch((error) => {
-      console.log(error);
-    });
-    axios.post('http://localhost:5000/guest/arrFlights',this.props.retSearch).then(result => this.setState({ ret_flights:  result.data})).catch((error) => {
-      console.log(error);
-    });
-  console.log('propsssssss',this.props);
+  // componentWillMount() {
+  //   axios.post('http://localhost:5000/guest/depFlights',this.props.depSearch).then(result => this.setState({ dep_flights:  result.data})).catch((error) => {
+  //     console.log(error);
+  //   });
+  //   axios.post('http://localhost:5000/guest/arrFlights',this.props.retSearch).then(result => this.setState({ ret_flights:  result.data})).catch((error) => {
+  //     console.log(error);
+  //   });
+  // console.log('propsssssss',this.props);
   
-  axios.get('http://localhost:5000/users/61a8d3f3ef7267e7fe6a6d4c/')
-    .then(response => {
-      this.setState({ user: response.data })
-    })
-    .catch((error) => {
-      console.log(error);
-    });  
+  // axios.get('http://localhost:5000/users/61a8d3f3ef7267e7fe6a6d4c/')
+  //   .then(response => {
+  //     this.setState({ user: response.data })
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //   });  
   
+  // }
+ 
+  componentDidUpdate(prevProps, prevState) {
+
+    // if (prevState.dep_flights.length == this.state.dep_flights.length) {
+    //   console.log('((((((depFlight state has changed))))))))).')
+    // }
+    // if (prevState.ret_flights.length !== this.state.ret_flights.length) {
+    //   console.log('((((retFlight state has changed.))))))')
+    // }
   }
-  
-  
-  componentDidMount() {
-    axios.post('http://localhost:5000/guest/depFlights',this.props.depSearch).then(result => this.setState({ dep_flights:  result.data})).catch((error) => {
+
+  fetchData = async () => {
+   await axios.post('http://localhost:5000/guest/depFlights',this.props.depSearch).then(result => this.setState({ dep_flights:  result.data})).catch((error) => {
         console.log(error);
       });
-      axios.post('http://localhost:5000/guest/arrFlights',this.props.retSearch).then(result => this.setState({ ret_flights:  result.data})).catch((error) => {
+      await  axios.post('http://localhost:5000/guest/arrFlights',this.props.retSearch).then(result => this.setState({ ret_flights:  result.data})).catch((error) => {
         console.log(error);
       });
     console.log('propsssssss',this.props);
+
+    await  axios.get('http://localhost:5000/users/61a8d3f3ef7267e7fe6a6d4c')
+      .then(response => {
+        this.setState({ user: response.data })
+      })
+      .catch((error) => {
+        console.log(error);
+      });  
+  }
+  componentDidMount() {
 
     axios.get('http://localhost:5000/users/61a8d3f3ef7267e7fe6a6d4c/')
       .then(response => {
@@ -191,11 +212,29 @@ class MasterForm extends Component {
       })
       .catch((error) => {
         console.log(error);
-      });     
+      });
+
+     this.fetchData();
+
+      // axios.get('http://localhost:5000/flights/')
+      // .then(response => {
+      //   this.setState({ retFlight: response.data })
+      // })
+      // .catch((error) => {
+      //   console.log(error);
+      // })
+
+
+    // this.setState({
+    //   dep_flights: localStorage.getItem("depArray"),
+    //   dep_flights:localStorage.getItem("retArray"),
+    //  });
+
+    // console.log(this.props);
+    console.log("depArray in master form:",this.state.dep_flights);
+    //console.log("retArray in master form:",this.state.dep_flights);
 
       
-
-    //console.log("retArray in master form:",this.state.dep_flights);
 
 
      
@@ -212,7 +251,7 @@ class MasterForm extends Component {
   //Return
   step2Validator() {
     //return true;
-   return (this.state.ret_flights.length==0)?false:true;;
+   return (this.state.ret_flights.length==0)?false:true;
   }
   
   //Summary
@@ -222,17 +261,21 @@ class MasterForm extends Component {
 
 
   step1Content() {
-    console.log("this.state.dep_flights.length=",this.state.dep_flights.length);
+    console.log("BEFORE If condition dep_flights empty",this.state.dep_flights);
     if(this.state.dep_flights.length==0) {
       //this.setState({});
+      
       return (<div>
+        {console.log("this.state.dep_flights.length(If condition dep_flights empty)=",this.state.dep_flights.length)}
+      {console.log("11inside content dep flights (If condition dep_flights empty):")}
+     { console.log(this.state.dep_flights)}
         <h1>Sorry no flights match your search in our database </h1> <br></br>
         <h1>Please go back to our search page</h1>
+        <button onClick={this.fetchData}>Fetch</button>
         </div>);
     }
-    console.log("11inside content dep flights:");
-    console.log(this.state.dep_flights);
-  
+
+    console.log("AFTER If condition dep_flights empty",this.state.dep_flights);
     return (  
     <div>
       <p>Please select prefered departure flight</p>
@@ -282,17 +325,23 @@ class MasterForm extends Component {
   }
 
   step2Content() {
-    console.log("this.state.ret_flights.length=",this.state.ret_flights.length);
+    console.log("If condition ret_flights empty",this.state.ret_flights);
 
     if(this.state.ret_flights.length==0) {
       //this.setState({});
       return (<div>
+        {    
+         console.log("this.state.ret_flights.length(If condition ret_flights empty)=",this.state.ret_flights.length),
+         console.log("inside content ret flights(If condition ret_flights empty):"),
+         console.log(this.state.ret_flights)
+   
+    }
         <h1>Sorry no flights match your search in our database </h1> <br></br>
         <h1>Please go back to our search page</h1>
         </div>)
     }
-    console.log("inside content ret flights:");
-    console.log(this.state.ret_flights);
+    console.log("After If condition ret_flights empty",this.state.ret_flights);
+
   
     return (  
     <div>
@@ -613,9 +662,7 @@ class MasterForm extends Component {
 
 
   render() {
-    //const { match, location, history } = this.props
-
-
+    if(this.state.dep_flights.length!=0 || this.state.ret_flights.length!=0)  {
     return (
       <div class="MasterForm">
 
@@ -649,6 +696,11 @@ class MasterForm extends Component {
       />
     </div>
     );
+      }
+      else
+  {
+    return <div></div>
+  }
 
   }
   
