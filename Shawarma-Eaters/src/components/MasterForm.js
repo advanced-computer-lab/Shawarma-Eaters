@@ -261,21 +261,7 @@ class MasterForm extends Component {
 
 
   step1Content() {
-    console.log("BEFORE If condition dep_flights empty",this.state.dep_flights);
-    if(this.state.dep_flights.length==0) {
-      //this.setState({});
-      
-      return (<div>
-        {console.log("this.state.dep_flights.length(If condition dep_flights empty)=",this.state.dep_flights.length)}
-      {console.log("11inside content dep flights (If condition dep_flights empty):")}
-     { console.log(this.state.dep_flights)}
-        <h1>Sorry no flights match your search in our database </h1> <br></br>
-        <h1>Please go back to our search page</h1>
-        <button onClick={this.fetchData}>Fetch</button>
-        </div>);
-    }
 
-    console.log("AFTER If condition dep_flights empty",this.state.dep_flights);
     return (  
     <div>
       <p>Please select prefered departure flight</p>
@@ -325,24 +311,7 @@ class MasterForm extends Component {
   }
 
   step2Content() {
-    console.log("If condition ret_flights empty",this.state.ret_flights);
-
-    if(this.state.ret_flights.length==0) {
-      //this.setState({});
-      return (<div>
-        {    
-         console.log("this.state.ret_flights.length(If condition ret_flights empty)=",this.state.ret_flights.length),
-         console.log("inside content ret flights(If condition ret_flights empty):"),
-         console.log(this.state.ret_flights)
    
-    }
-        <h1>Sorry no flights match your search in our database </h1> <br></br>
-        <h1>Please go back to our search page</h1>
-        </div>)
-    }
-    console.log("After If condition ret_flights empty",this.state.ret_flights);
-
-  
     return (  
     <div>
       <p>Please select prefered return flight</p>
@@ -638,7 +607,25 @@ class MasterForm extends Component {
   
   }
 
+  step1ContentEmpty(){      
+      return (
+      <div>
+        <h1>Sorry no departure flights match your search in our database </h1> <br></br>
+        <h1>Please go back to our search page</h1>
+        {/* <button onClick={this.fetchData}>Fetch data</button> */}
+        </div>);
+    }
 
+
+  step2ContentEmpty(){  
+      return (
+              <div>
+                <h1>Sorry no return flights match your search in our database </h1> <br></br>
+                <h1>Please go back to our search page</h1>
+                </div>
+                );
+
+  }
 
 
   // Trigger an alert on form submission
@@ -662,7 +649,125 @@ class MasterForm extends Component {
 
 
   render() {
-    if(this.state.dep_flights.length!=0 || this.state.ret_flights.length!=0)  {
+  //   if(this.state.dep_flights.length!=0 || this.state.ret_flights.length!=0)  {
+  //   return (
+  //     <div class="MasterForm">
+
+  //     <StepProgressBar 
+  //       startingStep={0}
+  //       wrapperClass="progress-wrapper-custom"
+  //       onSubmit={this.handleSubmit}
+  //       submitBtnName="Submit"
+  //       previousBtnName="Previous"
+  //       nextBtnName="Next"
+  //       steps={[
+  //         {
+  //           label: "Step 1",
+  //           name: "step 1",
+  //           content: this.step1Content(),
+  //           validator:this.step1Validator
+  //         },
+  //         {
+  //           label: "Step 2",
+  //           name: "step 2",
+  //           content: this.step2Content(),
+  //           validator: this.step2Validator
+  //         },
+  //         {
+  //           label: "Step 3",
+  //           name: "step 3",
+  //           content: this.step3Content(),
+  //           validator: this.step3Validator
+  //         }
+  //       ]}
+  //     />
+  //   </div>
+  //   );
+  //     }
+  //     else
+  // {
+  //   return( <div></div>);
+  // }
+
+
+
+   if(this.state.dep_flights.length==0 && this.state.ret_flights.length==0)  {
+    return (<div>No departure and arrival flights.</div>);
+
+    }
+   else if(this.state.dep_flights.length==0 && this.state.ret_flights.length!=0 ){
+    return (
+      <div class="MasterForm">
+
+      <StepProgressBar 
+        startingStep={0}
+        wrapperClass="progress-wrapper-custom"
+        onSubmit={this.handleSubmit}
+        submitBtnName="Submit"
+        previousBtnName="Previous"
+        nextBtnName="Next"
+        steps={[
+          {
+            label: "Step 1",
+            name: "step 1",
+            content: this.step1ContentEmpty(),
+            validator:true
+          },
+          {
+            label: "Step 2",
+            name: "step 2",
+            content: this.step2Content(),
+            validator: true
+          },
+          {
+            label: "Step 3",
+            name: "step 3",
+            content: this.step3Content(),
+            validator: this.step3Validator
+          }
+        ]}
+      />
+    </div>
+    );
+   
+   }
+   else if(this.state.ret_flights.length!=0 && this.state.ret_flights.length==0){
+    return (
+      <div class="MasterForm">
+
+      <StepProgressBar 
+        startingStep={0}
+        wrapperClass="progress-wrapper-custom"
+        onSubmit={this.handleSubmit}
+        submitBtnName="Submit"
+        previousBtnName="Previous"
+        nextBtnName="Next"
+        steps={[
+          {
+            label: "Step 1",
+            name: "step 1",
+            content: this.step1Content(),
+            validator:true
+          },
+          {
+            label: "Step 2",
+            name: "step 2",
+            content: this.step2ContentEmpty(),
+            validator: true
+          },
+          {
+            label: "Step 3",
+            name: "step 3",
+            content: this.step3Content(),
+            validator: this.step3Validator
+          }
+        ]}
+      />
+    </div>
+    );
+   }
+   else{
+
     return (
       <div class="MasterForm">
 
@@ -696,14 +801,126 @@ class MasterForm extends Component {
       />
     </div>
     );
-      }
-      else
-  {
-    return <div></div>
-  }
+   }
 
   }
   
 }
 
 export default MasterForm;
+
+
+
+// function a(){
+//   if(this.state.dep_flights.length==0 && this.state.ret_flights.length==0)  {
+//     return (<div>No departure and arrival flights.</div>);
+
+//     }
+//   else if(this.state.dep_flights.length==0 && this.state.ret_flights.length!=0 ){
+//     return (
+//       <div class="MasterForm">
+
+//       <StepProgressBar 
+//         startingStep={0}
+//         wrapperClass="progress-wrapper-custom"
+//         onSubmit={this.handleSubmit}
+//         submitBtnName="Submit"
+//         previousBtnName="Previous"
+//         nextBtnName="Next"
+//         steps={[
+//           {
+//             label: "Step 1",
+//             name: "step 1",
+//             content: this.step1ContentEmpty(),
+//             validator:true
+//           },
+//           {
+//             label: "Step 2",
+//             name: "step 2",
+//             content: this.step2Content(),
+//             validator: true
+//           },
+//           {
+//             label: "Step 3",
+//             name: "step 3",
+//             content: this.step3Content(),
+//             validator: this.step3Validator
+//           }
+//         ]}
+//       />
+//     </div>
+//     );
+   
+//    }
+//    else if(this.state.ret_flights.length!=0 && this.state.ret_flights.length==0){
+//     return (
+//       <div class="MasterForm">
+
+//       <StepProgressBar 
+//         startingStep={0}
+//         wrapperClass="progress-wrapper-custom"
+//         onSubmit={this.handleSubmit}
+//         submitBtnName="Submit"
+//         previousBtnName="Previous"
+//         nextBtnName="Next"
+//         steps={[
+//           {
+//             label: "Step 1",
+//             name: "step 1",
+//             content: this.step1Content(),
+//             validator:true
+//           },
+//           {
+//             label: "Step 2",
+//             name: "step 2",
+//             content: this.step2ContentEmpty(),
+//             validator: true
+//           },
+//           {
+//             label: "Step 3",
+//             name: "step 3",
+//             content: this.step3Content(),
+//             validator: this.step3Validator
+//           }
+//         ]}
+//       />
+//     </div>
+//     );
+//    }
+//    else{
+
+//     return (
+//       <div class="MasterForm">
+
+//       <StepProgressBar 
+//         startingStep={0}
+//         wrapperClass="progress-wrapper-custom"
+//         onSubmit={this.handleSubmit}
+//         submitBtnName="Submit"
+//         previousBtnName="Previous"
+//         nextBtnName="Next"
+//         steps={[
+//           {
+//             label: "Step 1",
+//             name: "step 1",
+//             content: this.step1Content(),
+//             validator:this.step1Validator
+//           },
+//           {
+//             label: "Step 2",
+//             name: "step 2",
+//             content: this.step2Content(),
+//             validator: this.step2Validator
+//           },
+//           {
+//             label: "Step 3",
+//             name: "step 3",
+//             content: this.step3Content(),
+//             validator: this.step3Validator
+//           }
+//         ]}
+//       />
+//     </div>
+//     );
+//    }
+// }
