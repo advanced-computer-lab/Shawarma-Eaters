@@ -166,6 +166,11 @@ return (
             </FormGroup>
             </div>
         <h1>SENDING MAIL WHEN THE DELETE BUTTON IS THE PREESED</h1>
+        <Button size="small" color="primary" onClick={()=> {
+            window.location.replace("http://localhost:3000/");
+        }}>
+            Edit Booking Information
+          </Button>
     </>
 )
 };

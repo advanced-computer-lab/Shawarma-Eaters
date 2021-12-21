@@ -11,6 +11,7 @@
     "npm": "^8.1.4",
     "react": "^16.14.0",
     "react-bootstrap": "^2.0.2",
+    "react-credit-cards": "^0.8.3",
     "react-datepicker": "^2.5.0",
     "react-dom": "^16.8.6",
     "react-redux": "^7.2.6",

@@ -75,10 +75,7 @@ export default class seats extends Component{
         
 //   const [seats,SetSeats]= useState([1,2,3,4,5]);
     }
-componentDidMount() {
 
-    
-}
 
  econSeat(s){
 
@@ -86,6 +83,10 @@ componentDidMount() {
 
 }
 
+componentDidMount() {
+
+    
+}
 
 render(){
 return(
@@ -137,7 +138,8 @@ Date: 12/01/2022
 {/* <h3>Business</h3> */}
 <div class="grid-containerBus">
    
-    {/* <div class="item1"> <button class="button" type="button">A1</button></div>
+    {
+    /* <div class="item1"> <button class="button" type="button">A1</button></div>
     <div class="item2"> <button class="button" type="button">B1</button></div>
     <div class="item3"> <button class="button" type="button">C1</button></div>
     <div class="item4"> <button class="button" type="button">D1</button></div>
