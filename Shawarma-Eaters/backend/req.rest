@@ -1,0 +1,25 @@
+
+GET http://localhost:5000/flights/seat/61a7e66b2772fe2430a1524a/3/true
+
+###
+POST http://localhost:5000/register
+
+Content-Type: application/json
+
+{
+     "username":"ahmed",
+      "email":"ahmed@gmail",
+      "password": "pass"
+}
+
+###
+
+POST http://localhost:5000/Login
+
+Content-Type: application/json
+
+{
+     "username":"ahmed",
+      "email":"ahmed@gmail",
+      "password": "pass"
+}

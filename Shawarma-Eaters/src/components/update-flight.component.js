@@ -31,6 +31,7 @@ export default class UpdateFlight extends Component {
   }
 
   componentDidMount() {
+
     axios.get('http://localhost:5000/flights/'+this.props.match.params.id)
       .then(response => {
         this.setState({
@@ -157,6 +158,7 @@ export default class UpdateFlight extends Component {
         </div>
         <div className="form-group"> 
           <label>Economy Class Seats: </label>
+          <h11>max. 43</h11>
           <input  type="text"
               required
               className="form-control"
@@ -166,6 +168,7 @@ export default class UpdateFlight extends Component {
         </div>
         <div className="form-group"> 
           <label>Business Class Seats: </label>
+          <h11>max. 12</h11>
           <input  type="text"
               required
               className="form-control"

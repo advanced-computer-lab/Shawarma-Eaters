@@ -10,97 +10,176 @@ import "./seats.css";
 export default class seats extends Component{
     constructor(props) {
         super(props);
-        console.log("inside constructor");
-        this.onChangeOcc = this.onChangeOcc.bind(this);  
+       
         this.toggleOcc = this.toggleOcc.bind(this);  
+        this.startSeats = this.startSeats.bind(this);  
+         this.seatsArray = [];
+
+        //  this.state = {
+        //     seatnumber:'',
+        //     occupied:false
+        //   }
+          
+
           this.state = {
-            seatnumber:'',
-            occupied:false
+            flight_number: '',
+            departure: '',
+            arrival_times: '',
+            number_of_Economy_seats: 0,
+            number_of_Business_class_seats: 0,
+            arrAirport:'',
+            depAirport:'',
+            // dates: new Date(),
+            users: [], 
+            economy_seats: [{ seatnumber: '', occupied:false }],
+            business_seats: [{ seatnumber: '', occupied:false }]
 
-          }
-        //   this.flight = {
-        //     flight_number: '',
-        //     departure: '',
-        //     arrival_times: '',
-        //     number_of_Economy_seats: 0,
-        //     number_of_Business_class_seats: 0,
-        //     arrAirport:'',
-        //     depAirport:'',
-        //     dates: new Date(),
-        //     users: []
-        //   }  
+          } 
+          this.startSeats = this.startSeats.bind(this);  
+
         }
+        getMethod(flightNo,seatNo,isOccupied)
+        {
+          
+          axios.get(`http://localhost:5000/flights/seat/${flightNo}/${seatNo}/${isOccupied}`)
+          .then(respond => {console.log(respond.data)})
+          
+        }
+         
+    toggleOcc(sno){
+           var sno2 = sno.substring(1, 3);
+            console.log("sno: "+sno2);
+            let sLen= this.seatsArray.length;
 
-        onChangeOcc(sno){
-            //console.log("inside onChange");
-             /* this.setState({
-                seatnumber:sno.target.value,
-                occupied:true
-            })
-            //console.log("Seatnumber: "+this.state.seatnumber);
-            //console.log("Occupied: "+this.state.occupied);
-          console.log(document.getElementById('s1').innerHTML );
-            var x = document.getElementById("s2").style.backgroundImage;
-            console.log(x);
-            document.getElementById("s2").style.backgroundImage = " url('seat_reserved.png')";
-            document.getElementById("s2").style.opacity="0.7";
-            //document.getElementById("s2").style.display="none";
-            var y = document.getElementById("s10").classList.value
-            console.log(y);*/
-            if (document.getElementById(sno).classList.value == "reserved"){
-                var y = document.getElementById(sno).classList.value
-            console.log(y);
-                document.getElementById(sno).classList.remove("reserved");
-                document.getElementById(sno).classList.add("available");
-            }else {
-                if(document.getElementById(sno).classList.value == "available"){
-                    document.getElementById(sno).classList.remove("available");
-                    document.getElementById(sno).classList.add("reserved");
-            }
-                } 
-
-            
-        }   
-        toggleOcc(sno){
-           var sno2 = sno.substring(1, 2);
-             console.log(sno2);
-            // this.setState({
-            //    // seatnumber:sno.target.value,
-            //     seatnumber:sno2,
-            //     occupied:true
-            //  })
-            //  var x = (this.props.occupied===false)?true:false;
-            //  this.setState({occupied:x});
-            if(this.state.occupied){
-                this.setState({
-                    seatnumber:sno2,
-                    occupied:false
-                 })
-                //  this.toggleClass("reserved");
+            console.log("Seats array length : "+sLen);
+            if(this.state.occupied && sLen<3){
+            this.setState({  seatnumber:sno2, occupied:false })
+                // From Available to Selected .... Put sno in Array
                 document.getElementById(sno).classList.remove("available");
-                document.getElementById(sno).classList.add("reserved");
-            }else{
-                this.setState({
-                    seatnumber:sno2,
-                    occupied:true
-                 })
-                 document.getElementById(sno).classList.remove("reserved");
-                 document.getElementById(sno).classList.add("available");
+                document.getElementById(sno).classList.add("selected");
+                this.getMethod( this.state.flight_number,sno2,true);
 
-                //document.getElementById("s1").className += "reserved";
-                
+                let fFlag=false;
+                let fLoc =0;
+                // for(let i=0;i<sLen;i++){
+                //   console.log("inside Available to Selected for "+ i);
+                //   if(this.seatsArray[i]===sno){
+                //     console.log("inside seatsArray[i]===sno");
+                //     fFlag= true;
+                //     fLoc = i;
+                //   }
+                // }
+                if(!fFlag){
+                  console.log("inside if ! fFlag");
+                  this.seatsArray.push(sno);
+                }
+              }else{
+                  this.setState({
+                      seatnumber:sno2,
+                      occupied:true
+                  })
 
-            }
-             console.log("Seatnumber: "+this.state.seatnumber);
-             console.log("Occupied: "+this.state.occupied);
+                  // From Selected to Available.... remove sno from array
+
+                  document.getElementById(sno).classList.remove("selected");
+                  document.getElementById(sno).classList.add("available");
+                  this.getMethod( this.state.flight_number,sno2,false);
+
+                  //  let fFlag=false;
+                  //  let fLoc =0;
+                  //  for(let i=0;i<sLen;i++){
+                  //    if(this.seatsArray[i]===sno){
+                  //      fFlag= true;
+                  //      fLoc = i;
+                  //    }
+                  //  }
+                  //  if(fFlag){
+                    console.log("inside if fFlag ");
+                    const index = this.seatsArray.indexOf(sno);
+                    if(index > -1 ){
+                      this.seatsArray.splice(index,1);
+                    }
+              }
+              console.log("Seatnumber: "+this.state.seatnumber);
+              console.log("Occupied: "+this.state.occupied);
+              console.log("Seats Array:"+ this.seatsArray);
+          
+            
+
 }
 
-     Seats() {
-        
-//   const [seats,SetSeats]= useState([1,2,3,4,5]);
+startSeats(){
+  //console.log("in startSeats");
+
+  // To close the not there Business seats 
+  for(let i=12;i>this.state.number_of_Business_class_seats;i--){
+      let x="s"+i;
+      document.getElementById(x).classList.remove("available");
+      document.getElementById(x).classList.add("reserved");
+  }
+
+  // To close the not there Economy seats 
+  for(let i=55;i>this.state.number_of_Economy_seats+12;i--){
+      //console.log("startSeats: i:"+i);   
+      let x="s"+i;
+      //console.log(x);
+      document.getElementById(x).classList.remove("available");
+      document.getElementById(x).classList.add("reserved");
+  }
+
+  // To close the reserved Business seats
+  for(let i=0;i<this.state.number_of_Business_class_seats;i++){
+    let x="s"+(i+1);
+    let cn = document.getElementById(x).className;
+
+    if(cn=="available"){
+      // check if the remaining seats are reserved or not
+    // console.log("i:"+i+" business_seats[i].seatnumber "+ this.state.business_seats[i].seatnumber+"  occupied: "+ this.state.business_seats[i].occupied  );
+      if(this.state.business_seats[i].occupied==true){
+        //console.log("this seat is RESERVED by a user  " +x);
+        document.getElementById(x).classList.remove("available");
+        document.getElementById(x).classList.add("reserved");
+       }else{
+        //console.log("this business seat is available  "+x);
+      }
+}
+}
+
+// To close the reserved Economy seats
+for(let i=0;i<this.state.number_of_Economy_seats;i++){
+  let x="s"+(i+1);
+  let cn = document.getElementById(x).className;
+
+  if(cn=="available" && i>=12 ){
+    // check if the remaining seats are reserved or not
+   console.log("i:"+i+" economy_seats[i].seatnumber "+ this.state.economy_seats[i].seatnumber+"  occupied: "+ this.state.economy_seats[i].occupied  );
+    
+   if(this.state.economy_seats[i].occupied==true){
+     console.log("this seat is RESERVED by a user  " +x);
+      document.getElementById(x).classList.remove("available");
+      document.getElementById(x).classList.add("reserved");
+     }else{
+      console.log("this economy seat is available  "+x);
     }
+}
+}
+      
+
+
+
+
+    
+    /*
+
+// Keep this line in mind 
+      //const list = state.list.filter(item => item.id !== id);
+
+*/
+
+}
+
 componentDidMount() {
-    axios.get('http://localhost:5000/flights/61a7e66b2772fe2430a1524a')
+  axios.get('http://localhost:5000/flights/61c0fd22cb5ce1115c0f584f')
     .then(response => {
       this.setState({
         flight_number: response.data.flight_number,
@@ -112,27 +191,24 @@ componentDidMount() {
         depAirport: response.data.depAirport,
         dates: response.data.dates,
         createdAt: response.data.createdAt,
-        EconomySeats: response.data.economy_seats.occupied
+        economy_seats: response.data.economy_seats,
+        business_seats: response.data.business_seats,
+
       })   
     })
     .catch(function (error) {
       console.log(error);
     })
 
-  
-
+//this.startSeats()
+    
 }
- econSeat(s){
-
-    console.log('econseat clicked'+ s);
-
-}
-
 
 render(){
 return(
 
 <body>
+<button  onClick={() =>this.startSeats()} type="button">PRESSSS</button>
 
 <h2>Flight Seating</h2>
 
@@ -166,7 +242,7 @@ Arrival Airport: {this.state.arrAirport}
 <br></br>
 Date: {this.state.dates}
 <br></br>
-Economy seats: {this.state.EconomySeats}
+{/* Economy seats: {this.state.economy_seats} */}
 </div>
 
 
@@ -192,65 +268,69 @@ Economy seats: {this.state.EconomySeats}
     <div class="item9"> <button class="available" type="button">D2</button></div>
     <div class="item10"> <button class="available" type="button">E2</button></div>
          */}
-        <button id="s1"class="available" onClick={() =>this.econSeat(1)} type="button">1</button>
-        <button id="s2"class="available" onClick={() =>this.onChangeOcc("s2")} type="button">2</button>
+        <button id="s1"class="available" onClick={() =>this.toggleOcc("s1")} type="button">1</button>
+        <button id="s2"class="available" onClick={() =>this.toggleOcc("s2")} type="button">2</button>
         <button id="s3"class="available" onClick={() =>this.toggleOcc("s3")} type="button">3</button>
-        <button id="s4"class="available" onclick={() =>this.toggleOcc("s4")} type="button">4</button>
-        <button id="s5"class="available" onclick={() =>this.toggleOcc("s5")} type="button">5</button>
-        <button id="s6"class="available" type="button">6</button>
-        <button id="s7"class="available" type="button">7</button>
-        <button id="s8"class="available" type="button">8</button> 
-        <button id="s9"class="available" type="button">9</button>
-        <button id="s10"class="reserved" type="button">10</button>
-        <button id="s11"class="reserved" type="button">11</button>
-        <button id="s12"class="reserved" type="button">12</button>
+        <button id="s4"class="available" onClick={() =>this.toggleOcc("s4")} type="button">4</button>
+        <button id="s5"class="available" onClick={() =>this.toggleOcc("s5")} type="button">5</button>
+        <button id="s6"class="available" onClick={() =>this.toggleOcc("s6")} type="button">6</button>
+        <button id="s7"class="available" onClick={() =>this.toggleOcc("s7")} type="button">7</button>
+        <button id="s8"class="available" onClick={() =>this.toggleOcc("s8")} type="button">8</button> 
+        <button id="s9"class="available" onClick={() =>this.toggleOcc("s9")} type="button">9</button>
+        <button id="s10"class="available" onClick={() =>this.toggleOcc("s10")} type="button">10</button>
+        <button id="s11"class="available" onClick={() =>this.toggleOcc("s11")} type="button">11</button>
+        <button id="s12"class="available" onClick={() =>this.toggleOcc("s12")} type="button">12</button>
+
 </div>
 {/* <h3>Economy</h3> */}
 <br></br>
     <div class="grid-containerEcon">
         
-    <button id="s13"class="available" type="button">13</button>
-        <button id="s14"class="available" type="button">14</button>
-        <button id="s15"class="available" type="button">15</button>
-        <button id="s16"class="available" type="button">16</button>
-        <button id="s17"class="reserved" type="button">17</button>
-        <button id="s18"class="selected" type="button">18</button>
-        <button id="s19"class="available" type="button">19</button>
-        <button id="s20"class="available" type="button">20</button> 
-        <button id="s21"class="available" type="button">21</button>
-        <button id="s22"class="available" type="button">22</button>
-        <button id="s23"class="available" type="button">23</button>
-        <button id="s24"class="available" type="button">24</button>
-        <button id="s25"class="available" type="button">25</button>
-        <button id="s26"class="available" type="button">26</button>
-        <button id="s27"class="reserved" type="button">27</button>
-        <button id="s28"class="available" type="button">28</button>
-        <button id="s29"class="available" type="button">29</button>
-        <button id="s10"class="available" type="button">30</button> 
-        <button id="s30"class="available" type="button">31</button>
-        <button id="s31"class="available" type="button">32</button>
+        <button id="s13"class="available" onClick={() =>this.toggleOcc("s13")} type="button">13</button>
+        <button id="s14"class="available" onClick={() =>this.toggleOcc("s14")} type="button">14</button>
+        <button id="s15"class="available" onClick={() =>this.toggleOcc("s15")} type="button">15</button>
+        <button id="s16"class="available" onClick={() =>this.toggleOcc("s16")} type="button">16</button>
+        <button id="s17"class="available" onClick={() =>this.toggleOcc("s17")} type="button">17</button>
+        <button id="s18"class="available" onClick={() =>this.toggleOcc("s18")} type="button">18</button>
+        <button id="s19"class="available" onClick={() =>this.toggleOcc("s19")} type="button">19</button>
+        <button id="s20"class="available" onClick={() =>this.toggleOcc("s20")} type="button">20</button>
+        <button id="s21"class="available" onClick={() =>this.toggleOcc("s21")} type="button">21</button>
+        <button id="s22"class="available" onClick={() =>this.toggleOcc("s22")} type="button">22</button>
+        <button id="s23"class="available" onClick={() =>this.toggleOcc("s23")} type="button">23</button>
+        <button id="s24"class="available" onClick={() =>this.toggleOcc("s24")} type="button">24</button>
+        <button id="s25"class="available" onClick={() =>this.toggleOcc("s25")} type="button">25</button>
+        <button id="s26"class="available" onClick={() =>this.toggleOcc("s26")} type="button">26</button>
+        <button id="s27"class="available" onClick={() =>this.toggleOcc("s27")} type="button">27</button>
+        <button id="s28"class="available" onClick={() =>this.toggleOcc("s28")} type="button">28</button>
+        <button id="s29"class="available" onClick={() =>this.toggleOcc("s29")} type="button">29</button>
+        <button id="s30"class="available" onClick={() =>this.toggleOcc("s30")} type="button">30</button>
+        <button id="s31"class="available" onClick={() =>this.toggleOcc("s31")} type="button">31</button>
+        <button id="s32"class="available" onClick={() =>this.toggleOcc("s32")} type="button">32</button>
         <br></br>
-        <button id="s33"class="available" type="button">33</button>
-        <button id="s34"class="available" type="button">34</button>
-        <button id="s35"class="available" type="button">35</button>
-        <button id="s36"class="available" type="button">36</button>
-        <button id="s37"class="reserved" type="button">37</button>
-        <button id="s38"class="available" type="button">38</button>
-        <button id="s39"class="available" type="button">39</button>
-        <button id="s40"class="available" type="button">40</button> 
-        <button id="s41"class="available" type="button">41</button>
-        <button id="s42"class="available" type="button">42</button>
-        <button id="s43"class="available" type="button">43</button>
-        <button id="s44"class="available" type="button">44</button>
-        <button id="s45"class="available" type="button">45</button>
-         <br></br>
-         <button id="s46"class="available" type="button">46</button>
-        <button id="s47"class="reserved" type="button">47</button>
-        <button id="s48"class="available" type="button">48</button>
-        <button id="s49"class="available" type="button">49</button>
-        <button id="s50"class="available" type="button">50</button> 
-        <button id="s51"class="available" type="button">51</button>
-        <button id="s52"class="available" type="button">52</button>
+        <button id="s33"class="available" onClick={() =>this.toggleOcc("s33")} type="button">33</button>
+        <button id="s34"class="available" onClick={() =>this.toggleOcc("s34")} type="button">34</button>
+        <button id="s35"class="available" onClick={() =>this.toggleOcc("s35")} type="button">35</button>
+        <button id="s36"class="available" onClick={() =>this.toggleOcc("s36")} type="button">36</button>
+        <button id="s37"class="available" onClick={() =>this.toggleOcc("s37")} type="button">37</button>
+        <button id="s38"class="available" onClick={() =>this.toggleOcc("s38")} type="button">38</button>
+        <button id="s39"class="available" onClick={() =>this.toggleOcc("s39")} type="button">39</button>
+        <button id="s40"class="available" onClick={() =>this.toggleOcc("s40")} type="button">40</button>
+        <button id="s41"class="available" onClick={() =>this.toggleOcc("s41")} type="button">41</button>
+        <button id="s42"class="available" onClick={() =>this.toggleOcc("s42")} type="button">42</button>
+        <button id="s43"class="available" onClick={() =>this.toggleOcc("s43")} type="button">43</button>
+        <button id="s44"class="available" onClick={() =>this.toggleOcc("s44")} type="button">44</button>
+        <button id="s45"class="available" onClick={() =>this.toggleOcc("s45")} type="button">45</button>
+        <br></br>
+        <button id="s46"class="available" onClick={() =>this.toggleOcc("s46")} type="button">46</button>
+        <button id="s47"class="available" onClick={() =>this.toggleOcc("s47")} type="button">47</button>
+        <button id="s48"class="available" onClick={() =>this.toggleOcc("s48")} type="button">48</button>
+        <button id="s49"class="available" onClick={() =>this.toggleOcc("s49")} type="button">49</button>
+        <button id="s50"class="available" onClick={() =>this.toggleOcc("s50")} type="button">50</button>
+        <button id="s51"class="available" onClick={() =>this.toggleOcc("s51")} type="button">51</button>
+        <button id="s52"class="available" onClick={() =>this.toggleOcc("s52")} type="button">52</button>
+        <button id="s53"class="available" onClick={() =>this.toggleOcc("s53")} type="button">53</button>
+        <button id="s54"class="available" onClick={() =>this.toggleOcc("s54")} type="button">54</button>
+        <button id="s55"class="available" onClick={() =>this.toggleOcc("s55")} type="button">55</button>
 </div>
     
     {/* <tbody>

@@ -15,7 +15,7 @@ const userSchema = new Schema({
   bookings : [{ type:Schema.Types.ObjectId, ref: 'Booking' }],
 
   // (type:HABD) reservations :{ type: reservations , required: false },
-});
+}, {timestamps: true});
 
 const User = mongoose.model('User', userSchema);
 

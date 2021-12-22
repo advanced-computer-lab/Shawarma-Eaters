@@ -127,9 +127,23 @@ const updateFlightById = (req, res) => {
 const UpdateFlightSeat = (req, res) => {
   console.log('Seat Update' ); 
   User.updateMany({ _id: req.params.id , economy_seats : req.params.economy_seats}, {$set: { economy_seats :{occupied:false}}})
-    .then(() => res.json('Seat Update.'))
+    .then(() => res.json('Seat Update in UpdateFlightSeat'))
     .catch(err => res.status(400).json('Error: ' + err));
 }
+
+const SeatState = (req, res) => {
+  console.log("inside seat state,,,flyNo input: "+req.params.flyNo);
+  occupied = ((req.params.occupied).toLowerCase() === 'true'); // false
+
+  Flight.findOneAndUpdate(
+    //{id:req.params.id,"business_seats.seatnumber":req.params.seatNo},
+    {"flight_number":req.params.flyNo,"business_seats.seatnumber":req.params.seatNo},
+    //{$set:{'business_seats.$.occupied': occupied }}, {new: true, useFindAndModify: false})
+    {$set:{'business_seats.$.occupied': req.params.occupied }})
+    .then(() => res.json('Seat Update in SeatState,,,,Seat no: '+ req.params.seatNo + 'occupied state: '+ req.params.occupied))
+    .catch(err => res.status(400).json('Error: ' + err));
+  }
+
 
 module.exports=
 {
@@ -140,5 +154,6 @@ module.exports=
     deleteFlightById,
     deleteFlightById2,
     updateFlightById,
-    UpdateFlightSeat
+    UpdateFlightSeat,
+    SeatState
 }
