@@ -102,7 +102,7 @@ class RetFlights extends Component {
                 
                 <Button color="primary" size="lg" style={{float:'left'}}    onClick={()=>{this.setState({redirectPrev: true});}}>Previous</Button>
                 <Button color="primary" size="lg"  onClick={()=>{   
-                  if (JSON.stringify(this.state.depFlight)=="{}"){
+                  if (JSON.stringify(this.state.retFlight)=="{}"){
                     alert("Please select a flight 1st");
                   }
                   else{
@@ -110,10 +110,17 @@ class RetFlights extends Component {
 
                   }
                 } } style={{float:'right'}} >Next</Button>
-              <h4><b>Please select prefered return flight</b></h4>
+              
                 <FormGroup>
 
-            { this.state.ret_flights.map(currentflight =>(
+                {  this.state.ret_flights.length==0?<div>
+        <h1>Sorry no return flights match your search in our database </h1> <br></br>
+        <h1>Please go back to our search page</h1>
+        </div>:
+
+        <div>
+          <h4 style={{textAlign:'center'}}><b>Please select prefered return flight</b></h4>
+        {this.state.ret_flights.map(currentflight =>(
             
                 
                 <Card border="dark" style={{ width: '80rem', height: '35rem' }}>
@@ -151,6 +158,8 @@ class RetFlights extends Component {
 
                 )
             )}
+         </div>
+            }
                 </FormGroup>
               
             </div>

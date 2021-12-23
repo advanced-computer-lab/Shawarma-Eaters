@@ -102,14 +102,16 @@ class DepFlights extends Component {
                     this.setState({redirectNext: true});
                   }
                 } } style={{float:'right'}} >Next</Button>
-              <p>Please select prefered departure flight</p>
               <FormGroup>
         
           {  this.state.dep_flights.length==0?<div>
         <h1>Sorry no departure flights match your search in our database </h1> <br></br>
         <h1>Please go back to our search page</h1>
         </div>:
-          this.state.dep_flights.map(currentflight =>(
+        
+        <div>
+          <h4 style={{textAlign:'center'}}><b>Please select prefered departure flight</b></h4>
+          {this.state.dep_flights.map(currentflight =>(
             
               
               <Card border="dark" style={{ width: '80rem', height: '35rem' }}>
@@ -146,7 +148,8 @@ class DepFlights extends Component {
               
         
               )
-          )
+          )}
+          </div>
           }
                 </FormGroup>
               
