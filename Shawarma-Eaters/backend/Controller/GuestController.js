@@ -74,6 +74,7 @@ const createUser = async (req,res) => {
     .catch(err => {console.log('error')});//res.status(400).json('Error: ' + err),
   }
   catch{
+
     console.log('error') //res.status(500).send()
 
   }};

@@ -16,7 +16,7 @@ export default class Navbar extends Component {
           <li> </li>
           <li> </li>
           <li className="navbar-item" color="red ">
-          <Link to="/myBookings/61a8d3f3ef7267e7fe6a6d4c" className="nav-link" color="red ">My Bookings</Link>
+          <Link to="/myBookings/" className="nav-link" color="red ">My Bookings</Link>
           </li> 
           <li className="navbar-item">
           <Link to="/createflights" className="nav-link">Create flights</Link>
@@ -28,7 +28,6 @@ export default class Navbar extends Component {
           <Link to="/edituser/61a8d3f3ef7267e7fe6a6d4c" className="nav-link">My Profile</Link>
           </li> 
           <li className="navbar-item">
-          <Link to="/createuser" className="nav-link">SIGN UP</Link>
           </li> 
 
           <li className="navbar-item">

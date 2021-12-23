@@ -53,10 +53,17 @@ const DisplayBookings = () => {
     //const id = this.props.match.params.id;
     //console.log(id);
    
-    console.log(window.location.pathname)
+    console.log(window.location.pathname);
+
+    const token = {accessToken :localStorage.getItem("accessToken")};    
+    const user = await axios.post('http://localhost:5000/users/verify',token);
     
+    console.log('user:',user.data);
+    console.log('token:',token)
+
+ 
     const response = await axios
-        .get(`http://localhost:5000/users/userBookings/`+getId(1)).then(booking => setBookings(booking.data))//.then(set)
+        .get(`http://localhost:5000/users/userBookings/`+user.data).then(booking => setBookings(booking.data))//.then(set)
         .catch((err) => console.log(err))
         console.log('all bookings',bookings);
     }

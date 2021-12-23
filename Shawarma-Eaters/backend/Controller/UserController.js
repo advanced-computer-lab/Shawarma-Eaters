@@ -1,7 +1,10 @@
 const User = require('../models/user');
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+const passport = require('passport');
+const { default: Axios } = require('axios');
+
 
 // changes needed
 // add popup in case of choosing other than economy and business
@@ -142,6 +145,7 @@ const sendEmail = async (req,res) => {
         to: email, // TODO: email receiver
         subject: 'Nodemailer - Test2',
         text: `Hello,${userDetails.firstname} ${userDetails.lastname} you have been canceled your reservation and the refunded amount is $499 `,
+        html: ""
        
         
     };
@@ -166,9 +170,12 @@ const sendEmail = async (req,res) => {
     
     });
 }
+let refreshTokens = []
+// let accessTokens = []
 
-const login = async (req, res) => {
-    User.findOne({username : req.body.username}).then(async user =>  {
+const login = async (req, res, next) => {
+console.log('in_login')
+User.findOne({username : req.body.username}).then(async user =>  {
         if (user == null) 
         {
           console.log(req.body,req.body.name)
@@ -176,12 +183,14 @@ const login = async (req, res) => {
         }
         try {
             if(await bcrypt.compare(req.body.password, user.password)) {
-                res.send('Success');
                 const username = req.body.username;
                 const user = { name: username };
                 const accessToken = generateAccessToken(user);
+              //  const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
+              //  refreshTokens.push(refreshToken);
+                // accessTokens.push(accessToken);
+                res.json({ accessToken: accessToken,message :'success' })
                 console.log({ accessToken: accessToken})
-                //res.json()
             } else {
               res.send('Wrong Password')
             }
@@ -190,20 +199,72 @@ const login = async (req, res) => {
             res.status(500).send()
           }
     })
-    
+  
+ 
+   
+    //   next();
+
 }
+
+const verifyAccess = async (req, res, next) => {
+    //console.log('in in in ')
+
+    const token = req.body.accessToken
+    if (token == null) return res.sendStatus(401)
+    jwt.verify(token, process.env.ACCESS_SECRET_TOKEN, async (err, user) => {
+        //console.log(user.name)
+        if (err) return res.sendStatus(403)
+
+       await User.findOne({username : user.name}).then(user => res.json(user._id));
+        //res.json(user.name);
+      })
+
+    }    
+
+function authenticateToken(req, res, next) {
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(' ')[1]
+    if (token == null) return res.sendStatus(401)
+  
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+      console.log(err)
+      if (err) return res.sendStatus(403)
+      req.user = user
+      next()
+    })
+  }
+
+// Logout
+const logout = (req, res) => {
+    // req.logout();
+    // req.flash('success_msg', 'You are logged out');
+    // res.redirect('/users/login');
+    refreshTokens = refreshTokens.filter(token => token !== req.body.token);
+    // accessTokens = accessTokens.filter(token => token !== req.body.token);
+
+
+    res.sendStatus(204)
+  }
+
+ 
 function generateAccessToken(user) {
     return jwt.sign(user, process.env.ACCESS_SECRET_TOKEN)
   }
+//   console.log('been in login backend');
+//   passport.authenticate('local', {
+//       successRedirect: 'http://localhost:3000/',
+//       failureRedirect: 'http://localhost:3000/user/',
+//       failureFlash: true
+//     })(req, res, next); 
 
-   
   
- 
 
 
 
 module.exports=
 {
+    verifyAccess,
+    logout,
     login,
     findDepartureFlight,
     findArrivalFlight,

@@ -30,6 +30,8 @@ router.route('/sendingMail/:id').get(userController.sendEmail);  //get  not post
 
 router.route('/:id').delete(userController.deleteUserById);
 router.route('/login').post(userController.login);
+router.route('/logout').delete(userController.logout);
+router.route('/verify').post(userController.verifyAccess);
 
 module.exports = router;  
 //

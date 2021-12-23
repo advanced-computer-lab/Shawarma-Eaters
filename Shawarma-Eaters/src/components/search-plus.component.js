@@ -106,26 +106,9 @@ export default class SearchPage extends Component {
         children : this.state.children,
         cabinclass : this.state.cabinclass
       }
-       axios.post('http://localhost:5000/guest/depFlights',Dep_search)
-      .then((result) =>{
-         this.setState({
-          depArray: result.data
-         },
-         () =>{
-          console.log("result data of dep search:",result.data);
-          window.localStorage.setItem("depArray", JSON.stringify(result.data) );
-         }
-         ) 
-         console.log('depArray state:',this.state.depArray)
-         console.log('Dep_search',result.data);
-         
-
-
-      }
-         )
-      .catch(function (error) {
-        console.log(error);
-      });
+      this.setState({
+        depArray: Dep_search
+       })
 
 
       const Return_search = {
@@ -137,25 +120,9 @@ export default class SearchPage extends Component {
         children : this.state.children,
         cabinclass : this.state.cabinclass
       }
-       axios.post('http://localhost:5000/guest/arrFlights',Return_search)
-      .then(result =>{
-         this.setState({
-          retArray: result.data
-         }, 
-         () =>{
-          console.log("result data of dep search:",result.data);
-          window.localStorage.setItem("retArray", JSON.stringify(result.data) );
-         }
-         ) 
-         console.log('retArray state:',this.state.retArray)
-         console.log('Return_search',result.data)
-
-
-      }
-         )
-      .catch(function (error) {
-        console.log(error);
-      });
+      this.setState({
+        retArray: Return_search
+       })
 
       this.setState({
         redirectToMasterForm:true

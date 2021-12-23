@@ -74,7 +74,7 @@ class MasterForm extends Component {
       })
       .catch((error) => {
         console.log(error);
-      });
+      });     
 
       axios.post('http://localhost:5000/guest/depFlights',this.props.depArray).then(result => this.setState({ dep_flights:  result}));
       axios.post('http://localhost:5000/guest/arrFlights',this.props.retArray).then(result => this.setState({ retFlights:  result}));

@@ -36,16 +36,13 @@ export default function Login() {
       }
     event.preventDefault();
     console.log('LOGIN is been pressed');
+    // const headers = { 'Content-Type': 'application/x-www-form-urlencoded','Access-Control-Allow-Origin' : '*' };
     axios.post('http://localhost:5000/users/login',user)
       .then(response => {
         console.log(response);
-        if(response.data === 'Success')
-        {
-          setMessage('You are Successfully logged in')
-          console.log('message')
-          // window.location  = '/myBookings'
-        }
-        else if(response.data === 'Wrong User')
+       localStorage.setItem("accessToken",response.data.accessToken);
+        // localStorage.getItem("lastname");
+        if(response.data === 'Wrong User')
         {
             setMessage('Incorrect username')
             console.log('Wrong User')
@@ -54,6 +51,13 @@ export default function Login() {
         {
           setMessage('Incorrect Password')
           console.log('Wrong Password')
+        }
+        else
+        {   
+          setMessage('You are Successfully logged in')
+          console.log('message')
+          // window.location  = '/myBookings'
+        
         }
       })
      

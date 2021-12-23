@@ -4,8 +4,9 @@ import { Prompt } from 'react-router-dom';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
-import "./styles.css";
+import "./login/signUp.css";
 import {Helmet} from 'react-helmet';
+import { Redirect } from 'react-router';
 
 
 export default class CreateUser extends Component {
@@ -34,6 +35,7 @@ export default class CreateUser extends Component {
   }
 
     submit() {
+      window.location('/login')
     const user = {
       username: this.state.username,
       firstname: this.state.firstname,
@@ -46,7 +48,7 @@ export default class CreateUser extends Component {
     console.log('user',user);
   
     axios.post('http://localhost:5000/guest/makeUser', user);
-     window.location = '/';
+    <Redirect to='/login'  />
 //  
   }
  
@@ -133,7 +135,7 @@ export default class CreateUser extends Component {
             
             
             <div class="form-group">
-                <button onClick={()=>this.submit()} class="btn btn-success btn-lg btn-block">Register Now</button>
+                <button onClick={()=>   window.location='/login'} class="btn btn-success btn-lg btn-block">Register Now</button>
             </div>
         </form>
         <div class="text-center">Already have an account?

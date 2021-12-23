@@ -14,7 +14,7 @@ import DeleteFlight from './components/flight-list.component';
 
 import EditUser from './components/update-user.component';
 import SearchPage from "./components/search-plus.component";
-import CreateUser from "./components/create-user.component";
+import CreateUser from "./components/login/signUp";
 
 import Seats from './components/Seats/seats.component';
 import MasterForm from "./components/MasterForm";
@@ -27,16 +27,19 @@ import iternary from "./components/iternary.component";
 
 import EmailSend from './components/SendMail/EmailSend';
 import DisplayBookings from './components/MyBookings/test';
-import Login from './components/login/signUp';
+import Login from './components/login/Login';
 
 
 function App() {
   const [buttonPopup,SetButtonPopup]= useState(false);
+  
   return (
     <Router>
       <div className="container">
       <Navbar />
       <br/>
+
+      <Route path="/createuser" component={CreateUser} />
       <Route path="/" exact component={SearchPage} />
       <Route path="/edit/:id" component={UpdateFlight} />
       <Route path="/createflights" component={CreateFlights} />
@@ -44,10 +47,8 @@ function App() {
       <Route path="/login" component={Login} /> 
       <Route path = "/send/:id" component = {EmailSend} />
       <Route path="/loginUser" component={LoginUser} /> 
-      <Route path="/delete/:id" component={DeleteFlight} /> 
-      <Route path="/myBookings/:id" component={DisplayBookings} /> 
-
-      <Route path="/createuser" component={CreateUser} />
+      <Route path="/delete/:id" component={DeleteFlight} />   
+      <Route path="/myBookings/" component={DisplayBookings} /> 
       <Route path="/searchplus" component={SearchPage} />
       <Route path="/edituser/:id" component={EditUser} />
       <Route path="/seats" component={Seats} /> 

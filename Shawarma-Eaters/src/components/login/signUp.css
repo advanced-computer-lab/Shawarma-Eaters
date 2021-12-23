@@ -77,8 +77,9 @@
 .btn {
     font-size: 16px;
     font-weight: bold;
-    min-width: 140px;
+    min-width: 30px;
     outline: none !important;
+    margin-left: 20%;
 }
 .signup-form .row div:first-child {
     padding-right: 10px;
