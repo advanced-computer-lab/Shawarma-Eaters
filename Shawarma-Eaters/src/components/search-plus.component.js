@@ -7,6 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./search.css";
 
 import MasterForm from './MasterForm.js';
+import DepFlights from './DepFlights.js';
 // Departure Airport, Arrival Airport, Departure Date, Arrival Date, Adults, Children, Cabin class
 let data=[];
 let flag1=false;
@@ -269,9 +270,15 @@ this.setState({
       // console.log(this.state.retSearch);
         //window.localStorage.clear();
         return (  
-          <>
-            <MasterForm depSearch = {this.state.depSearch} retSearch = {this.state.retSearch} />
-          </>
+           <Redirect
+           to={{
+           pathname: "/DepFlights",
+           state: { 
+             depSearch: this.state.depSearch,
+             retSearch: this.state.retSearch
+                   }
+           }}
+           />
 
         
         )

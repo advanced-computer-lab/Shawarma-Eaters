@@ -19,6 +19,9 @@ import CreateUser from "./components/create-user.component";
 import Seats from './components/Seats/seats.component';
 import MasterForm from "./components/MasterForm";
 
+import DepFlights from './components/DepFlights.js';
+import RetFlights from './components/RetFlights.js';
+
 import BasicTable from "./components/search/table";
 
 
@@ -48,10 +51,13 @@ function App() {
       <Route path="/createuser" component={CreateUser} />
       <Route path="/searchplus" component={SearchPage} />
       <Route path="/edituser/:id" component={EditUser} />
-      <Route path="/seats" component={Seats} /> 
+      <Route path="/seats" render={(props) => <Seats {...props} />}/> 
 
       <Route path="/MasterForm" component={MasterForm} />
       {/* <Route path="MasterForm" render={(props) => <MasterForm {...props}/>}/> */}
+      <Route path="/DepFlights" render={(props) => <DepFlights {...props}/>}/>
+      <Route path="/RetFlights" render={(props) => <RetFlights {...props}/>}/>
+      
 
 
       <Route path="/profile" component={UserProfile} /> 

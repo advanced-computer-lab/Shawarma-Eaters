@@ -1013,7 +1013,6 @@ class MasterForm extends Component {
       <div>
         <h1>Sorry no departure flights match your search in our database </h1> <br></br>
         <h1>Please go back to our search page</h1>
-        {/* <button onClick={this.fetchData}>Fetch data</button> */}
         </div>);
     }
 

@@ -85,13 +85,15 @@ export default class seats extends Component{
 
 componentDidMount() {
 
-    
+    console.log(this.props);
 }
 
 render(){
 return(
 
 <body>
+
+
 
 <h2>Flight Seating</h2>
 
@@ -109,7 +111,7 @@ Passport number:38163A13G
 
 <div class="solid2"> 
 <h3>Flight Details:</h3>
-Flight number: AD2135
+Flight number: {this.props.location.state.depFlight.flight_number}
 <br></br>
 Departure time: 16:34
 <br></br>
