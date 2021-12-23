@@ -11,7 +11,7 @@ div.Forumdiv{
   position: relative;
   left: 30px;
   top: 30px;
-  box-sizing: border-box;
+  box-sizing: content-box;
   border-radius: 6px;
 }
 input[type=text] {
@@ -27,4 +27,19 @@ label{
 }
 h1{
 margin: 10px 100px ;
+}
+
+.form-group{
+  width: 50%;
+  display:inline-block;
+
+
+}
+
+div.planebg{
+  background-image: url("travel-background-with-airplane-and-sky-with-cloud-vector-31819486.jpg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 100%;
+  height:100%;
 }

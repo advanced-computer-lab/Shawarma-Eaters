@@ -2,6 +2,7 @@
 div.solid1 {
     border-style: solid;
     background-color: rgb(160, 156, 156);
+    position: static;
 }
 div.solid2 {
     border-style: solid;
@@ -149,4 +150,14 @@ div.grid-container > div {
   }
 
 
+#progressbar{
+     left: 70%;
+     background-image: url("progressbar.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: static;
+    width: 540pt;
+    height: 100pt;
+    margin: auto;
 
+}

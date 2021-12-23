@@ -32,9 +32,9 @@ function App() {
   const [buttonPopup,SetButtonPopup]= useState(false);
   return (
     <Router>
-      <div className="container">
+      <div >
       <Navbar />
-      <br/>
+  
       <Route path="/" exact component={SearchPage} />
       <Route path="/edit/:id" component={UpdateFlight} />
       <Route path="/createflights" component={CreateFlights} />

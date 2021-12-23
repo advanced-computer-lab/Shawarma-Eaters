@@ -96,81 +96,84 @@ export default class CreateUser extends Component {
   }
   render() {
     return (
-    <div class="Forumdiv">
-      <h3>Sign Up</h3>
-      <form onSubmit={this.onSubmit}>
+  <div class="planebg">
 
-        <div  className="form-group"> 
-          <label>User Name: </label>
-          <input  type="text"
-              required
-              className="form-control"
-              value={this.state.username}
-              onChange={this.onChangeUsername}
-              /> 
-              </div>
+      
+      <div class="Forumdiv">
+        <h3>Sign Up</h3>
+        <form onSubmit={this.onSubmit}>
+
+          <div  className="form-group"> 
+            <label>User Name: </label>
+            <input  type="text"
+                required
+                className="form-control"
+                value={this.state.username}
+                onChange={this.onChangeUsername}
+                /> 
+                </div>
+            
+        
+          <div className="form-group"> 
+          <label> Firstname: </label>
+            <input  type="text"
+                required
+                className="form-control"
+                value={this.state.firstname}
+                onChange={this.onChangeFirstname}
+                />
+          </div>
+
+          <div className="form-group">
+          <label> Lastname: </label>
+            <input  type="text"
+                required
+                className="form-control"
+                value={this.state.lastname}
+                onChange={this.onChangeLastname}
+                />
+          </div>
+          <div className="form-group"> 
+            <label>Passportnumber: </label>
+            <input  type="text"
+                required
+                className="form-control"
+                value={this.state.passportnumber}
+                onChange={this.onChangePassport}
+                />
+          </div>
           
-       
-        <div className="form-group"> 
-        <label> Firstname: </label>
-          <input  type="text"
-              required
-              className="form-control"
-              value={this.state.firstname}
-              onChange={this.onChangeFirstname}
-              />
-        </div>
+          <div className="form-group"> 
+            <label>Email: </label>
+            <input  type="text"
+                required
+                className="form-control"
+                value={this.state.email}
+                onChange={this.onChangeEmail}
+                />
+          </div>
+          
+          <div className="form-group"> 
+            <label>Password: </label>
+            <input  type="text"
+                required
+                className="form-control"
+                value={this.state.password}
+                onChange={this.onChangePassword}
+                />
+          </div>
+          
 
-        <div className="form-group">
-        <label> Lastname: </label>
-          <input  type="text"
-              required
-              className="form-control"
-              value={this.state.lastname}
-              onChange={this.onChangeLastname}
-              />
-        </div>
-        <div className="form-group"> 
-          <label>Passportnumber: </label>
-          <input  type="text"
-              required
-              className="form-control"
-              value={this.state.passportnumber}
-              onChange={this.onChangePassport}
-              />
-        </div>
-        
-        <div className="form-group"> 
-          <label>Email: </label>
-          <input  type="text"
-              required
-              className="form-control"
-              value={this.state.email}
-              onChange={this.onChangeEmail}
-              />
-        </div>
-        
-        <div className="form-group"> 
-          <label>Password: </label>
-          <input  type="text"
-              required
-              className="form-control"
-              value={this.state.password}
-              onChange={this.onChangePassword}
-              />
-        </div>
-        
+          <div className="form-group">
+            <input type="submit" value="Sign Up!" className="btn btn-primary" />
+    
+          </div>
+          </form>
+          
+    </div>
+    
 
-        <div className="form-group">
-          <input type="submit" value="Sign Up!" className="btn btn-primary" />
-  
-        </div>
-        </form>
-        
   </div>
-  
-
-  
       
     
     )

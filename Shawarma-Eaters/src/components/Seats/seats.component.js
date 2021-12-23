@@ -14,6 +14,7 @@ export default class seats extends Component{
         this.toggleOcc = this.toggleOcc.bind(this);  
         this.startSeats = this.startSeats.bind(this);  
          this.seatsArray = [];
+          this.startSeats = this.startSeats.bind(this);  
 
         //  this.state = {
         //     seatnumber:'',
@@ -35,7 +36,6 @@ export default class seats extends Component{
             business_seats: [{ seatnumber: '', occupied:false }]
 
           } 
-          this.startSeats = this.startSeats.bind(this);  
 
         }
         getMethod(flightNo,seatNo,isOccupied)
@@ -179,6 +179,7 @@ for(let i=0;i<this.state.number_of_Economy_seats;i++){
 }
 
 componentDidMount() {
+  //ret f
   axios.get('http://localhost:5000/flights/61c0fd22cb5ce1115c0f584f')
     .then(response => {
       this.setState({
@@ -208,9 +209,11 @@ render(){
 return(
 
 <body>
+  <div id="progressbar">
 <button  onClick={() =>this.startSeats()} type="button">PRESSSS</button>
+</div>
+<h2>Departure Flight Seating</h2>
 
-<h2>Flight Seating</h2>
 
 <div class="solid1"> 
 <h3>Profile</h3>

@@ -159,6 +159,7 @@ export default class SearchPage extends Component {
         
         
         return (  
+          
           <>
             <Redirect
               to={{
@@ -171,7 +172,7 @@ export default class SearchPage extends Component {
         )
       }
       return (
-        
+        <div>
       <div class="IMGdiv">
         <div class="searchForum">
         <h1>Search</h1>
@@ -256,21 +257,35 @@ export default class SearchPage extends Component {
               <label for="Business">Business</label>
               <input type="radio" id="Economy" onChange={this.onChangeCabinClass} value="Economy"/>
               <label for="Economy">Economy</label>
-              <br></br>
-              <br></br>
+             
               
               
         </div>
-          <div className="form-group">
+          <div >
             <input type="submit" value="Search" className="btn btn-primary" />
     
           </div>
           </form>
           </div>
+    
+</div>
+    <div class="offerImg">
+
+<h1 id="offerText">
+A NEW TRIP BEGINS WITH
+40,000 BONUS MILES Earn 40,000 bonus miles plus enjoy your first checked bag free on Delta flights. 
+See offer Terms Apply.         
+$$$$$$[PS. get a higher quality img]$$$$$$
+</h1>
+
+
+
+
+
+
+    
+  </div>
     </div>
-    
-  
-    
         
       
       )
