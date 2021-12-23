@@ -6,11 +6,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./search.css";
 import "./ticket.css";
 
-import "./Seats/seats.css";
-import "./Seats/seat-icon.jpg";
-import "./Seats/seat reserved.png";
-import "./Seats/seat available.png";
-
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
 
