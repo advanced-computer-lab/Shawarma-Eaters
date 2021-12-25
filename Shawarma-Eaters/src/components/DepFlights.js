@@ -92,7 +92,17 @@ class DepFlights extends Component {
             <div>
               {console.log(this.state.depFlight)}
                 
-                <Button color="primary" size="lg" style={{float:'left'}} onClick={()=>{this.setState({redirectPrev: true});}}>Previous</Button>
+                
+                <br></br>
+                <br></br>
+              <p>Please select prefered departure flight</p>
+              <FormGroup style={{
+        boxSizing: 'border-box',
+        padding: "10px",
+        fontFamily: "Arial",
+        flexWrap: 'wrap'
+      }}>
+        <Button color="primary" size="lg" style={{float:'left'}} onClick={()=>{this.setState({redirectPrev: true});}}>Previous</Button>
                 <Button color="primary" size="lg"  onClick={()=>{
                   if (JSON.stringify(this.state.depFlight)=="{}"){
                     alert("Please select a flight 1st");
@@ -100,11 +110,7 @@ class DepFlights extends Component {
                   else{
                     this.setState({redirectNext: true});
                   }
-                } } style={{float:'inline-start'}} >Next</Button>
-                <br></br>
-                <br></br>
-              <p>Please select prefered departure flight</p>
-              <FormGroup>
+                } } style={{float:'inline-start' ,flexWrap: 'wrap'}} >Next</Button>
         
           { this.state.dep_flights.length==0?
         <div>
@@ -117,7 +123,8 @@ class DepFlights extends Component {
           this.state.dep_flights.map(currentflight =>(
             
               
-            <Card border="dark" style={{ width: '80rem', height: '35rem',border: currentflight._id==this.state.depFlight._id ? this.state.color:""  }}>
+            <Card border="dark" style={{ width: '80rem', height: '35rem',
+            flexWrap: 'wrap',border: currentflight._id==this.state.depFlight._id ? this.state.color:""  }}>
 
             <CardImg className="card-img-top" top width="100%" src={plane} alt="Card image cap" />
             <CardBody>
