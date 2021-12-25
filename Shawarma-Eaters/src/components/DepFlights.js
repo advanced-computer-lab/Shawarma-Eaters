@@ -53,6 +53,7 @@ class DepFlights extends Component {
 
     //this.props.depSearch
     componentDidMount(props) {
+      console.log(this.props.location.state);
         axios.post('http://localhost:5000/guest/depFlights',this.props.location.state.depSearch).then(result => this.setState({ dep_flights:  result.data})).catch((error) => {
         console.log(error);
       });

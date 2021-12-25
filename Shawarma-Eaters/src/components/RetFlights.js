@@ -53,6 +53,8 @@ class RetFlights extends Component {
 
     //this.props.depSearch
     componentDidMount(props) {
+      console.log(this.props.location.state);
+
         axios.post('http://localhost:5000/guest/arrFlights',this.props.location.state.retSearch).then(result => this.setState({ ret_flights:  result.data})).catch((error) => {
             console.log(error);
           });
@@ -71,8 +73,6 @@ class RetFlights extends Component {
                 retSearch: this.props.location.state.retSearch,
                 depFlight : this.props.location.state.depFlight,
 
-                economy_seats_dep: this.props.location.state.economy_seats,
-                business_seats_dep: this.props.location.state.business_seats,
                 
                 users: this.props.location.state.users,
 
