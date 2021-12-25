@@ -40,14 +40,24 @@ text-align: left !important;
 display:inline-flex;
 font-size: 0;
 margin-left: -210px;
+position: relative;
+  left: 119px;
 }
 .EditButton ,.DeleteButton{
 text-align: left !important;
 font-weight: bold;
 font-size: 10px;
+position: relative;
+left: -10px;
 
 
 }
+.ButtonTable
+    {
+      position: relative;
+      left: 119px;
+
+    }
 
 .EditButton {
 column-width: 90px;
@@ -91,9 +101,7 @@ border: solid #ff3c00 1px;
   box-shadow: 1px 1px 0px #d12222;
 }
 
-.BOX{
-box-shadow: 12px 5px 12px rgb(250, 249, 249) ;
-}
+
 .primary-nav::after {
 content: '';
 flex-grow: 1;

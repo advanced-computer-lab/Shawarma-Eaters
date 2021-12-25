@@ -1,0 +1,26 @@
+GET http://localhost:5000/users
+
+###
+
+POST http://localhost:5000/guest/createUser 
+Content-Type: application/json
+
+{
+"username": "omar","firstname" : "Omar","lastname":"walid" ,"email":"anasayman5@gmail.com" ,"passportnumber":"121221212" , "password": "omar"
+}
+###
+POST  http://localhost:5000/guest/depFlights
+Content-Type: application/json
+
+{
+    "departureAirport" : "Alex" , "arrivalAirport" : "United States","cabinclass": "Business","arrivalDate":"12/15/2021","departureDate":"12/15/2021","adults":1,"children":2
+}
+###
+
+POST http://localhost:5000/users/login 
+Content-Type: application/json
+
+{
+"username": "ziad", "password": "123"
+}
+

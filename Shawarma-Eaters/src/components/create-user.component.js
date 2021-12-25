@@ -4,10 +4,13 @@ import { Prompt } from 'react-router-dom';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
-import "./styles.css";
+import "./login/signUp.css";
+import {Helmet} from 'react-helmet';
+import { Redirect } from 'react-router';
 
 
 export default class CreateUser extends Component {
+  
   constructor(props) {
     super(props);
 
@@ -17,7 +20,7 @@ export default class CreateUser extends Component {
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassport = this.onChangePassport.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+    this.submit = this.submit.bind(this);
 
     this.state = {
       username: '',
@@ -30,19 +33,36 @@ export default class CreateUser extends Component {
       users: []
     }
   }
+
+    submit() {
+      window.location('/login')
+    const user = {
+      username: this.state.username,
+      firstname: this.state.firstname,
+      lastname: this.state.lastname,
+      email: this.state.email,
+      passportnumber: this.state.passportnumber,
+      password:this.state.password
+      }
+  
+    console.log('user',user);
+  
+    axios.post('http://localhost:5000/guest/makeUser', user);
+    <Redirect to='/login'  />
+//  
+  }
+ 
   // componentDidMount() {
-  //   axios.get('http://localhost:5000/users/')
-  //     .then(response => {
-  //       if (response.data.length > 0) {
-  //         this.setState({
-  //           users: response.data.map(user => user.username),
-  //           username: response.data[0].username
-  //         })
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     })
+  //   const user = {
+  //     username: this.state.username,
+  //     firstname: this.state.firstname,
+  //     lastname: this.state.lastname,
+  //     email: this.state.email,
+  //     passportnumber: this.state.passportnumber,
+  //     password:this.state.password
+  //     }
+  //   axios.post('http://localhost:5000/guest/createUser', user)
+      
 
   // }
   onChangeUsername(e) {
@@ -75,25 +95,7 @@ export default class CreateUser extends Component {
       password:e.target.value
     })
   }
-  onSubmit(e) {
-    e.preventDefault();
-
-    const user = {
-      username: this.state.username,
-      firstname: this.state.firstname,
-      lastname: this.state.lastname,
-      email: this.state.email,
-      passportnumber: this.state.passportnumber,
-      password:this.state.password
-      }
   
-    console.log(user);
-
-    axios.post('http://localhost:5000/guest/createUser', user)
-      .then(res => console.log(res.data));
-
-    window.location = '/';
-  }
   render() {
     return (
   <div class="planebg">
@@ -163,6 +165,51 @@ export default class CreateUser extends Component {
                 />
           </div>
           
+    <body>
+    <div class="signup-form">
+            <Helmet>
+                <style>{'body { background-color: #5dd9be }'}</style>
+            </Helmet> 
+        <form  method="post">
+            <h2>Register</h2>
+            <div >
+               
+                <div class ='special' >
+                    <div class="col ">
+                        <input type="text" class="form-control " name="first_name" placeholder="First Name" maxlength="100" required="required" value={this.state.firstname} onChange={this.onChangeFirstname}/>
+                    </div>
+                    <div class="col ">
+                        <input type="text" class="form-control" name="last_name" placeholder="Last Name"  maxlength="100" required="required"  value={this.state.lastname} onChange={this.onChangeLastname}/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="UserName:" placeholder="User Name:" required="required"  value={this.state.username} onChange={this.onChangeUsername}/>
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" name="email" placeholder="Email" required="required" value={this.state.email} onChange={this.onChangeEmail}/>
+            </div>
+            
+            <div class="form-group ">
+                <input type="text" class="form-control " name="Passportnumber:" placeholder="Passport number:" required="required" value={this.state.passportnumber} onChange={this.onChangePassport}/>
+            </div>
+            <div class="row ">
+                <div class="col form-group">
+                    <input type="password" class="form-control" name="password" placeholder="Password" required="required"  value={this.state.password} onChange={this.onChangePassword}/>
+                </div>
+               
+            </div>
+            
+            
+            <div class="form-group">
+                <button onClick={()=>   window.location='/login'} class="btn btn-success btn-lg btn-block">Register Now</button>
+            </div>
+        </form>
+        <div class="text-center">Already have an account?
+            <a href="http://localhost:3000/loginUser">Sign in</a>
+        </div>
+    </div>
+</body>
 
           <div className="form-group">
             <input type="submit" value="Sign Up!" className="btn btn-primary" />

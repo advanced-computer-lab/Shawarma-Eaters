@@ -53,10 +53,17 @@ const DisplayBookings = () => {
     //const id = this.props.match.params.id;
     //console.log(id);
    
-    console.log(window.location.pathname)
+    console.log(window.location.pathname);
+
+    const token = {accessToken :localStorage.getItem("accessToken")};    
+    const user = await axios.post('http://localhost:5000/users/verify',token);
     
+    console.log('user:',user.data);
+    console.log('token:',token)
+
+ 
     const response = await axios
-        .get(`http://localhost:5000/users/userBookings/`+getId(1)).then(booking => setBookings(booking.data))//.then(set)
+        .get(`http://localhost:5000/users/userBookings/`+user.data).then(booking => {setBookings(booking.data);console.log('bookings:',booking)})//.then(set)
         .catch((err) => console.log(err))
         console.log('all bookings',bookings);
     }
@@ -80,6 +87,20 @@ const DisplayBookings = () => {
             console.log(bookings);
       
     }
+
+    const SendItinerary = async (Booking) => {
+        console.log('SendItinerary method')
+        const token = {accessToken :localStorage.getItem("accessToken")};    
+        const user = await axios.post('http://localhost:5000/users/verify',token);        //const BookID = getId(1);
+        console.log('userID:222' , user)
+       
+        const Itinerary = 
+        await axios
+            .post(`http://localhost:5000/users/sendItinerary/`+user.data,Booking).then()
+            .catch((err) => console.log(err))
+            console.log(bookings);
+      
+    }
     const Check = (id)=>
     {
         if(window.confirm('are you sure')){
@@ -97,7 +118,7 @@ const DisplayBookings = () => {
             var depFlight = booking.outgoingFlightId;
             var arrFlight = booking.returnFlightId;
             console.log(booking.returnFlightId)
-            if(depFlight !== undefined && arrFlight !== undefined){
+            if(depFlight !== undefined && arrFlight !== undefined &&depFlight !== null  &&arrFlight !== null){
             return (
                     <Card className = 'card'>
                     {/* <CardImg className="card-img-top" top width="100%"  alt="Card image cap" /> */}
@@ -134,9 +155,13 @@ const DisplayBookings = () => {
                     </CardBody>
                                         </div>
                                         <div class="col-sm btnPart ">
-                                        <Button className = 'btnBook' size="small"  color="primary" onClick={()=> {Check(booking._id)}}>
-                            Delete
-                        </Button>                        </div>
+                                            <Button className = 'btnBook' size="small"  color="primary" onClick={()=> {Check(booking._id)}}>
+                                                Delete
+                                            </Button>   
+                                            <Button className = 'btn btn-success btn-lg btn-block' size="small"  color="primary" onClick={()=> {SendItinerary(booking)}}>
+                                                Send Itinerary via mail
+                                            </Button>                       
+                                        </div>
 
                                 </div>
                             </div>
@@ -165,7 +190,6 @@ return (
                 {theItems}
             </FormGroup>
             </div>
-        <h1>SENDING MAIL WHEN THE DELETE BUTTON IS THE PREESED</h1>
     </>
 )
 };

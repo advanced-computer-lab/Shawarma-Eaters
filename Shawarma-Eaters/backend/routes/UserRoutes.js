@@ -19,6 +19,8 @@ router.route('/userBookings/:id').get(userController.getUserBookingById);
 router.route('/DeleteBookings/:id/:book').put(userController.deleteUserBookById);
 
 router.route('/sendingMail/:id').get(userController.sendEmail);  //get  not post
+router.route('/sendItinerary/:id').post(userController.sendItinerary);  //get  not post
+
 // router.route('/').get(adminController.getAllAdmins);
 // router.route('/isThereAdmin').get(adminController.getAdmin);
 // router.route('/add').post(adminController.addAdmin);
@@ -29,7 +31,9 @@ router.route('/sendingMail/:id').get(userController.sendEmail);  //get  not post
 
 
 router.route('/:id').delete(userController.deleteUserById);
-
+router.route('/login').post(userController.login);
+router.route('/logout').delete(userController.logout);
+router.route('/verify').post(userController.verifyAccess);
 
 module.exports = router;  
 //

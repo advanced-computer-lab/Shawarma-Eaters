@@ -58,7 +58,7 @@ const flightColumns = useMemo(
   () =>
     flight[0]
       ? Object.keys(flight[0])
-          .filter((key) => key !== "updatedAt" &&  key !== "createdAt" &&   key !== "dates" &&  key !== "__v" && key !== 'business_seats' &&  key !== 'economy_seats')  //key !== "_id" && 
+          .filter((key) => key !== "updatedAt" &&  key !== "createdAt" &&   key !== "dates" &&  key !== "__v" && key !== 'business_seats' && key !== "_id" &&   key !== 'economy_seats')  //key !== "_id" && 
           .map((key) => {
             let head = key;
             if(key == "arrival_times")
@@ -97,6 +97,9 @@ const editFlight =  ()=>
   };
 
 const tableHooks = (hooks) => {
+  console.log('flight::::',flight)
+  if(flight.lenght != 0)
+  {
   hooks.visibleColumns.push((columns) => [
     ...columns,
     {
@@ -121,7 +124,7 @@ const tableHooks = (hooks) => {
       ),
     },
   ]);
-};
+}};
 const tableInstance = useTable({columns : flightColumns,data : flightData},tableHooks,useGlobalFilter,useFilters);
 
   const {
@@ -152,9 +155,12 @@ const tableInstance = useTable({columns : flightColumns,data : flightData},table
   //   setContacts(newContacts);
   // };
   
+  if(flight.lenght != 0)
+  {
+
   
   return (
-    
+
     <>
       <div className = 'BOX'>
         <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
@@ -181,7 +187,6 @@ const tableInstance = useTable({columns : flightColumns,data : flightData},table
               return (
                 <tr class = "left" {...row.getRowProps()}>
                   {row.cells.map(cell => {
-                    console.log(cell.row.values,"nnnnnn")
                     return <td  {...cell.getCellProps({
                       style: {
                         minWidth: cell.column.minWidth,
@@ -207,6 +212,19 @@ const tableInstance = useTable({columns : flightColumns,data : flightData},table
       </div>
     </>
   )
+}
+else
+{
+  return(
+    <>
+    <div>
+
+      <h1> There is no data OR There is no connection with the "server" </h1>
+    </div>
+    </>
+  )
+}
+
 }
 
 export default BasicTable;

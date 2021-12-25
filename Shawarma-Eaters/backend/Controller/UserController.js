@@ -1,5 +1,11 @@
 const User = require('../models/user');
+const Booking = require('../models/booking');
 const nodemailer = require('nodemailer');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const passport = require('passport');
+const { default: Axios } = require('axios');
+
 
 // changes needed
 // add popup in case of choosing other than economy and business
@@ -59,6 +65,7 @@ const getUserById = (req, res) => {
 }
 
 const getUserBookingById = (req, res) => {
+  console.log('in getUserBookingById')
     User.findById(req.params.id).populate({path : 'bookings',populate :[{path : 'outgoingFlightId'},{path : 'returnFlightId'}]})//.populate('outgoingFlightId').populate('returnFlightId')
       .then(user => res.json(user.bookings))
       .catch(err => res.status(400).json('Error: ' + err));
@@ -140,6 +147,7 @@ const sendEmail = async (req,res) => {
         to: email, // TODO: email receiver
         subject: 'Nodemailer - Test2',
         text: `Hello,${userDetails.firstname} ${userDetails.lastname} you have been canceled your reservation and the refunded amount is $499 `,
+        html: ""
        
         
     };
@@ -165,8 +173,196 @@ const sendEmail = async (req,res) => {
     });
 }
 
+const sendItinerary = async (req,res) => {   ///take in the params USERid and in body booking object i.e /userBookings/`+user.data and filter with the same booking id or router.route('/:id').get(bookingController.getBookById);
+
+  var email = 'unKown';
+
+  var userDetails = 
+  {_id: "1",
+  username: 'unkown',
+  firstname: 'unkown',
+  lastname: 'unkown',
+  email: 'unkown',
+  passportnumber: 'unkown',
+  password: 'unkown',
+  };
+  console.log(req.body.outgoingFlightId);
+  var bookingDetails = req.body ?req.body:
+  {
+    bookingNumber: 'unkown',
+    seats: ['unkown'],
+    outgoingFlightId: {},
+    cost: 'unkown',
+    returnFlightId: {},
+    cabin: 'unkown',
+  }
+  var depFlight = req.body? req.body.outgoingFlightId:
+  {
+    departure: 'unkown',
+    dates: 'unkown',
+    depAirport: 'unkown',
+    arrAirport:  'unkown'
+  }
+  var arrFlight = req.body? req.body.returnFlightId:
+  {
+    departure: 'unkown',
+    dates: 'unkown',
+    depAirport: 'unkown',
+    arrAirport:  'unkown'
+  }
+  
+
+ // res.json({status: true, respMesg: 'AAAAEmail Sent Successfully'})
+  await User.findById(req.params.id)
+        .then((user) => {email = user.email;userDetails = user})
+        .catch(err => res.status(400).json('Error: ' + err));
+  // await Booking.findById(req.params.booking)
+  // .then((booking) => {bookingDetails = booking})
+  // .catch(err => res.status(400).json('Error: ' + err));
+  // console.log(bookingDetails)
+
+  console.log('email request 2 came');
+  //console.log(req.body);
+ 
+  let transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+          user: process.env.EMAIL || 'acluser40@gmail.com', // TODO: your gmail account
+          pass: process.env.PASSWORD || 'aclgroup123' // TODO: your gmail password
+      }
+  });
+
+
+  let mailOptions = {
+      from: 'acluser40@gmail.com', // TODO: email sender
+      to: email, // TODO: email receiver
+      subject: 'Nodemailer - Test2',
+      text: `Hello,${userDetails.firstname} ${userDetails.lastname} you have reserved a Booking \n\n Booking no. : ${bookingDetails.bookingNumber} \n FROM : ${depFlight.depAirport} on ${depFlight.dates} by ${depFlight.departure} \n TO : ${depFlight.arrAirport} on ${arrFlight.dates} by ${arrFlight.departure};\n Cabin Class : ${bookingDetails.cabin} ; \n SEATS : ${bookingDetails.seats};\n `,
+      html: ""
+     
+      
+  };
+
+  transporter.sendMail(mailOptions, function(error, info){
+      if (error)
+      {
+          res.json({status: true, respMesg: "Email Didn't Sent Successfully"})
+         return console.log('there an error', error)
+      } 
+      else
+      {
+      res.json({status: true, respMesg: 'Email Sent Successfully'})
+      console.log('Email Sent Successfully')
+      }   
+  
+  });
+}
+
+
+
+
+
+
+
+let refreshTokens = []
+// let accessTokens = []
+
+const login = async (req, res, next) => {
+console.log('in_login')
+User.findOne({username : req.body.username}).then(async user =>  {
+        if (user == null) 
+        {
+          console.log(req.body,req.body.name)
+          return res.send('Wrong User')  //res.status(400).send('Cannot find user')
+        }
+        try {
+            if(await bcrypt.compare(req.body.password, user.password)) {
+                const username = req.body.username;
+                const user = { name: username };
+                const accessToken = generateAccessToken(user);
+              //  const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
+              //  refreshTokens.push(refreshToken);
+                // accessTokens.push(accessToken);
+                res.json({ accessToken: accessToken,message :'success' })
+                console.log({ accessToken: accessToken})
+            } else {
+              res.send('Wrong Password')
+            }
+            
+          } catch {
+            res.status(500).send()
+          }
+    })
+  
+ 
+   
+    //   next();
+
+}
+
+
+
+const verifyAccess = async (req, res, next) => {
+    //console.log('in in in ')
+
+    const token = req.body.accessToken
+    if (token == null) return res.sendStatus(401)
+    jwt.verify(token, process.env.ACCESS_SECRET_TOKEN, async (err, user) => {
+        //console.log(user.name)
+        if (err) return res.sendStatus(403)
+
+       await User.findOne({username : user.name}).then(user => res.json(user._id));
+        //res.json(user.name);
+      })
+
+    }    
+
+function authenticateToken(req, res, next) {
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(' ')[1]
+    if (token == null) return res.sendStatus(401)
+  
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+      console.log(err)
+      if (err) return res.sendStatus(403)
+      req.user = user
+      next()
+    })
+  }
+
+// Logout
+const logout = (req, res) => {
+    // req.logout();
+    // req.flash('success_msg', 'You are logged out');
+    // res.redirect('/users/login');
+    refreshTokens = refreshTokens.filter(token => token !== req.body.token);
+    // accessTokens = accessTokens.filter(token => token !== req.body.token);
+
+
+    res.sendStatus(204)
+  }
+
+ 
+function generateAccessToken(user) {
+    return jwt.sign(user, process.env.ACCESS_SECRET_TOKEN)
+  }
+//   console.log('been in login backend');
+//   passport.authenticate('local', {
+//       successRedirect: 'http://localhost:3000/',
+//       failureRedirect: 'http://localhost:3000/user/',
+//       failureFlash: true
+//     })(req, res, next); 
+
+  
+
+
+
 module.exports=
 {
+    sendItinerary,
+    verifyAccess,
+    logout,
+    login,
     findDepartureFlight,
     findArrivalFlight,
     getUserById,

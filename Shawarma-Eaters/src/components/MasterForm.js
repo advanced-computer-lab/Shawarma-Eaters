@@ -258,17 +258,19 @@ class MasterForm extends Component {
       //   console.log(error);
       // })
 
+      axios.post('http://localhost:5000/guest/depFlights',this.props.depArray).then(result => this.setState({ dep_flights:  result}));
+      axios.post('http://localhost:5000/guest/arrFlights',this.props.retArray).then(result => this.setState({ retFlights:  result}));
 
-    // this.setState({
-    //   dep_flights: localStorage.getItem("depArray"),
-    //   dep_flights:localStorage.getItem("retArray"),
-    //  });
+     
 
     // console.log(this.props);
-    console.log("depArray in master form:",this.state.dep_flights);
+    console.log(this.state.depFlight);
+    console.log(this.state.retFlight);
+
     //console.log("retArray in master form:",this.state.dep_flights);
 
-      
+   
+      console.log(this.props);
 
 
      

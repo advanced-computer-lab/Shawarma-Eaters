@@ -1,5 +1,7 @@
 //todo popup for other than economy and business
 const User = require('../models/user');
+// const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
 const Flight = require('../models/flight');
 function parseDate(input) {
 
@@ -39,7 +41,7 @@ const findArrivalFlight = (req,res) => {
         .catch(err => res.status(400).json('Error: ' + err));
     }
     else if (req.body.cabinclass == "Business" ){
-        Flight.find({depAirport: req.body.arrivalAirport,arrAirport: req.body.departureAirport, dates:{$lt: new Date(arrdateUpper),$gt: new Date(arrdateLower)}, number_of_Business_class_seats :{ $gte: Number(req.body.adults) + Number(req.body.children)}})
+        Flight.find({depAirport: req.body.arrivalAirport,arrAirport: req.body.departureAirport,dates:{$lt: new Date(arrdateUpper),$gte: new Date(arrdateLower)}, number_of_Business_class_seats :{ $gte: Number(req.body.adults) + Number(req.body.children)}})
         .then(flight => res.json(flight))
         .catch(err => res.status(400).json('Error: ' + err));
     }
@@ -49,15 +51,16 @@ const findArrivalFlight = (req,res) => {
   
 }
 //
-const createUser = (req,res) => {
+const createUser = async (req,res) => {
     console.log('trying to create user');
-    
+    try{
+    const hashedPassword = await bcrypt.hash(req.body.password, 10)
     const username = req.body.username;
     const firstname = req.body.firstname;
     const lastname = req.body.lastname;
     const email = req.body.email;   
     const passportnumber = req.body.passportnumber;
-    const password = req.body.password;
+    const password = hashedPassword;
 
     const newUser = new User({
         username,
@@ -68,9 +71,14 @@ const createUser = (req,res) => {
         password
     });
     newUser.save()
-    .then(() => res.json('User added!'))
-    .catch(err => res.status(400).json('Error: ' + err));
-  };
+    .then(() => {console.log('success')}) //res.json('User added!'),
+    .catch(err => {console.log('error')});//res.status(400).json('Error: ' + err),
+  }
+  catch{
+
+    console.log('error') //res.status(500).send()
+
+  }};
 
 const getAllUsers = (req,res) => {
     console.log('ALL aboard');
