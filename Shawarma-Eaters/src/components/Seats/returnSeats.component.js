@@ -227,26 +227,21 @@ for(let i=0;i<this.state.number_of_Economy_seats;i++){
 
 componentDidMount() {
   //ret f
-  axios.get('http://localhost:5000/flights/61c0fd22cb5ce1115c0f584f')
-    .then(response => {
       this.setState({
-        flight_number: response.data.flight_number,
-        departure: response.data.departure,
-        arrival_times: response.data.arrival_times,
-        number_of_Economy_seats: response.data.number_of_Economy_seats,
-        number_of_Business_class_seats: response.data.number_of_Business_class_seats,
-        arrAirport: response.data.arrAirport,
-        depAirport: response.data.depAirport,
-        dates: response.data.dates,
-        createdAt: response.data.createdAt,
-        economy_seats: response.data.economy_seats,
-        business_seats: response.data.business_seats,
+        flight_number: this.props.location.state.retFlight.flight_number,
+        departure: this.props.location.state.retFlight.departure,
+        arrival_times: this.props.location.state.retFlight.arrival_times,
+        number_of_Economy_seats: this.props.location.state.retFlight.number_of_Economy_seats,
+        number_of_Business_class_seats: this.props.location.state.retFlight.number_of_Business_class_seats,
+        arrAirport: this.props.location.state.retFlight.arrAirport,
+        depAirport: this.props.location.state.retFlight.depAirport,
+        dates: this.props.location.state.retFlight.dates,
+        createdAt: this.props.location.state.retFlight.createdAt,
+        economy_seats: this.props.location.state.retFlight.economy_seats,
+        business_seats: this.props.location.state.retFlight.business_seats,
 
-      })   
-    })
-    .catch(function (error) {
-      console.log(error);
-    })
+      }); 
+
 
 //this.startSeats()
     
@@ -263,7 +258,19 @@ render(){
           depSearch: this.props.location.state.depSearch ,
           retSearch: this.props.location.state.retSearch,
           depFlight : this.props.location.state.depFlight,
-          retFlight : this.state.retFlight,
+
+          economy_seats_dep: this.props.location.state.economy_seats,
+          business_seats_dep: this.props.location.state.business_seats,
+
+          users: this.props.location.state.users,
+          retFlight :this.props.location.state.retFlight,
+
+          economy_seats_ret: this.state.economy_seats,
+          business_seats_ret: this.state.business_seats,
+
+          seatnumber:"12"
+
+
   
                 }
         }}
@@ -278,10 +285,17 @@ render(){
     return (  
         <Redirect
         to={{
-        pathname: "/seats",
+        pathname: "/RetFlights",
         state: { 
           depSearch: this.props.location.state.depSearch ,
-          retSearch: this.props.location.state.retSearch
+          retSearch: this.props.location.state.retSearch,
+          depFlight : this.props.location.state.depFlight,
+
+          economy_seats_dep: this.props.location.state.economy_seats,
+          business_seats_dep: this.props.location.state.business_seats,
+
+          users: this.props.location.state.users,
+          retFlight :this.props.location.state.retFlight
           }
         }}
         />
@@ -433,13 +447,13 @@ Date: {this.state.dates}
  onClick={()=>{this.setState({redirectPrev: true});}}>Previous</Button>
                
 <Button id="nextButton" color="primary" size="" style={{float:'inline-start',width:'15%'}} 
-onClick={()=>{   if (JSON.stringify(this.state.retFlight)=="{}"){
-                    alert("Please select a flight 1st");
-                  }
-                  else{
+onClick={()=>{  // if (seats empty){
+                  //   alert("Please select a seat 1st");
+                  // }
+                  // else{
                     this.setState({redirectNext: true});
 
-                  }
+                  //}
                 } } style={{float:'inline-start',width:'15%'}} >Next</Button>
 
 

@@ -230,17 +230,17 @@ componentDidMount() {
   axios.get('http://localhost:5000/flights/61c0fd22cb5ce1115c0f584f')
     .then(response => {
       this.setState({
-        flight_number: response.data.flight_number,
-        departure: response.data.departure,
-        arrival_times: response.data.arrival_times,
-        number_of_Economy_seats: response.data.number_of_Economy_seats,
-        number_of_Business_class_seats: response.data.number_of_Business_class_seats,
-        arrAirport: response.data.arrAirport,
-        depAirport: response.data.depAirport,
-        dates: response.data.dates,
-        createdAt: response.data.createdAt,
-        economy_seats: response.data.economy_seats,
-        business_seats: response.data.business_seats,
+        flight_number: this.props.location.depFlight.flight_number,
+        departure: this.props.location.depFlight.departure,
+        arrival_times: this.props.location.depFlight.arrival_times,
+        number_of_Economy_seats: this.props.location.depFlight.number_of_Economy_seats,
+        number_of_Business_class_seats: this.props.location.depFlight.number_of_Business_class_seats,
+        arrAirport: this.props.location.depFlight.arrAirport,
+        depAirport: this.props.location.depFlight.depAirport,
+        dates: this.props.location.depFlight.dates,
+        createdAt: this.props.location.depFlight.createdAt,
+        economy_seats: this.props.location.depFlight.economy_seats,
+        business_seats: this.props.location.depFlight.business_seats,
 
       })   
     })
@@ -258,12 +258,26 @@ render(){
     return (  
         <Redirect
         to={{
-        pathname: "/returnSeats",
+        pathname: "/summary",
         state: { 
           depSearch: this.props.location.state.depSearch ,
-          retSearch: this.props.location.state.retSearch,
-          depFlight : this.props.location.state.depFlight,
-          retFlight : this.state.retFlight,
+                retSearch: this.props.location.state.retSearch,
+                depFlight : this.props.location.state.depFlight,
+
+            economy_seats_dep: this.state.economy_seats,
+            business_seats_dep: this.state.business_seats,
+  
+            users: this.props.location.state.users,
+            retFlight :this.props.location.state.retFlight,
+  
+            economy_seats_ret: this.props.location.state.economy_seats,
+            business_seats_ret: this.props.location.state.business_seats,
+
+            user:this.props.location.state.user,
+
+            NewBooking: this.props.location.state.NewBooking,
+            amountDebit: this.props.location.state.amountDebit,
+            amountCredit : this.props.location.state.amountCredit
   
                 }
         }}
@@ -278,10 +292,27 @@ render(){
     return (  
         <Redirect
         to={{
-        pathname: "/RetFlights",
+        pathname: "/DepFlights2",
         state: { 
-          depSearch: this.props.location.state.depSearch ,
-          retSearch: this.props.location.state.retSearch
+            depSearch: this.props.location.state.depSearch ,
+            retSearch: this.props.location.state.retSearch,
+            depFlight : this.props.location.state.depFlight,
+                
+            economy_seats_dep: this.state.economy_seats,
+            business_seats_dep: this.state.business_seats,
+  
+            users: this.props.location.state.users,
+            retFlight :this.props.location.state.retFlight,
+  
+            economy_seats_ret: this.props.location.state.economy_seats,
+            business_seats_ret: this.props.location.state.business_seats,
+
+            user:this.props.location.state.user,
+
+            NewBooking: this.props.location.state.NewBooking,
+            
+            amountDebit: this.props.location.state.amountDebit,
+            amountCredit : this.props.location.state.amountCredit
           }
         }}
         />
@@ -296,7 +327,7 @@ return(
   <div id="progressbar">
 <button  onClick={() =>this.startSeats()} type="button">PRESSSS</button>
 </div>
-<h2>Departure Flight Seating</h2>
+<h2>Edit Departure Flight Seating</h2>
 
 
 <div class="solid1"> 
@@ -433,15 +464,15 @@ Date: {this.state.dates}
 <Button id="prevButton" color="primary" size="" style={{float:'inline-start',width:'15%'}}   
  onClick={()=>{this.setState({redirectPrev: true});}}>Previous</Button>
                
-<Button id="nextButton" color="primary" size="lg"  
-onClick={()=>{   if (JSON.stringify(this.state.retFlight)=="{}"){
-                    alert("Please select a flight 1st");
-                  }
-                  else{
+               <Button id="nextButton" color="primary" size="" style={{float:'inline-start',width:'15%'}} 
+onClick={()=>{  // if (seats empty){
+                  //   alert("Please select a seat 1st");
+                  // }
+                  // else{
                     this.setState({redirectNext: true});
 
-                  }
-                } } style={{float:'inline-start'}} >Next</Button>
+                  //}
+                } } style={{float:'inline-start',width:'15%'}} >Next</Button>
 
 
 

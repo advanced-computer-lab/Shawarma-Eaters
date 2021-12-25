@@ -12,12 +12,28 @@ const addBook =  (req,res)=> {
 
     const bookingNumber = req.body.bookingNumber;
     const cost = req.body.cost;
+    const outgoingFlightId = req.body.selected_depFlight;
+    const returnFlightId = req.body.selected_retFlight;
+    const bookingDate = new Date();
 
+    
+
+    //what seats ?
+
+//bookingNumber
+//seats
+//outgoingFlightId
+//cost
+//returnFlightId
+//bookingDate
   
   
     const newBook = new Book({
         bookingNumber,
-        cost
+        cost,
+        outgoingFlightId,
+        returnFlightId,
+        bookingDate
     });
   
     newBook.save()

@@ -13,13 +13,13 @@ import DepFlights from './DepFlights.js';
 export default class Search2dep extends Component {
    constructor(props) {
       super(props);
-
-
+      
+      
       this.onChangeDepDate = this.onChangeDepDate.bind(this);
       this.onChangeArrDate = this.onChangeArrDate.bind(this);
       this.onChangeCabinClass = this.onChangeCabinClass.bind(this);
       this.onSubmit = this.onSubmit.bind(this);
-
+      
 
 
 
@@ -32,44 +32,50 @@ export default class Search2dep extends Component {
             retSearch:{},
             amountDebit:0,
             amountCredit:0
-
+             
         }
-
+        
     }
     componentDidMount(){
       console.log(this.props);
     }
-
+  
 
      onChangeDepDate(date) {
        this.setState({
         departureDate: date
        })
      }
-
+   
      onChangeArrDate(date) {
        this.setState({
         arrivalDate: date
        })
      }
-
-
+   
+   
      onChangeCabinClass(e){
        this.setState({
         cabinclass:e.target.value
        })
      }
-
+    
 onSubmit(e) { 
+
+
   console.log('in oSubmit');
   let costDiffrences = 0;
 
   if(this.props.location.state.depSearch.cabinclass=='Economy' && this.state.cabinclass=='Business' ){
     costDiffrences=(1000 *(this.props.location.state.depSearch.adults + this.props.location.state.depSearch.children))-this.props.location.state.NewBooking.cost;
   }
-  else{
-     costDiffrences=(100 *(this.props.location.state.depSearch.adults + this.props.location.state.depSearch.children))-this.props.location.state.NewBooking.cost;
+  if(this.props.location.state.depSearch.cabinclass=='Business' && this.state.cabinclass=='Economy'){
+    costDiffrences=(100 *(this.props.location.state.depSearch.adults + this.props.location.state.depSearch.children))-this.props.location.state.NewBooking.cost;
   }
+  if ( (this.props.location.state.depSearch.cabinclass=='Economy' && this.state.cabinclass=='Economy') ||(this.props.location.state.depSearch.cabinclass=='Business' && this.state.cabinclass=='Business')){
+    costDiffrences = 0;
+  }
+
 
   let amountDebit =costDiffrences<-1?costDiffrences*-1:0 ;
   let amountCredit= costDiffrences>-1?costDiffrences*-1:0;
@@ -81,6 +87,7 @@ onSubmit(e) {
 
 
 
+  
 
 const Dep_search = {
   departureAirport :  this.props.location.state.depSearch.departureAirport,
@@ -128,30 +135,41 @@ alert("amountDebit: "+amountDebit+" and AmountCredit: "+amountCredit);
            to={{
            pathname: "/DepFlights2",
            state: { 
-            depSearch: this.state.depSearch ,
-            retSearch: this.state.retSearch,
+            depSearch: this.props.location.state.depSearch ,
+            retSearch: this.props.location.state.retSearch,
             depFlight : this.props.location.state.depFlight,
-            retFlight : this.props.location.state.retFlight,
-            seatnumber : this.props.location.state.seatnumber,
+  
+            economy_seats_dep: this.props.location.state.economy_seats,
+            business_seats_dep: this.props.location.state.business_seats,
+  
+            users: this.props.location.state.users,
+            retFlight :this.props.location.state.retFlight,
+  
+            economy_seats_ret: this.props.location.state.economy_seats,
+            business_seats_ret: this.props.location.state.business_seats,
+
+            user:this.props.location.state.user,
+
             NewBooking: this.props.location.state.NewBooking,
+            
             amountDebit: this.state.amountDebit,
             amountCredit : this.state.amountCredit
             }
            }}
            />
 
-
+        
         )
       }
-
-
+     
+      
       return (
-
+        
       <div class="IMGdiv">
         <div class="searchForum">
         <h1>Search</h1>
         <form onSubmit={this.onSubmit}>
-
+  
           <div class="depDatediv" className="form-group">
           <label>Old Departure Date: <br></br>{this.props.location.state.depSearch.departureDate +""} </label><br></br>
           <label>Old Arrival Date: <br></br>{this.props.location.state.depSearch.arrivalDate +""} </label><br></br>
@@ -176,29 +194,29 @@ alert("amountDebit: "+amountDebit+" and AmountCredit: "+amountCredit);
 
           <div className="form-group"> 
             <label>Cabin Class:</label>
-
+          
               <input type="radio" id="Business" onChange={this.onChangeCabinClass} value="Business"/>
               <label for="Business">Business</label>
               <input type="radio" id="Economy" onChange={this.onChangeCabinClass} value="Economy"/>
               <label for="Economy">Economy</label>
               <br></br>
               <br></br>
-
-
+              
+              
         </div>
           <div className="form-group">
             <input type="submit" value="Search" className="btn btn-primary" />
-
+    
           </div>
           </form>
           </div>
     </div>
-
-
-
-
-
+    
+  
+    
+        
+      
       )
     }
-
+ 
   }

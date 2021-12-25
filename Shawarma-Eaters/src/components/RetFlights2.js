@@ -36,7 +36,16 @@ import  '../imgs/img.css';
 import { FormGroup, Label, Input } from "reactstrap";
 import { Prompt ,Redirect,useLocation,BrowserRouter,withRouter } from 'react-router-dom';
 
-
+import Itinerary, {
+  ItinerarySegment,
+  ItineraryStatus,
+  ItineraryBadgeList,
+  ItinerarySegmentStop,
+  ItinerarySegmentDetail,
+} from "@kiwicom/orbit-components/lib/Itinerary";
+import { Airplane,Seat,InformationCircle,Entertainment ,Wifi,PowerPlug} from "@kiwicom/orbit-components/icons";
+import Icons from "@kiwicom/orbit-components/lib/icons";
+import Badge from "@kiwicom/orbit-components/lib/Badge";
 
 class RetFlights2 extends Component {
     constructor(props) {
@@ -69,12 +78,28 @@ class RetFlights2 extends Component {
           return (  
               <Redirect
               to={{
-              pathname: "/seats",
+              pathname: "/editReturnSeats",
               state: { 
-                depSearch: this.props.location.state.depSearch ,
-                retSearch: this.props.location.state.retSearch,
-                depFlight : this.props.location.state.depFlight,
-                retFlight : this.state.retFlight,
+
+            depSearch: this.props.location.state.depSearch ,
+            retSearch: this.props.location.state.retSearch,
+            depFlight : this.props.location.state.depFlight,
+            retFlight : this.state.retFlight,     // only changed retFlight we edit this
+            seatnumber : this.props.location.state.seatnumber,
+            NewBooking: this.props.location.state.NewBooking,
+            amountDebit: this.props.location.state.amountDebit,
+            amountCredit : this.props.location.state.amountCredit,
+
+            //from search 2 ret
+            economy_seats_dep: this.props.location.state.economy_seats,
+            business_seats_dep: this.props.location.state.business_seats,
+  
+            users: this.props.location.state.users,
+  
+            economy_seats_ret: this.props.location.state.economy_seats,
+            business_seats_ret: this.props.location.state.business_seats,
+
+            user:this.props.location.state.user
 
                       }
               }}
@@ -89,11 +114,25 @@ class RetFlights2 extends Component {
           return (  
               <Redirect
               to={{
-              pathname: "/DepFlights",
+              pathname: "/Search2ret",
               state: { 
                 depSearch: this.props.location.state.depSearch ,
-                retSearch: this.props.location.state.retSearch,
-                depFlight : this.props.location.state.depFlight
+            retSearch: this.props.location.state.retSearch,
+            depFlight : this.props.location.state.depFlight,
+            retFlight : this.state.retFlight,     // only changed retFlight
+            seatnumber : this.props.location.state.seatnumber,
+            NewBooking: this.props.location.state.NewBooking,
+            amountDebit: this.props.location.state.amountDebit,
+            amountCredit : this.props.location.state.amountCredit,
+            economy_seats_dep: this.props.location.state.economy_seats,
+            business_seats_dep: this.props.location.state.business_seats,
+  
+            users: this.props.location.state.users,
+  
+            economy_seats_ret: this.props.location.state.economy_seats,
+            business_seats_ret: this.props.location.state.business_seats,
+
+            user:this.props.location.state.user
 
                 }
               }}
@@ -105,7 +144,14 @@ class RetFlights2 extends Component {
         return (  
             <div>
                 {console.log(this.state.retFlight)}
-
+                <u><b><h4>Your old return flight</h4></b></u>
+    <ItinerarySegmentStop
+      city={this.props.location.state.depFlight.depAirport}
+      station={this.props.location.state.depFlight.depAirport+" Airport"}
+      date={this.props.location.state.depFlight.dates}
+      time={this.props.location.state.depFlight.departure}
+      icon={< Airplane size="large" />}
+    />
                 <Button color="primary" size="lg" style={{float:'left'}}    onClick={()=>{this.setState({redirectPrev: true});}}>Previous</Button>
                 <Button color="primary" size="lg"  onClick={()=>{   
                   if (JSON.stringify(this.state.retFlight)=="{}"){
@@ -115,7 +161,7 @@ class RetFlights2 extends Component {
                     this.setState({redirectNext: true});
 
                   }
-                } } style={{float:'right'}} >Next</Button>
+                } } style={{float:'inline-start'}} >Next</Button>
 
                 <FormGroup>
 
@@ -152,7 +198,8 @@ class RetFlights2 extends Component {
 
 
                     <Button size="small" color="primary" onClick={()=> { 
-                        this.setState({ retFlight: currentflight });  
+                        this.setState({ retFlight: currentflight  ,
+                          color:'0.5rem dashed black'});  
                         window.localStorage.setItem('Selected_Return_Flight', currentflight);
                     alert("Flight Selected !\nPlease proceed to the next page");
                     }}>

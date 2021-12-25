@@ -81,16 +81,25 @@ class DepFlights2 extends Component {
         return (  
             <Redirect
             to={{
-            pathname: "/seats",
+            pathname: "/editSeats",
             state: { 
-                depSearch: this.props.location.state.depSearch ,
-                retSearch: this.props.location.state.retSearch,
-                depFlight : this.state.depFlight,
-                retFlight : this.props.location.state.retFlight,
-                seatnumber : this.props.location.state.seatnumber,
-                NewBooking: this.props.location.state.NewBooking,
-                amountDebit: this.props.location.state.amountDebit,
-                amountCredit : this.props.location.state.amountCredit
+            depSearch: this.props.location.state.depSearch ,
+            retSearch: this.props.location.state.retSearch,
+            depFlight : this.state.depFlight,
+            economy_seats_dep: this.props.location.state.economy_seats,
+            business_seats_dep: this.props.location.state.business_seats,
+  
+            users: this.props.location.state.users,
+            retFlight :this.props.location.state.retFlight,
+  
+            economy_seats_ret: this.props.location.state.economy_seats,
+            business_seats_ret: this.props.location.state.business_seats,
+
+            user:this.props.location.state.user,
+
+            NewBooking: this.props.location.state.NewBooking,
+            amountDebit: this.props.location.state.amountDebit,
+            amountCredit : this.props.location.state.amountCredit
                 }
             }}
             />
@@ -106,13 +115,23 @@ class DepFlights2 extends Component {
               pathname: "/Search2dep",
               state: { 
                 depSearch: this.props.location.state.depSearch ,
-                retSearch: this.props.location.state.retSearch,
-                depFlight : this.state.depFlight,
-                retFlight : this.props.location.state.retFlight,
-                seatnumber : this.props.location.state.seatnumber,
-                NewBooking: this.props.location.state.NewBooking,
-                amountDebit: this.props.location.state.amountDebit,
-                amountCredit : this.props.location.state.amountCredit
+            retSearch: this.props.location.state.retSearch,
+            depFlight : this.props.location.state.depFlight,
+  
+            economy_seats_dep: this.props.location.state.economy_seats,
+            business_seats_dep: this.props.location.state.business_seats,
+  
+            users: this.props.location.state.users,
+            retFlight :this.props.location.state.retFlight,
+  
+            economy_seats_ret: this.props.location.state.economy_seats,
+            business_seats_ret: this.props.location.state.business_seats,
+
+            user:this.props.location.state.user,
+
+            NewBooking: this.props.location.state.NewBooking,
+            amountDebit: this.props.location.state.amountDebit,
+            amountCredit : this.props.location.state.amountCredit
                 }
             }}
               />
@@ -147,7 +166,7 @@ class DepFlights2 extends Component {
                   else{
                     this.setState({redirectNext: true});
                   }
-                } } style={{float:'right'}} >Submit</Button>
+                } } style={{float:'inline-start'}} >Next</Button>
               <FormGroup>
 
           {  this.state.dep_flights.length==0?<div>

@@ -56,13 +56,18 @@ class Iten extends React.Component {
     const sum=Math.floor((matches+matches2)/10000000);
     let NewBooking={};
 
+    // let seatnumberDepEconomy=this.props.location.state.economy_seats_dep[0].seatnumber;
+    // let seatnumberDepBusiness=this.props.location.state.business_seats_dep[0].seatnumber;
+
+    // let seatnumberRetEconomy=this.props.location.state.economy_seats_ret[0].seatnumber;
+    // let seatnumberRetBusiness=this.props.location.state.business_seats_ret[0].seatnumber;
 
 
     //   /booking/add
 if(this.props.location.state.depSearch.cabinclass == 'Economy'){
    NewBooking={
     bookingNumber:sum,
-    seats:this.props.location.state.seatnumber,
+    seats:'12',
     outgoingFlightId:this.props.location.state.depFlight._id,
     cost:100 *(this.props.location.state.depSearch.adults + this.props.location.state.depSearch.children),
     returnFlightId:this.props.location.state.retFlight._id
@@ -72,7 +77,7 @@ if(this.props.location.state.depSearch.cabinclass == 'Economy'){
 }else{
    NewBooking={
     bookingNumber:sum,
-    seats:this.props.location.state.seatnumber,
+    seats:'12',
     cost:1000 *(this.props.location.state.depSearch.adults + this.props.location.state.depSearch.children),
     outgoingFlightId:this.props.location.state.depFlight._id,
     returnFlightId:this.props.location.state.retFlight._id
@@ -99,10 +104,19 @@ const redirectEditRet = this.state.redirectEditRet;
             pathname: "/Search2ret",
             state: { 
               depSearch: this.props.location.state.depSearch ,
-              retSearch: this.props.location.state.retSearch,
-              depFlight : this.props.location.state.depFlight,
-              retFlight : this.props.location.state.retFlight,
-              seatnumber : this.props.location.state.seatnumber,
+            retSearch: this.props.location.state.retSearch,
+            depFlight : this.props.location.state.depFlight,
+  
+            economy_seats_dep: this.props.location.state.economy_seats,
+            business_seats_dep: this.props.location.state.business_seats,
+  
+            users: this.props.location.state.users,
+            retFlight :this.props.location.state.retFlight,
+  
+            economy_seats_ret: this.props.location.state.economy_seats,
+            business_seats_ret: this.props.location.state.business_seats,
+
+            user:this.props.location.state.user,
               NewBooking: this.state.NewBooking
 
                     }
@@ -120,12 +134,23 @@ const redirectEditRet = this.state.redirectEditRet;
             to={{
             pathname: "/Search2dep",
             state: { 
-              depSearch: this.props.location.state.depSearch ,
-              retSearch: this.props.location.state.retSearch,
-              depFlight : this.props.location.state.depFlight,
-              retFlight : this.props.location.state.retFlight,
-              seatnumber : this.props.location.state.seatnumber,
-              NewBooking: this.state.NewBooking
+            depSearch: this.props.location.state.depSearch ,
+            retSearch: this.props.location.state.retSearch,
+            depFlight : this.props.location.state.depFlight,
+  
+            economy_seats_dep: this.props.location.state.economy_seats,
+            business_seats_dep: this.props.location.state.business_seats,
+  
+            users: this.props.location.state.users,
+            retFlight :this.props.location.state.retFlight,
+  
+            economy_seats_ret: this.props.location.state.economy_seats,
+            business_seats_ret: this.props.location.state.business_seats,
+
+            user:this.props.location.state.user,
+
+            NewBooking: this.state.NewBooking
+
               }
             }}
             />

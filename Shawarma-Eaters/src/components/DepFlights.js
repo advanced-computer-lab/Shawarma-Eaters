@@ -45,7 +45,8 @@ class DepFlights extends Component {
           depFlight:{},
           dep_flights: [],
           redirectNext:false,
-          redirectPrev:false
+          redirectPrev:false,
+          color:''
         
         }
     }
@@ -64,7 +65,7 @@ class DepFlights extends Component {
         return (  
             <Redirect
             to={{
-            pathname: "/RetFlights",
+            pathname: "/seats",
             state: { 
               depSearch: this.props.location.state.depSearch ,
               retSearch: this.props.location.state.retSearch,
@@ -116,7 +117,8 @@ class DepFlights extends Component {
           this.state.dep_flights.map(currentflight =>(
             
               
-              <Card border="dark" style={{ width: '80rem', height: '35rem' }}>
+            <Card border="dark" style={{ width: '80rem', height: '35rem',border: currentflight._id==this.state.depFlight._id ? this.state.color:""  }}>
+
             <CardImg className="card-img-top" top width="100%" src={plane} alt="Card image cap" />
             <CardBody>
                 <CardTitle tag="h5">
@@ -143,7 +145,8 @@ class DepFlights extends Component {
                   
         
                     <Button class="btn btn-default" size="small" color="primary" onClick={()=> {
-                      this.setState({ depFlight: currentflight }) ; 
+                      this.setState({ depFlight: currentflight ,
+                        color:'0.5rem dashed black' }) ; 
                       window.localStorage.setItem("Selected_Departure_Flight",currentflight);
                       alert("Flight Selected !\nPlease proceed to the next page");}}  active= {(JSON.stringify(this.state.depFlight)=="{}")}
                       >

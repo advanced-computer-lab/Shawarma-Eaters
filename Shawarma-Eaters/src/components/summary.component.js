@@ -80,8 +80,17 @@ console.log(this.props);
             depSearch: this.props.location.state.depSearch ,
             retSearch: this.props.location.state.retSearch,
             depFlight : this.props.location.state.depFlight,
-            retFlight : this.props.location.state.retFlight,
-            seatnumber: this.props.location.state.seatnumber  
+  
+            economy_seats_dep: this.props.location.state.economy_seats,
+            business_seats_dep: this.props.location.state.business_seats,
+  
+            users: this.props.location.state.users,
+            retFlight :this.props.location.state.retFlight,
+  
+            economy_seats_ret: this.props.location.state.economy_seats,
+            business_seats_ret: this.props.location.state.business_seats,
+
+            user:this.state.user
 
                   }
           }}
@@ -96,13 +105,22 @@ console.log(this.props);
       return (  
           <Redirect
           to={{
-          pathname: "/seats",
+          pathname: "/returnSeats",
           state: { 
             depSearch: this.props.location.state.depSearch ,
             retSearch: this.props.location.state.retSearch,
             depFlight : this.props.location.state.depFlight,
-            retFlight : this.props.location.state.retFlight,
-            seatnumber: this.props.location.state.seatnumber 
+  
+            economy_seats_dep: this.props.location.state.economy_seats,
+            business_seats_dep: this.props.location.state.business_seats,
+  
+            users: this.props.location.state.users,
+            retFlight :this.props.location.state.retFlight,
+  
+            economy_seats_ret: this.props.location.state.economy_seats,
+            business_seats_ret: this.props.location.state.business_seats,
+
+            user:this.state.user
             }
           }}
           />
@@ -184,6 +202,8 @@ console.log(this.props);
           </span>
           <span class="body">
           <Label> {this.props.location.state.seatnumber}</Label> <br></br>
+          <br></br>
+          <b>El seats ya OMAR</b>
           </span>
         </div>
 
@@ -220,6 +240,8 @@ console.log(this.props);
           </span>
           <span class="body">
           <Label> {this.props.location.state.seatnumber}</Label> <br></br>
+
+          
           </span>
         </div>
       </div>
@@ -335,6 +357,8 @@ console.log(this.props);
           </span>
           <span class="body">
           <Label> {this.props.location.state.seatnumber}</Label> <br></br>
+          
+          
           </span>
         </div>
       </div>
@@ -345,6 +369,8 @@ console.log(this.props);
           </span>
           <span class="body">
           <Label> {this.props.location.state.seatnumber}</Label> <br></br>
+          <br></br>
+          <b>El seats ya OMAR !!!!!!! 12 dih test ana 7atetha</b>
           </span>
         </div>
 

@@ -44,7 +44,8 @@ class RetFlights extends Component {
             ret_flights: [],
             retFlight:{},
             redirectNext:false,
-            redirectPrev:false
+            redirectPrev:false,
+            color:''
 
         
         }
@@ -64,12 +65,18 @@ class RetFlights extends Component {
           return (  
               <Redirect
               to={{
-              pathname: "/seats",
+              pathname: "/returnSeats",
               state: { 
                 depSearch: this.props.location.state.depSearch ,
                 retSearch: this.props.location.state.retSearch,
                 depFlight : this.props.location.state.depFlight,
-                retFlight : this.state.retFlight,
+
+                economy_seats_dep: this.props.location.state.economy_seats,
+                business_seats_dep: this.props.location.state.business_seats,
+                
+                users: this.props.location.state.users,
+
+                retFlight : this.state.retFlight
         
                       }
               }}
@@ -84,10 +91,14 @@ class RetFlights extends Component {
           return (  
               <Redirect
               to={{
-              pathname: "/DepFlights",
+              pathname: "/seats",
               state: { 
                 depSearch: this.props.location.state.depSearch ,
-                retSearch: this.props.location.state.retSearch
+                retSearch: this.props.location.state.retSearch,
+                depFlight : this.props.location.state.depFlight,
+                economy_seats_dep: this.props.location.state.economy_seats,
+                business_seats_dep: this.props.location.state.business_seats,
+                users: this.props.location.state.users
                 }
               }}
               />
@@ -119,7 +130,7 @@ class RetFlights extends Component {
         </div>: this.state.ret_flights.map(currentflight =>(
             
                 
-                <Card border="dark" style={{ width: '80rem', height: '35rem' }}>
+            <Card border="dark" style={{ width: '80rem', height: '35rem',border: currentflight._id==this.state.retFlight._id ? this.state.color:""  }}>
             <CardImg className="card-img-top" top width="100%" src={plane} alt="Card image cap" />
             <CardBody>
                 <CardTitle tag="h5">
@@ -146,7 +157,9 @@ class RetFlights extends Component {
                     
 
                     <Button size="small" color="primary" onClick={()=> { 
-                        this.setState({ retFlight: currentflight });  
+                        this.setState({ retFlight: currentflight ,
+                          color:'0.5rem dashed black' });  
+                        
                         window.localStorage.setItem('Selected_Return_Flight', currentflight);
                     alert("Flight Selected !\nPlease proceed to the next page");
                     }}>

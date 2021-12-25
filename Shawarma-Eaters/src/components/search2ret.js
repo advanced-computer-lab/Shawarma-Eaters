@@ -141,14 +141,27 @@ alert("amountDebit: "+amountDebit+" and AmountCredit: "+amountCredit);
            to={{
            pathname: "/RetFlights2",
            state: { 
-            depSearch: this.state.depSearch ,
-            retSearch: this.state.retSearch,
+            depSearch: this.state.depSearch , // we edit this
+            retSearch: this.state.retSearch,  // we edit this
             depFlight : this.props.location.state.depFlight,
             retFlight : this.props.location.state.retFlight,
             seatnumber : this.props.location.state.seatnumber,
             NewBooking: this.props.location.state.NewBooking,
-            amountDebit: this.state.amountDebit,
-            amountCredit : this.state.amountCredit
+            amountDebit: this.state.amountDebit,  // we pass this
+            amountCredit : this.state.amountCredit, // we pass this
+
+  
+            economy_seats_dep: this.props.location.state.economy_seats,
+            business_seats_dep: this.props.location.state.business_seats,
+  
+            users: this.props.location.state.users,
+  
+            economy_seats_ret: this.props.location.state.economy_seats,
+            business_seats_ret: this.props.location.state.business_seats,
+
+            user:this.props.location.state.user
+
+
                    }
            }}
            />
@@ -162,7 +175,7 @@ alert("amountDebit: "+amountDebit+" and AmountCredit: "+amountCredit);
 
         <div class="IMGdiv">
         <div class="searchForum">
-        <h1>Search</h1>
+        <h1>Edit Your Return Flight Search</h1>
         <form onSubmit={this.onSubmit}>
 
           <div class="depDatediv" className="form-group">
