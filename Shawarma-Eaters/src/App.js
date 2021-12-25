@@ -28,8 +28,6 @@ import iternary from "./components/iternary.component";
 import EmailSend from './components/SendMail/EmailSend';
 import DisplayBookings from './components/MyBookings/test';
 import Login from './components/login/Login';
-
-
 function App() {
   const [buttonPopup,SetButtonPopup]= useState(false);
   

@@ -40,14 +40,24 @@ text-align: left !important;
 display:inline-flex;
 font-size: 0;
 margin-left: -210px;
+position: relative;
+  left: 119px;
 }
 .EditButton ,.DeleteButton{
 text-align: left !important;
 font-weight: bold;
 font-size: 10px;
+position: relative;
+left: -10px;
 
 
 }
+.ButtonTable
+    {
+      position: relative;
+      left: 119px;
+
+    }
 
 .EditButton {
 column-width: 90px;

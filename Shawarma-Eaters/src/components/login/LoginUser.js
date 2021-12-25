@@ -146,9 +146,9 @@ export default function Login() {
         </div>
         
         <br></br>
-        <Button block size="lg" type="submit" disabled={!validateForm()}>
+        <button className = "butn" block size="lg" type="submit" disabled={!validateForm()}>
           Login
-        </Button>
+        </button>
       </Form>
       
     </div>

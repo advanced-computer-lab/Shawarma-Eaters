@@ -65,6 +65,7 @@ const getUserById = (req, res) => {
 }
 
 const getUserBookingById = (req, res) => {
+  console.log('in getUserBookingById')
     User.findById(req.params.id).populate({path : 'bookings',populate :[{path : 'outgoingFlightId'},{path : 'returnFlightId'}]})//.populate('outgoingFlightId').populate('returnFlightId')
       .then(user => res.json(user.bookings))
       .catch(err => res.status(400).json('Error: ' + err));
@@ -176,7 +177,8 @@ const sendItinerary = async (req,res) => {   ///take in the params USERid and in
 
   var email = 'unKown';
 
-  var userDetails = {_id: "1",
+  var userDetails = 
+  {_id: "1",
   username: 'unkown',
   firstname: 'unkown',
   lastname: 'unkown',

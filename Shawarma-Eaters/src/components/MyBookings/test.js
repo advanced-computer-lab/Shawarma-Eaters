@@ -63,7 +63,7 @@ const DisplayBookings = () => {
 
  
     const response = await axios
-        .get(`http://localhost:5000/users/userBookings/`+user.data).then(booking => setBookings(booking.data))//.then(set)
+        .get(`http://localhost:5000/users/userBookings/`+user.data).then(booking => {setBookings(booking.data);console.log('bookings:',booking)})//.then(set)
         .catch((err) => console.log(err))
         console.log('all bookings',bookings);
     }
@@ -118,7 +118,7 @@ const DisplayBookings = () => {
             var depFlight = booking.outgoingFlightId;
             var arrFlight = booking.returnFlightId;
             console.log(booking.returnFlightId)
-            if(depFlight !== undefined && arrFlight !== undefined){
+            if(depFlight !== undefined && arrFlight !== undefined &&depFlight !== null  &&arrFlight !== null){
             return (
                     <Card className = 'card'>
                     {/* <CardImg className="card-img-top" top width="100%"  alt="Card image cap" /> */}
