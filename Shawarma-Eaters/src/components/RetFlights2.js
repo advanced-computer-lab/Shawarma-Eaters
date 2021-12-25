@@ -29,7 +29,7 @@ import StepProgressBar from "react-step-progress";
 import "react-step-progress/dist/index.css";
 
 import SearchPage from "./search-plus.component";
-import plane from '../imgs/plane.jpg';
+import plane from '../imgs/planeSky.jpg';
 import  '../imgs/img.css';
 
 

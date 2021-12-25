@@ -28,7 +28,7 @@ import StepProgressBar from "react-step-progress";
 import "react-step-progress/dist/index.css";
 
 import SearchPage from "./search-plus.component";
-import plane from '../imgs/plane.jpg';
+import plane from '../imgs/planeSky.jpg';
 import  '../imgs/img.css';
 
 
@@ -93,16 +93,16 @@ class DepFlights extends Component {
               {console.log(this.state.depFlight)}
                 
                 
-                <br></br>
-                <br></br>
-              <p>Please select prefered departure flight</p>
+             
+              <h1 style={{margin:'auto'}} >Please select prefered departure flight:</h1>
               <FormGroup style={{
         boxSizing: 'border-box',
         padding: "10px",
         fontFamily: "Arial",
         flexWrap: 'wrap'
       }}>
-        <Button color="primary" size="lg" style={{float:'left'}} onClick={()=>{this.setState({redirectPrev: true});}}>Previous</Button>
+        <Button color="primary" size="lg" style={{float:'left'}} 
+        onClick={()=>{this.setState({redirectPrev: true});}}>Previous</Button>
                 <Button color="primary" size="lg"  onClick={()=>{
                   if (JSON.stringify(this.state.depFlight)=="{}"){
                     alert("Please select a flight 1st");
@@ -110,7 +110,7 @@ class DepFlights extends Component {
                   else{
                     this.setState({redirectNext: true});
                   }
-                } } style={{float:'inline-start' ,flexWrap: 'wrap'}} >Next</Button>
+                } } style={{float:'inline-start' ,flexWrap: 'wrap',left:'1100px'}} >Next</Button>
         
           { this.state.dep_flights.length==0?
         <div>
@@ -123,13 +123,15 @@ class DepFlights extends Component {
           this.state.dep_flights.map(currentflight =>(
             
               
-            <Card border="dark" style={{ width: '80rem', height: '35rem',
-            flexWrap: 'wrap',border: currentflight._id==this.state.depFlight._id ? this.state.color:""  }}>
+            <Card border="dark" style={{ width: '80rem', height: '25rem',
+            flexWrap: 'wrap', boxSizing: 'border-box',top:'50px',
 
-            <CardImg className="card-img-top" top width="100%" src={plane} alt="Card image cap" />
+            border: currentflight._id==this.state.depFlight._id ? this.state.color:""  }}>
+
+           
             <CardBody>
                 <CardTitle tag="h5">
-                Departure Flight
+                <h1>Departure Flight</h1>
                 </CardTitle>
                 <CardSubtitle
                   className="mb-2 text-muted"
@@ -159,7 +161,8 @@ class DepFlights extends Component {
                       >
                     Select
                   </Button>
-              </CardBody>
+              </CardBody> 
+              <CardImg className="card-img-top" margin="auto" width="90%" src={plane} alt="Card image cap" />
               </Card>
               
         
