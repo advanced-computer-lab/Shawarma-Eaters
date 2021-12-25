@@ -16,6 +16,10 @@ export default class Search2ret extends Component {
    constructor(props) {
       super(props);
 
+      
+        
+      
+
 
 
       this.onChangeDepDate = this.onChangeDepDate.bind(this);
