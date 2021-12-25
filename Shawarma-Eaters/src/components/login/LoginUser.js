@@ -41,6 +41,7 @@ export default function Login() {
       .then(response => {
         console.log(response);
        localStorage.setItem("accessToken",response.data.accessToken);
+       localStorage.setItem("islogin",true);
         // localStorage.getItem("lastname");
         if(response.data === 'Wrong User')
         {
@@ -54,6 +55,7 @@ export default function Login() {
         }
         else
         {   
+          window.setTimeout(function() {window.location = '/';}, 1000);
           setMessage('You are Successfully logged in')
           console.log('message')
           // window.location  = '/myBookings'

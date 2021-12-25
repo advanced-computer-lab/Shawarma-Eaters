@@ -26,6 +26,7 @@ var booking 	 = new Schema ({
 	cost 				: Number,
 	returnFlightId 		: {type: Schema.Types.ObjectId , ref:'Flight'}, // reference id to the returnFlight number .
 	bookingDate			: Date, // booking date will be equal to the current date .
+	cabin : {type: String,required: true}
 
 });
 

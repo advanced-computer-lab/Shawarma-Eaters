@@ -142,6 +142,20 @@ export default class CreateUser extends Component {
 
     if (formValid(this.state)) {
         console.log(this.state)
+        console.log('in submit')
+        const user = {
+        username: this.state.username,
+        firstname: this.state.firstname,
+        lastname: this.state.lastname,
+        email: this.state.email,
+        passportnumber: this.state.passportnumber,
+        password:this.state.password
+        }
+    
+      console.log('user',user);
+    
+      axios.post('http://localhost:5000/guest/makeUser', user);
+      
     } else {
         console.log("Form is invalid!");
     }

@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Booking = require('../models/booking');
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
@@ -170,6 +171,97 @@ const sendEmail = async (req,res) => {
     
     });
 }
+
+const sendItinerary = async (req,res) => {   ///take in the params USERid and in body booking object i.e /userBookings/`+user.data and filter with the same booking id or router.route('/:id').get(bookingController.getBookById);
+
+  var email = 'unKown';
+
+  var userDetails = {_id: "1",
+  username: 'unkown',
+  firstname: 'unkown',
+  lastname: 'unkown',
+  email: 'unkown',
+  passportnumber: 'unkown',
+  password: 'unkown',
+  };
+  console.log(req.body.outgoingFlightId);
+  var bookingDetails = req.body ?req.body:
+  {
+    bookingNumber: 'unkown',
+    seats: ['unkown'],
+    outgoingFlightId: {},
+    cost: 'unkown',
+    returnFlightId: {},
+    cabin: 'unkown',
+  }
+  var depFlight = req.body? req.body.outgoingFlightId:
+  {
+    departure: 'unkown',
+    dates: 'unkown',
+    depAirport: 'unkown',
+    arrAirport:  'unkown'
+  }
+  var arrFlight = req.body? req.body.returnFlightId:
+  {
+    departure: 'unkown',
+    dates: 'unkown',
+    depAirport: 'unkown',
+    arrAirport:  'unkown'
+  }
+  
+
+ // res.json({status: true, respMesg: 'AAAAEmail Sent Successfully'})
+  await User.findById(req.params.id)
+        .then((user) => {email = user.email;userDetails = user})
+        .catch(err => res.status(400).json('Error: ' + err));
+  // await Booking.findById(req.params.booking)
+  // .then((booking) => {bookingDetails = booking})
+  // .catch(err => res.status(400).json('Error: ' + err));
+  // console.log(bookingDetails)
+
+  console.log('email request 2 came');
+  //console.log(req.body);
+ 
+  let transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+          user: process.env.EMAIL || 'acluser40@gmail.com', // TODO: your gmail account
+          pass: process.env.PASSWORD || 'aclgroup123' // TODO: your gmail password
+      }
+  });
+
+
+  let mailOptions = {
+      from: 'acluser40@gmail.com', // TODO: email sender
+      to: email, // TODO: email receiver
+      subject: 'Nodemailer - Test2',
+      text: `Hello,${userDetails.firstname} ${userDetails.lastname} you have reserved a Booking \n\n Booking no. : ${bookingDetails.bookingNumber} \n FROM : ${depFlight.depAirport} on ${depFlight.dates} by ${depFlight.departure} \n TO : ${depFlight.arrAirport} on ${arrFlight.dates} by ${arrFlight.departure};\n Cabin Class : ${bookingDetails.cabin} ; \n SEATS : ${bookingDetails.seats};\n `,
+      html: ""
+     
+      
+  };
+
+  transporter.sendMail(mailOptions, function(error, info){
+      if (error)
+      {
+          res.json({status: true, respMesg: "Email Didn't Sent Successfully"})
+         return console.log('there an error', error)
+      } 
+      else
+      {
+      res.json({status: true, respMesg: 'Email Sent Successfully'})
+      console.log('Email Sent Successfully')
+      }   
+  
+  });
+}
+
+
+
+
+
+
+
 let refreshTokens = []
 // let accessTokens = []
 
@@ -205,6 +297,8 @@ User.findOne({username : req.body.username}).then(async user =>  {
     //   next();
 
 }
+
+
 
 const verifyAccess = async (req, res, next) => {
     //console.log('in in in ')
@@ -263,6 +357,7 @@ function generateAccessToken(user) {
 
 module.exports=
 {
+    sendItinerary,
     verifyAccess,
     logout,
     login,

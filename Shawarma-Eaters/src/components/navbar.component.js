@@ -1,7 +1,28 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+//import { logout } from '../../backend/Controller/UserController';
+
+//const auth = localStorage.getItem("islogin");
 
 export default class Navbar extends Component {
+  constructor(props) {
+    super(props);
+
+    this.logout = this.logout.bind(this);
+
+    this.state = {auth: localStorage.getItem("islogin")}
+  console.log('auth:',this.state.auth);
+  }
+
+  logout()
+  {
+    console.log('in_logout')
+    localStorage.clear();
+    this.setState({ auth: false })
+    console.log(localStorage.getItem("islogin"))
+
+  }
+  
 
   render() {
     return (
@@ -37,7 +58,14 @@ export default class Navbar extends Component {
           <li className="navbar-item">
           <Link to="/seats" className="nav-link">Seats</Link>
           </li>
+        </ul>
+        <ul className="navbar-nav ms-auto">
+          {
+            this.state.auth?<Link onClick = {()=> {this.logout()}} to="/loginUser" className="nav-link" >logout</Link>  :  <><Link to="/loginUser" className="nav-link">login</Link> <Link to="/createuser" className="nav-link">signUp</Link></>
+          }
           
+
+
         </ul>
         </div>
       </nav>
