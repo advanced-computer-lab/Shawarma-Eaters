@@ -67,7 +67,8 @@ class Iten extends React.Component {
 if(this.props.location.state.depSearch.cabinclass == 'Economy'){
    NewBooking={
     bookingNumber:sum,
-    seats:'12',
+    dep_seats:this.props.location.state.depSeats,
+    ret_seats:this.props.location.state.depSeats,
     outgoingFlightId:this.props.location.state.depFlight._id,
     cost:100 *(this.props.location.state.depSearch.adults + this.props.location.state.depSearch.children),
     returnFlightId:this.props.location.state.retFlight._id
@@ -77,7 +78,8 @@ if(this.props.location.state.depSearch.cabinclass == 'Economy'){
 }else{
    NewBooking={
     bookingNumber:sum,
-    seats:'12',
+    dep_seats:this.props.location.state.depSeats,
+    ret_seats:this.props.location.state.depSeats,
     cost:1000 *(this.props.location.state.depSearch.adults + this.props.location.state.depSearch.children),
     outgoingFlightId:this.props.location.state.depFlight._id,
     returnFlightId:this.props.location.state.retFlight._id
@@ -106,18 +108,16 @@ const redirectEditRet = this.state.redirectEditRet;
               depSearch: this.props.location.state.depSearch ,
             retSearch: this.props.location.state.retSearch,
             depFlight : this.props.location.state.depFlight,
-  
-            economy_seats_dep: this.props.location.state.economy_seats,
-            business_seats_dep: this.props.location.state.business_seats,
-  
+
             users: this.props.location.state.users,
             retFlight :this.props.location.state.retFlight,
-  
-            economy_seats_ret: this.props.location.state.economy_seats,
-            business_seats_ret: this.props.location.state.business_seats,
 
             user:this.props.location.state.user,
-              NewBooking: this.state.NewBooking
+
+            NewBooking: this.state.NewBooking,
+
+          depSeats: this.props.location.state.depSeats,
+          retSeats: this.props.location.state.retSeats
 
                     }
             }}
@@ -134,22 +134,20 @@ const redirectEditRet = this.state.redirectEditRet;
             to={{
             pathname: "/Search2dep",
             state: { 
-            depSearch: this.props.location.state.depSearch ,
+              
+             depSearch: this.props.location.state.depSearch ,
             retSearch: this.props.location.state.retSearch,
             depFlight : this.props.location.state.depFlight,
-  
-            economy_seats_dep: this.props.location.state.economy_seats,
-            business_seats_dep: this.props.location.state.business_seats,
-  
+
             users: this.props.location.state.users,
             retFlight :this.props.location.state.retFlight,
-  
-            economy_seats_ret: this.props.location.state.economy_seats,
-            business_seats_ret: this.props.location.state.business_seats,
-
+            
             user:this.props.location.state.user,
 
-            NewBooking: this.state.NewBooking
+            NewBooking: this.state.NewBooking,
+
+          depSeats: this.props.location.state.depSeats,
+          retSeats: this.props.location.state.retSeats
 
               }
             }}

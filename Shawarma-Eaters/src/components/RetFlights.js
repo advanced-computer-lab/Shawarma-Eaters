@@ -59,8 +59,6 @@ class RetFlights extends Component {
         axios.post('http://localhost:5000/guest/arrFlights',this.props.location.state.retSearch).then(result => this.setState({ ret_flights:  result.data})).catch((error) => {
             console.log(error);
           });
-
-          console.log(this.props);
     }
     
 
@@ -76,8 +74,7 @@ class RetFlights extends Component {
                 retSearch: this.props.location.state.retSearch,
                 depFlight : this.props.location.state.depFlight,
 
-                
-                depSeats: this.props.location.state.seatsArray,
+                depSeats: this.props.location.state.depSeats,
 
                 users: this.props.location.state.users,
 
@@ -114,8 +111,6 @@ class RetFlights extends Component {
         }
         return (  
             <div>
-                {console.log(this.state.retFlight)}
-                {console.log(this.state.seatsArray)}
 
                 <Button color="primary" size="lg" style={{float:'left'}}   
                 onClick={()=>{this.setState({redirectPrev: true});}}>Previous</Button>

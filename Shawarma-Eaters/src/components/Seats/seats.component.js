@@ -246,6 +246,7 @@ render(){
           depSearch: this.props.location.state.depSearch,
           retSearch: this.props.location.state.retSearch,
           depFlight : this.props.location.state.depFlight,
+          users:this.state.users,
           
           depSeats: this.seatsArray
   
