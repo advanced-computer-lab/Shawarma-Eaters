@@ -227,26 +227,22 @@ for(let i=0;i<this.state.number_of_Economy_seats;i++){
 
 componentDidMount() {
   //ret f
-  axios.get('http://localhost:5000/flights/61c0fd22cb5ce1115c0f584f')
-    .then(response => {
-      this.setState({
-        flight_number: response.data.flight_number,
-        departure: response.data.departure,
-        arrival_times: response.data.arrival_times,
-        number_of_Economy_seats: response.data.number_of_Economy_seats,
-        number_of_Business_class_seats: response.data.number_of_Business_class_seats,
-        arrAirport: response.data.arrAirport,
-        depAirport: response.data.depAirport,
-        dates: response.data.dates,
-        createdAt: response.data.createdAt,
-        economy_seats: response.data.economy_seats,
-        business_seats: response.data.business_seats,
 
-      })   
-    })
-    .catch(function (error) {
-      console.log(error);
-    })
+      this.setState({
+        flight_number: this.props.location.state.retFlight.flight_number,
+        departure: this.props.location.state.retFlight.departure,
+        arrival_times: this.props.location.state.retFlight.arrival_times,
+        number_of_Economy_seats: this.props.location.state.retFlight.number_of_Economy_seats,
+        number_of_Business_class_seats: this.props.location.state.retFlight.number_of_Business_class_seats,
+        arrAirport: this.props.location.state.retFlight.arrAirport,
+        depAirport: this.props.location.state.retFlight.depAirport,
+        dates: this.props.location.state.retFlight.dates,
+        createdAt: this.props.location.state.retFlight.createdAt,
+        economy_seats: this.props.location.state.retFlight.economy_seats,
+        business_seats: this.props.location.state.retFlight.business_seats,
+
+      })   ;
+   
 
 //this.startSeats()
     
@@ -260,7 +256,6 @@ render(){
         to={{
         pathname: "/summary",
         state: { 
-
 
           depSearch: this.props.location.state.depSearch ,
           retSearch: this.props.location.state.retSearch,

@@ -86,9 +86,6 @@ onSubmit(e) {
   })
 
 
-
-  
-
 const Dep_search = {
   departureAirport :  this.props.location.state.depSearch.departureAirport,
   arrivalAirport :  this.props.location.state.depSearch.arrivalAirport,

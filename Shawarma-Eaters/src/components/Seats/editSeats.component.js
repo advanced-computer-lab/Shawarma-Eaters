@@ -227,8 +227,7 @@ for(let i=0;i<this.state.number_of_Economy_seats;i++){
 
 componentDidMount() {
   //ret f
-  axios.get('http://localhost:5000/flights/61c0fd22cb5ce1115c0f584f')
-    .then(response => {
+  
       this.setState({
         flight_number: this.props.location.depFlight.flight_number,
         departure: this.props.location.depFlight.departure,
@@ -243,11 +242,7 @@ componentDidMount() {
         business_seats: this.props.location.depFlight.business_seats,
 
       })   
-    })
-    .catch(function (error) {
-      console.log(error);
-    })
-
+    
 //this.startSeats()
     
 }
