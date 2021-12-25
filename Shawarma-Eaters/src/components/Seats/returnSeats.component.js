@@ -8,7 +8,7 @@ import axios from 'axios';
 import "./seats.css";
 import { Prompt ,Redirect,useLocation,BrowserRouter,withRouter } from 'react-router-dom';
 
-export default class returnSeats extends Component{
+export default class ReturnSeats extends Component{
     constructor(props) {
         super(props);
        
