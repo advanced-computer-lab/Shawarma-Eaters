@@ -4,7 +4,6 @@
 
 body,
 html {
-  background: #bbbbbb;
   height: 100%;
   display: grid;
   text-transform: "capitalize";

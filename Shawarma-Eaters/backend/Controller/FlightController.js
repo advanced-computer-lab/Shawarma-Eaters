@@ -20,8 +20,8 @@ const addFlight =  (req,res)=> {
       )
     }
     
-    const depAirport = req.body.depAirport;
-    const arrAirport = req.body.arrAirport;
+    const depAirport = (req.body.depAirport).trim();
+    const arrAirport = (req.body.arrAirport).trim(  );
     const dates = Date.parse(req.body.dates);
   
   

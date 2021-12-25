@@ -22,6 +22,7 @@ export default class SearchPage extends Component {
       this.onChangeChildren = this.onChangeChildren.bind(this);
       this.onChangeCabinClass = this.onChangeCabinClass.bind(this);
       this.onSubmit = this.onSubmit.bind(this);
+      this.render = this.render.bind(this);
       
 
 
@@ -35,8 +36,8 @@ export default class SearchPage extends Component {
             children:0,
             cabinclass:'',
             redirectToMasterForm:false,
-            depArray:[],
-            retArray:[]
+            depArray:{},
+            retArray:{}
         }
         
     }
@@ -83,9 +84,31 @@ export default class SearchPage extends Component {
         cabinclass:e.target.value
        })
      }
-    
-     onSubmit(e) { 
-      e.preventDefault();
+    //  componentDidUpdate(prevProps, prevState) {
+    //   if (prevState.depArray.length !== this.state.depArray.length) {
+    //     console.log('depArraystate has changed.')
+    //   }
+    //   if (prevState.retArray.length !== this.state.retArray.length) {
+    //     console.log('retArraystate has changed.')
+    //   }
+    // }
+  //   componentDidMount() {
+  //     this.onSubmit();
+  // }
+      onSubmit(e) { 
+        console.log('in oSubmit')
+      const Dep_search = {
+        departureAirport : this.state.departureAirport,
+        arrivalAirport : this.state.arrivalAirport,
+        departureDate : this.state.departureDate,
+        arrivalDate : this.state.arrivalDate,
+        adults : this.state.adults,
+        children : this.state.children,
+        cabinclass : this.state.cabinclass
+      }
+      this.setState({
+        depArray: Dep_search
+       })
 
           const Dep_search = {
             departureAirport : this.state.departureAirport,
@@ -143,7 +166,7 @@ export default class SearchPage extends Component {
 
         
         )
-      }
+          }
       return (
         <div>
       <div class="IMGdiv">

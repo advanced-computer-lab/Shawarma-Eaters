@@ -3,6 +3,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from 'axios';
 import "./Login.css";
+import {Helmet} from 'react-helmet';
+
 
 export default function Login() {
   const [Username, setUsername] = useState("");
@@ -41,10 +43,12 @@ export default function Login() {
 
   return (
     <div className="Login">
-
-      <Form onSubmit={handleSubmit}>
+     
+          <Helmet>
+                <style>{'body { background-color: #5dd9be }'}</style>
+            </Helmet> 
       
-      <Form.Label>{error}</Form.Label>
+      <Form className="LoginForm" onSubmit={handleSubmit}>
         <Form.Group size="lg" controlId="Username">
           <Form.Label>Username</Form.Label>
           <Form.Control
@@ -65,15 +69,17 @@ export default function Login() {
           />
           <br></br>
         </Form.Group>
-       <div className = "loginAs">
-          <a href="http://localhost:3000/loginUser" >Login as user</a>
+        <div className = "loginAs">
+        <a href="http://localhost:3000/loginUser" >Login as user</a>
         </div>
-        
+
         <br></br>
-        <Button block size="lg" type="submit" disabled={!validateForm()}>
-          Login
-        </Button>
+        <button className = "butn" block size="lg" type="submit" disabled={!validateForm()}>
+        Login
+        </button>
       </Form>
+      
     </div>
   );
 }
+
