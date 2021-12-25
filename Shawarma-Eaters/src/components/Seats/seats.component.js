@@ -58,7 +58,7 @@ export default class seats extends Component{
         }
           this.seatsArray.push(sno);
 
-         }
+        }
         makeAvailable(sno){
           console.log("make Available");
 
@@ -75,7 +75,7 @@ export default class seats extends Component{
           if(index > -1 ){
             this.seatsArray.splice(index,1);
           }
-         }
+        }
         toggleOcc(sno){
            var sno2 = sno.substring(1, 3);
             //console.log("sno: "+sno2);
@@ -143,8 +143,7 @@ export default class seats extends Component{
           
             
 
-}
-
+        } 
         startSeats(){
           //console.log("in startSeats");
 
@@ -213,11 +212,9 @@ export default class seats extends Component{
 
 */
 
-}
+        }
 
 componentDidMount() {
-  //ret f
-
       this.setState({
         flight_number: this.props.location.state.depFlight.flight_number,
         departure: this.props.location.state.depFlight.departure,
@@ -240,18 +237,17 @@ componentDidMount() {
 
 render(){
   const redirectNext = this.state.redirectNext;
-  if (redirectNext) {
+  if (redirectNext & this.seatsArray.length != 0) {
     return (  
         <Redirect
         to={{
         pathname: "/RetFlights",
         state: { 
-          depSearch: this.props.location.state.depSearch ,
+          depSearch: this.props.location.state.depSearch,
           retSearch: this.props.location.state.retSearch,
           depFlight : this.props.location.state.depFlight,
-          economy_seats_dep: this.state.economy_seats,
-          business_seats_dep: this.state.business_seats
-
+          
+          depSeats: this.seatsArray
   
                 }
         }}
@@ -281,7 +277,7 @@ return(
 <body>
 
 
-  <div id="progressbar">
+<div id="progressbar">
 <button  onClick={() =>this.startSeats()} type="button">PRESSSS</button>
 </div>
 <h2>Departure Flight Seating</h2>

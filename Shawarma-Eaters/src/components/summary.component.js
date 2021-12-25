@@ -46,7 +46,9 @@ export default class Summary extends Component {
 
 
 
-  componentDidMount() {
+  componentDidMount(props) {
+    console.log(this.props.location.state.seatsArray);
+
 console.log(this.props);
     axios.get('http://localhost:5000/users/61a8d3f3ef7267e7fe6a6d4c/')
       .then(response => {
@@ -201,7 +203,7 @@ console.log(this.props);
             <u><b>SEAT</b></u>
           </span>
           <span class="body">
-          <Label> {this.props.location.state.seatnumber}</Label> <br></br>
+          <Label> {this.props.location.state.depSeats}</Label> <br></br>
           <br></br>
           <b>El seats ya OMAR</b>
           </span>
@@ -239,7 +241,7 @@ console.log(this.props);
             <u><b>SEAT</b></u>
           </span>
           <span class="body">
-          <Label> {this.props.location.state.seatnumber}</Label> <br></br>
+          <Label> {this.props.location.state.retSeats}</Label> <br></br>
 
           
           </span>
