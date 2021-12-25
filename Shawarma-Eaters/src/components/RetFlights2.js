@@ -91,15 +91,14 @@ class RetFlights2 extends Component {
             amountCredit : this.props.location.state.amountCredit,
 
             //from search 2 ret
-            economy_seats_dep: this.props.location.state.economy_seats,
-            business_seats_dep: this.props.location.state.business_seats,
+
   
             users: this.props.location.state.users,
-  
-            economy_seats_ret: this.props.location.state.economy_seats,
-            business_seats_ret: this.props.location.state.business_seats,
 
-            user:this.props.location.state.user
+
+            user:this.props.location.state.user,
+            depSeats: this.props.location.state.depSeats,
+            retSeats: this.props.location.state.retSeats
 
                       }
               }}
@@ -124,15 +123,14 @@ class RetFlights2 extends Component {
             NewBooking: this.props.location.state.NewBooking,
             amountDebit: this.props.location.state.amountDebit,
             amountCredit : this.props.location.state.amountCredit,
-            economy_seats_dep: this.props.location.state.economy_seats,
-            business_seats_dep: this.props.location.state.business_seats,
+
   
             users: this.props.location.state.users,
-  
-            economy_seats_ret: this.props.location.state.economy_seats,
-            business_seats_ret: this.props.location.state.business_seats,
 
-            user:this.props.location.state.user
+
+            user:this.props.location.state.user,
+            depSeats: this.props.location.state.depSeats,
+            retSeats: this.props.location.state.retSeats
 
                 }
               }}

@@ -153,17 +153,16 @@ alert("amountDebit: "+amountDebit+" and AmountCredit: "+amountCredit);
             NewBooking: this.props.location.state.NewBooking,
             amountDebit: this.state.amountDebit,  // we pass this
             amountCredit : this.state.amountCredit, // we pass this
-
-  
-            economy_seats_dep: this.props.location.state.economy_seats,
-            business_seats_dep: this.props.location.state.business_seats,
   
             users: this.props.location.state.users,
-  
-            economy_seats_ret: this.props.location.state.economy_seats,
-            business_seats_ret: this.props.location.state.business_seats,
 
-            user:this.props.location.state.user
+            user:this.props.location.state.user,
+
+            //////////
+
+
+          depSeats: this.props.location.state.depSeats,
+          retSeats: this.props.location.state.retSeats
 
 
                    }

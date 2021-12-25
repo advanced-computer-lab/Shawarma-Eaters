@@ -274,13 +274,12 @@ render(){
           //
 
           //from search 2 ret
-          economy_seats_dep: this.props.location.state.economy_seats,
-          business_seats_dep: this.props.location.state.business_seats,
+
 
           users: this.props.location.state.users,
 
-          economy_seats_ret: this.state.economy_seats, // we edit this  
-          business_seats_ret: this.state.business_seats,// we edit this  
+          depSeats: this.props.location.state.depSeats,
+          retSeats: this.seatsArray,
 
           user:this.props.location.state.user
   

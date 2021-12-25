@@ -139,8 +139,7 @@ alert("amountDebit: "+amountDebit+" and AmountCredit: "+amountCredit);
             retSearch: this.props.location.state.retSearch,
             depFlight : this.props.location.state.depFlight,
   
-            economy_seats_dep: this.props.location.state.economy_seats,
-            business_seats_dep: this.props.location.state.business_seats,
+
   
             users: this.props.location.state.users,
             retFlight :this.props.location.state.retFlight,
@@ -153,7 +152,10 @@ alert("amountDebit: "+amountDebit+" and AmountCredit: "+amountCredit);
             NewBooking: this.props.location.state.NewBooking,
             
             amountDebit: this.state.amountDebit,
-            amountCredit : this.state.amountCredit
+            amountCredit : this.state.amountCredit,
+
+            depSeats: this.props.location.state.depSeats,
+            retSeats: this.props.location.state.retSeats
             }
            }}
            />

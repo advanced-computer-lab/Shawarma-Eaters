@@ -86,20 +86,19 @@ class DepFlights2 extends Component {
             depSearch: this.props.location.state.depSearch ,
             retSearch: this.props.location.state.retSearch,
             depFlight : this.state.depFlight,
-            economy_seats_dep: this.props.location.state.economy_seats,
-            business_seats_dep: this.props.location.state.business_seats,
+
   
             users: this.props.location.state.users,
             retFlight :this.props.location.state.retFlight,
   
-            economy_seats_ret: this.props.location.state.economy_seats,
-            business_seats_ret: this.props.location.state.business_seats,
-
             user:this.props.location.state.user,
 
             NewBooking: this.props.location.state.NewBooking,
             amountDebit: this.props.location.state.amountDebit,
-            amountCredit : this.props.location.state.amountCredit
+            amountCredit : this.props.location.state.amountCredit,
+
+            depSeats: this.props.location.state.depSeats,
+            retSeats: this.props.location.state.retSeats
                 }
             }}
             />
@@ -114,24 +113,25 @@ class DepFlights2 extends Component {
               to={{
               pathname: "/Search2dep",
               state: { 
-                depSearch: this.props.location.state.depSearch ,
+              
+            depSearch: this.props.location.state.depSearch ,
             retSearch: this.props.location.state.retSearch,
             depFlight : this.props.location.state.depFlight,
   
-            economy_seats_dep: this.props.location.state.economy_seats,
-            business_seats_dep: this.props.location.state.business_seats,
   
             users: this.props.location.state.users,
             retFlight :this.props.location.state.retFlight,
-  
-            economy_seats_ret: this.props.location.state.economy_seats,
-            business_seats_ret: this.props.location.state.business_seats,
 
             user:this.props.location.state.user,
 
             NewBooking: this.props.location.state.NewBooking,
             amountDebit: this.props.location.state.amountDebit,
             amountCredit : this.props.location.state.amountCredit
+
+            ,
+
+            depSeats: this.props.location.state.depSeats,
+            retSeats: this.props.location.state.retSeats
                 }
             }}
               />
