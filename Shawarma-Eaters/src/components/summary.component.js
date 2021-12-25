@@ -47,9 +47,8 @@ export default class Summary extends Component {
 
 
   componentDidMount(props) {
-    console.log(this.props.location.state.seatsArray);
+    console.log(this.props.location.state);
 
-console.log(this.props);
     axios.get('http://localhost:5000/users/61a8d3f3ef7267e7fe6a6d4c/')
       .then(response => {
         this.setState({ user: response.data })
@@ -79,20 +78,14 @@ console.log(this.props);
           to={{
           pathname: "/iten",
           state: { 
-            depSearch: this.props.location.state.depSearch ,
-            retSearch: this.props.location.state.retSearch,
-            depFlight : this.props.location.state.depFlight,
-  
-            economy_seats_dep: this.props.location.state.economy_seats,
-            business_seats_dep: this.props.location.state.business_seats,
-  
-            users: this.props.location.state.users,
-            retFlight :this.props.location.state.retFlight,
-  
-            economy_seats_ret: this.props.location.state.economy_seats,
-            business_seats_ret: this.props.location.state.business_seats,
-
-            user:this.state.user
+          depSearch: this.props.location.state.depSearch ,
+          retSearch: this.props.location.state.retSearch,
+          depFlight : this.props.location.state.depFlight,
+          users: this.props.location.state.users,
+          retFlight :this.props.location.state.retFlight,
+          user:this.state.user,
+          depSeats: this.props.location.state.depSeats,
+          retSeats: this.props.location.state.retSeats
 
                   }
           }}
@@ -204,8 +197,7 @@ console.log(this.props);
           </span>
           <span class="body">
           <Label> {this.props.location.state.depSeats}</Label> <br></br>
-          <br></br>
-          <b>El seats ya OMAR</b>
+
           </span>
         </div>
 
@@ -358,7 +350,9 @@ console.log(this.props);
             <u><b>SEAT</b></u>
           </span>
           <span class="body">
-          <Label> {this.props.location.state.seatnumber}</Label> <br></br>
+          {this.props.location.state.retSeats.map(a=>(
+              <Label> {a} </Label> 
+            ))}
           
           
           </span>
@@ -370,9 +364,10 @@ console.log(this.props);
             <u><b>SEAT</b></u>
           </span>
           <span class="body">
-          <Label> {this.props.location.state.seatnumber}</Label> <br></br>
-          <br></br>
-          <b>El seats ya OMAR !!!!!!! 12 dih test ana 7atetha</b>
+            {this.props.location.state.retSeats.map(a=>(
+              <Label> {a} </Label> 
+            ))}
+          
           </span>
         </div>
 

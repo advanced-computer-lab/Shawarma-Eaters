@@ -227,8 +227,7 @@ for(let i=0;i<this.state.number_of_Economy_seats;i++){
 
 componentDidMount(props) {
   //ret f
-  console.log(this.props.location.state.seatsArray);
-  console.log(this.props)
+  console.log(this.props.location.state)
 
       this.setState({ 
         flight_number: this.props.location.state.retFlight.flight_number,
@@ -265,8 +264,7 @@ render(){
           users: this.props.location.state.users,
           retFlight :this.props.location.state.retFlight,
 
-
-          depSeats: this.props.location.state.seatsArray,
+          depSeats: this.props.location.state.depSeats,
           retSeats: this.seatsArray,
 
 
@@ -290,9 +288,6 @@ render(){
           depSearch: this.props.location.state.depSearch ,
           retSearch: this.props.location.state.retSearch,
           depFlight : this.props.location.state.depFlight,
-
-          economy_seats_dep: this.props.location.state.economy_seats,
-          business_seats_dep: this.props.location.state.business_seats,
 
           depSeats: this.props.location.state.seatsArray,
 

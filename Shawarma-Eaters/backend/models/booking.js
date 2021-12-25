@@ -21,7 +21,8 @@ var booking 	 = new Schema ({
 	// 			seat			: String
 	// 		}
 	// 	],
-	seats : [String],
+	dep_seats : [String],
+	ret_seats : [String],
 	outgoingFlightId 	: {type: Schema.Types.ObjectId , ref: 'Flight' },	//reference id to the outGoingFlight number .
 	cost 				: Number,
 	returnFlightId 		: {type: Schema.Types.ObjectId , ref:'Flight'}, // reference id to the returnFlight number .
