@@ -97,18 +97,7 @@ export default class SearchPage extends Component {
   // }
       onSubmit(e) { 
         console.log('in oSubmit')
-      const Dep_search = {
-        departureAirport : this.state.departureAirport,
-        arrivalAirport : this.state.arrivalAirport,
-        departureDate : this.state.departureDate,
-        arrivalDate : this.state.arrivalDate,
-        adults : this.state.adults,
-        children : this.state.children,
-        cabinclass : this.state.cabinclass
-      }
-      this.setState({
-        depArray: Dep_search
-       })
+
 
           const Dep_search = {
             departureAirport : this.state.departureAirport,

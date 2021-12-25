@@ -92,6 +92,20 @@ if(this.props.location.state.depSearch.cabinclass == 'Economy'){
           console.log(error);
         });
 
+        const SendItinerary = async (NewBooking) => {
+          console.log('SendItinerary method')
+          const token = {accessToken :localStorage.getItem("accessToken")};
+          const user = await axios.post('http://localhost:5000/users/verify%27',token);        //const BookID = getId(1);
+          console.log('userID:222' , user)
+  
+          const Itinerary = 
+          await axios
+              .post('http://localhost:5000/users/sendItinerary/'+user.data,NewBooking).then()
+              .catch((err) => console.log(err))
+              console.log(NewBooking);
+  
+        }
+
 
 
   }
