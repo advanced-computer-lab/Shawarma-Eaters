@@ -12,17 +12,14 @@ import DepFlights from './DepFlights.js';
 let data=[];
 let flag1=false;
 let flag2=false;
-export default class SearchPage extends Component {
+export default class Search2ret extends Component {
    constructor(props) {
       super(props);
       
       
-      this.onChangeDepAirport = this.onChangeDepAirport.bind(this);
-      this.onChangeArrAirport = this.onChangeArrAirport.bind(this);
+    
       this.onChangeDepDate = this.onChangeDepDate.bind(this);
       this.onChangeArrDate = this.onChangeArrDate.bind(this);
-      this.onChangeAdults = this.onChangeAdults.bind(this);
-      this.onChangeChildren = this.onChangeChildren.bind(this);
       this.onChangeCabinClass = this.onChangeCabinClass.bind(this);
       this.onSubmit = this.onSubmit.bind(this);
       
@@ -30,47 +27,23 @@ export default class SearchPage extends Component {
 
 
         this.state = {
-            departureAirport: '',
-            arrivalAirport: '',
             departureDate:new Date(),
             arrivalDate:new Date(),
-            adults: 0,
-            children:0,
             cabinclass:'',
             redirectToMasterForm:false,
             depSearch:{},
             retSearch:{},
-            allFlights:[]
+            amountDebit:0,
+            amountCredit:0
+             
         }
         
     }
-
-
-    componentDidMount() {
-      axios.get('http://localhost:5000/flights/')
-      .then(response => {
-        this.setState({ allFlights: response.data });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-//window.localStorage.clear();
+    componentDidMount(){
+      console.log(this.props);
     }
+  
 
-
-     onChangeDepAirport(e) {
-      this.setState({
-        departureAirport: e.target.value
-      })
-     }
-   
-     onChangeArrAirport(e) {
-       this.setState({
-        arrivalAirport: e.target.value
-       })
-     }
-   
      onChangeDepDate(date) {
        this.setState({
         departureDate: date
@@ -84,35 +57,45 @@ export default class SearchPage extends Component {
      }
    
    
-     onChangeAdults(e) {
-       this.setState({
-        adults: e.target.value
-       })
-     }
-   
-     onChangeChildren(e) {
-       this.setState({
-        children: e.target.value
-       })
-     }
-   
      onChangeCabinClass(e){
        this.setState({
         cabinclass:e.target.value
        })
      }
     
-
 onSubmit(e) { 
   console.log('in oSubmit');
+  let costDiffrences = 0;
+  
+  if(this.props.location.state.retSearch.cabinclass=='Economy' && this.state.cabinclass=='Business' ){
+    costDiffrences=(1000 *(this.props.location.state.retSearch.adults + this.props.location.state.retSearch.children))-this.props.location.state.NewBooking.cost;
+  }
+  if(this.props.location.state.retSearch.cabinclass=='Business' && this.state.cabinclass=='Economy'){
+    costDiffrences=(100 *(this.props.location.state.retSearch.adults + this.props.location.state.retSearch.children))-this.props.location.state.NewBooking.cost;
+  }
+  if ( (this.props.location.state.retSearch.cabinclass=='Economy' && this.state.cabinclass=='Economy') ||(this.props.location.state.retSearch.cabinclass=='Business' && this.state.cabinclass=='Business')){
+    costDiffrences = 0;
+  }
+  
+
+  let amountDebit =costDiffrences<-1?costDiffrences*-1:0 ;
+  let amountCredit= costDiffrences>-1?costDiffrences*-1:0;
+
+  this.setState({
+    amountDebit:amountDebit,
+    amountCredit:amountCredit
+  })
+
+
+  
 
 const Dep_search = {
-  departureAirport : this.state.departureAirport,
-  arrivalAirport : this.state.arrivalAirport,
+  departureAirport :  this.props.location.state.depSearch.departureAirport,
+  arrivalAirport :  this.props.location.state.depSearch.arrivalAirport,
   departureDate : this.state.departureDate,
   arrivalDate : this.state.arrivalDate,
-  adults : this.state.adults,
-  children : this.state.children,
+  adults :  this.props.location.state.depSearch.adults,
+  children : this.props.location.state.depSearch.children,
   cabinclass : this.state.cabinclass
 }
 this.setState({
@@ -121,21 +104,24 @@ this.setState({
 
 
 const Return_search = {
-  departureAirport :   this.state.arrivalAirport,
-  arrivalAirport :this.state.departureAirport ,
+  departureAirport :   this.props.location.state.retSearch.departureAirport,
+  arrivalAirport :this.props.location.state.retSearch.arrivalAirport ,
   departureDate : this.state.departureDate,
   arrivalDate : this.state.arrivalDate,
-  adults : this.state.adults,
-  children : this.state.children,
+  adults : this.props.location.state.retSearch.adults,
+  children : this.props.location.state.retSearch.children,
   cabinclass : this.state.cabinclass
 }
 this.setState({
   retSearch: Return_search
- })
+ });
+
 
 this.setState({
   redirectToMasterForm:true
 });
+alert("amountDebit: "+amountDebit+" and AmountCredit: "+amountCredit);
+
 //   e.preventDefault();
 //  alert('YOU DID IT YOU SEARCHED!!!!!' );
 
@@ -147,15 +133,22 @@ this.setState({
       //   console.log("depSearch:");
       //   console.log(this.state.depSearch);
       //   console.log("retSearch:");
-      // console.log(this.state.retSearch);
+      console.log(this.state.retSearch);
         //window.localStorage.clear();
+        
         return (  
            <Redirect
            to={{
-           pathname: "/DepFlights",
+           pathname: "/RetFlights2",
            state: { 
-             depSearch: this.state.depSearch,
-             retSearch: this.state.retSearch
+            depSearch: this.state.depSearch ,
+            retSearch: this.state.retSearch,
+            depFlight : this.props.location.state.depFlight,
+            retFlight : this.props.location.state.retFlight,
+            seatnumber : this.props.location.state.seatnumber,
+            NewBooking: this.props.location.state.NewBooking,
+            amountDebit: this.state.amountDebit,
+            amountCredit : this.state.amountCredit
                    }
            }}
            />
@@ -167,36 +160,15 @@ this.setState({
       
       return (
         
-      <div class="IMGdiv">
+        <div class="IMGdiv">
         <div class="searchForum">
         <h1>Search</h1>
         <form onSubmit={this.onSubmit}>
   
-          <div class="depAirdiv" className="form-group"> 
-            <label>Departure Airport: </label>
-            <input  class="depAirdiv" type="text"
-                required
-                className="form-control"
-                value={this.state.departureAirport}
-                onChange={this.onChangeDepAirport}
-                placeholder="From"
-                /> 
-                </div>
-   
-            
-         
-          <div id="arrAirdiv" className="form-group"> 
-          <label>  Arrival Airport: </label>
-            <input  type="text"
-                required
-                className="form-control"
-                value={this.state.arrivalAirport}
-                onChange={this.onChangeArrAirport}
-                placeholder="To"
-                /> 
-          </div>
-  
           <div class="depDatediv" className="form-group">
+          <label>Old Departure Date: <br></br>{this.props.location.state.retSearch.departureDate +""} </label><br></br>
+          <label>Old Arrival Date: <br></br>{this.props.location.state.retSearch.arrivalDate +""} </label><br></br>
+          <label>Old Cabin Class: <br></br>{this.props.location.state.retSearch.cabinclass +""} </label><br></br>
           <label> Departure Date: </label>
           <div>
             <DatePicker
@@ -214,38 +186,9 @@ this.setState({
             />
           </div>
           </div>
-          
-          <div className="form-group"> 
-            <label>Number of Adults: </label>
-            <input  type="text"
-                required
-                className="form-control"
-                // value={this.state.adults}
-                onChange={this.onChangeAdults}
-                //placeholder="Number of Adults:"
 
-                /> 
-          </div>
-          
-          <div className="form-group"> 
-            <label>Number of Children: </label>
-            <input  type="text"
-                required
-                className="form-control"
-                //value={this.state.children}
-                onChange={this.onChangeChildren}
-                //placeholder="Number of Children:"
-
-                /> 
-          </div>
           <div className="form-group"> 
             <label>Cabin Class:</label>
-            {/* <input  type="text"
-                required
-                className="form-control"
-                value={this.state.cabinclass}
-                onChange={this.onChangeCabinClass}
-                />  */}
           
               <input type="radio" id="Business" onChange={this.onChangeCabinClass} value="Business"/>
               <label for="Business">Business</label>

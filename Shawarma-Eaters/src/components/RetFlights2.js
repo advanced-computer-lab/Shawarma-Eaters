@@ -38,7 +38,7 @@ import { Prompt ,Redirect,useLocation,BrowserRouter,withRouter } from 'react-rou
 
 
 
-class RetFlights extends Component {
+class RetFlights2 extends Component {
     constructor(props) {
         super(props);
     
@@ -47,7 +47,9 @@ class RetFlights extends Component {
             ret_flights: [],
             retFlight:{},
             redirectNext:false,
-            redirectPrev:false
+            redirectPrev:false,
+            oldRetFlight: {},
+            color: ''
 
         
         }
@@ -127,7 +129,7 @@ class RetFlights extends Component {
         {this.state.ret_flights.map(currentflight =>(
             
                 
-                <Card border="dark" style={{ width: '80rem', height: '35rem' }}>
+                <Card border="dark" style={{ width: '80rem', height: '35rem',border: currentflight._id==this.state.retFlight._id ? this.state.color:"" }}>
             <CardImg className="card-img-top" top width="100%" src={plane} alt="Card image cap" />
             <CardBody>
                 <CardTitle tag="h5">
@@ -173,4 +175,4 @@ class RetFlights extends Component {
     }
 }
 
-export default RetFlights;
+export default RetFlights2;

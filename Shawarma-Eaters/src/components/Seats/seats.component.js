@@ -3,12 +3,9 @@ import React, { Component } from 'react';
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from 'axios';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-  } from "react-router-dom";
+import { Prompt ,Redirect,useLocation,BrowserRouter,withRouter } from 'react-router-dom';
+
+
 //import CheckIcon from '@mui/icons-material/Check';
 // import ToggleButton from '@mui/material/ToggleButton';
 import "./seats.css";
@@ -20,8 +17,10 @@ export default class seats extends Component{
         this.onChangeOcc = this.onChangeOcc.bind(this);  
         this.toggleOcc = this.toggleOcc.bind(this);  
           this.state = {
-            seatnumber:'',
-            occupied:false
+            seatnumber:'12',
+            occupied:false,
+            redirectNext:false,
+            redirectPrev:false
 
           }
         }
@@ -52,7 +51,7 @@ export default class seats extends Component{
                     occupied:false
                  })
                 //  this.toggleClass("reserved");
-                document.getElementById("s5").classList.delete("available");
+                document.getElementById("s5").classList.remove("available");
                 document.getElementById("s5").classList.add("reserved");
             }else{
                 this.setState({
@@ -60,7 +59,7 @@ export default class seats extends Component{
                     occupied:true
                  })
                  
-                 document.getElementById("s5").classList.delete("reserved");
+                 document.getElementById("s5").classList.remove("reserved");
                  document.getElementById("s5").classList.add("available");
 
                 //document.getElementById("s1").className += "reserved";
@@ -79,7 +78,7 @@ export default class seats extends Component{
 
  econSeat(s){
 
-    console.log('econseat clicked'+ s);
+    console.log('econseat clicked'+ s );
 
 }
 
@@ -89,10 +88,52 @@ componentDidMount() {
 }
 
 render(){
+    const redirectNext = this.state.redirectNext;
+    console.log(this.state.seatnumber.length);
+    console.log(redirectNext);
+    if (redirectNext && this.state.seatnumber.length!=0) {
+      return (  
+          <Redirect
+          to={{
+          pathname: "/summary",
+          state: { 
+            depSearch: this.props.location.state.depSearch ,
+            retSearch: this.props.location.state.retSearch,
+            depFlight : this.props.location.state.depFlight,
+            retFlight : this.props.location.state.retFlight,
+            seatnumber: "12"
+            }
+          }}
+          />
+
+      
+      )
+    }
+
+    const redirectPrev = this.state.redirectPrev;
+    if (redirectPrev) {
+      return (  
+          <Redirect
+          to={{
+          pathname: "/RetFlights",
+          state: { 
+            depSearch: this.props.location.state.depSearch ,
+            retSearch: this.props.location.state.retSearch,
+            depFlight : this.props.location.state.depFlight,
+            retFlight : this.props.location.state.retFlight
+            }
+          }}
+          />
+
+      
+      )
+    }
 return(
 
 <body>
-
+                
+<Button color="primary" size="lg" onClick={()=>{this.setState({redirectPrev: true});}}  style={{float:'left'}} >Previous</Button>
+<Button color="primary" size="lg"  onClick={()=>{ this.setState({redirectNext: true});}} style={{float:'right'}} >Next</Button>
 
 
 <h2>Flight Seating</h2>

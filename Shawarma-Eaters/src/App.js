@@ -21,12 +21,19 @@ import MasterForm from "./components/MasterForm";
 
 import DepFlights from './components/DepFlights.js';
 import RetFlights from './components/RetFlights.js';
+import Iten from './components/iten.component.js';
+
+import Search2dep from './components/search2dep.js';
+import Search2ret from './components/search2ret.js';
+
+import DepFlights2 from './components/DepFlights2.js';
+import RetFlights2 from './components/RetFlights2.js';
 
 import BasicTable from "./components/search/table";
 
 
 import UserProfile from "./components/profile/profile.component";
-import iternary from "./components/iternary.component";
+import Summary from "./components/summary.component";
 
 import EmailSend from './components/SendMail/EmailSend';
 import DisplayBookings from './components/MyBookings/test';
@@ -57,11 +64,18 @@ function App() {
       {/* <Route path="MasterForm" render={(props) => <MasterForm {...props}/>}/> */}
       <Route path="/DepFlights" render={(props) => <DepFlights {...props}/>}/>
       <Route path="/RetFlights" render={(props) => <RetFlights {...props}/>}/>
-      
+      <Route path="/iten" render={(props) => <Iten {...props}/>}/>
+      <Route path="/summary" render={(props) => <Summary {...props}/>}/>
+
+      <Route path="/Search2dep" render={(props) => <Search2dep {...props}/>}/>
+      <Route path="/Search2ret" render={(props) => <Search2ret {...props}/>}/>
+
+      <Route path="/DepFlights2" render={(props) => <DepFlights2 {...props}/>}/>
+      <Route path="/RetFlights2" render={(props) => <RetFlights2 {...props}/>}/>
 
 
       <Route path="/profile" component={UserProfile} /> 
-      <Route path="/iternary" component={iternary} />
+      {/* <Route path="/summary" component={Summary} /> */}
 
 
 

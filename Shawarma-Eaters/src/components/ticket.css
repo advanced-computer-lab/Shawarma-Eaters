@@ -7,15 +7,22 @@ html {
   background: #bbbbbb;
   height: 100%;
   display: grid;
+  text-transform: "capitalize";
+
 }
 
 .ticket {
   height: 20vw;
   width: 60vw;
-  margin: auto;
+  margin: auto auto 50px auto;
   border-radius: 2vw;
   position: relative;
   background: white;
+  text-transform: "capitalize";
+}
+h3{
+  text-align: end;
+  text-transform: "capitalize";
 }
 
 #banner {
@@ -24,6 +31,7 @@ html {
   border-top: 4vw solid #3399ff;
   font-family: "Merienda";
   color: white;
+  text-transform: "capitalize";
 }
 
 #mainbanner {
@@ -31,25 +39,31 @@ html {
   top: -0.4vw;
   left: 4.5vw;
   font-size: 3vw;
+  text-transform: "capitalize";
+  
 }
 
 #mainbanner img {
   vertical-align: middle;
   height: 4vw;
   width: 4vw;
+  width: 10%;
+  text-transform: "capitalize";
 }
 
 #tearoffbanner {
   position: absolute;
   top: 1vw;
   left: 46.7vw;
-  font-size: 1.2vw;
+  font-size: 100%;
+  text-transform: "capitalize";
 }
 
 #tearoffbanner img {
   vertical-align: middle;
-  height: 2vw;
-  width: 2vw;
+  height: 1 0%;
+  width: 12%;
+  text-transform: "capitalize";
 }
 
 #barcode {
@@ -58,10 +72,11 @@ html {
   width: 13vw;
   position: absolute;
   top: 10vw;
-  left: -2vw;
+  left: -5vw;
   font-size: 4em;
   font-family: "Libre Barcode 39";
   transform: rotate(-90deg) scale(1, 2.5);
+  text-transform: "capitalize";
 }
 
 #holes {
@@ -69,6 +84,7 @@ html {
   position: absolute;
   top: -1.8vw;
   left: 44vw;
+  text-transform: "capitalize";
 }
 
 #holes div {
@@ -77,12 +93,14 @@ html {
   border-radius: 100%;
   background: #bbbbbb;
   margin-top: 0.5vw;
+  text-transform: "capitalize";
 }
 
 #data {
   text-transform: uppercase;
-  font-size: 0.8vw;
+  font-size: 1vw;
   font-family: "Open Sans";
+  text-transform: "capitalize";
 }
 
 #maindata {
@@ -92,19 +110,23 @@ html {
   height: 16vw;
   top: 4vw;
   left: 9vw;
+  text-transform: "capitalize";
 }
 
 #data .box {
   width: 17vw;
   display: inline-block;
+  text-transform: "capitalize";
 }
 
 #data .box .header {
   display: block;
+  text-transform: "capitalize";
 }
 
 #data .box .body {
-  font-size: 1.7vw;
+  font-size: 1vw;
+  text-transform: "capitalize";
 }
 
 #data .box.boarding {
@@ -116,13 +138,16 @@ html {
   border: 2px solid black;
   margin-top: 0.3vw;
   margin-left: 6vw;
+  text-transform: "capitalize";
 }
 #data .box.boarding .header {
   font-size: 1.8vw;
+  text-transform: "capitalize";
 }
 
 #data .box.boarding .body {
   font-size: 1.5vw;
+  text-transform: "capitalize";
 }
 
 #tearoffdata {
@@ -132,24 +157,30 @@ html {
   top: 0vw;
   left: 37vw;
   font-size: 0.8vw;
+  text-transform: "capitalize";
 }
 
 #tearoffdata .box {
   width: 13vw;
   display: block;
+  text-transform: "capitalize";
 }
 
 #tearoffdata .box .header {
   text-decoration: none;
+  text-transform: "capitalize";
 }
 #tearoffdata .box .body {
   margin-left: 1vw;
-  font-size: 1.2vw;
+  font-size: 1vw;
+  text-transform: "capitalize";
 }
 
 #tearoffdata .box.seat {
   margin-top: 0vw;
+  text-transform: "capitalize";
 }
 #tearoffdata .box.seat .body {
-  font-size: 2vw;
+  font-size: 1vw;
+  text-transform: "capitalize";
 }

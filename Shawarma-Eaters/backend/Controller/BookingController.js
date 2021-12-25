@@ -15,6 +15,9 @@ const addBook =  (req,res)=> {
     const outgoingFlightId = req.body.selected_depFlight;
     const returnFlightId = req.body.selected_retFlight;
     const bookingDate = new Date();
+
+    
+
     //what seats ?
 
 //bookingNumber
