@@ -87,86 +87,59 @@ export default class SearchPage extends Component {
      onSubmit(e) { 
       e.preventDefault();
 
-      // const Dep_search = {
-      //   departureAirport : this.state.departureAirport,
-      //   arrivalAirport : this.state.arrivalAirport,
-      //   departureDate : this.state.departureDate,
-      //   arrivalDate : this.state.arrivalDate,
-      //   adults : this.state.adults,
-      //   children : this.state.children,
-      //   cabinclass : this.state.cabinclass
-      // }
-      // axios.post('http://localhost:5000/guest/depFlights',Dep_search)
-      // .then(result =>{
-      //   console.log('the Dep search:',Dep_search);
-      //   console.log('result data of dep search:',result.data);
-      //    this.setState({
-      //     depArray: result.data
-      //    })
-         
-      // }
-      
-      //    )
-      // .catch(function (error) {
-      //   console.log(error);
-      // })
+          const Dep_search = {
+            departureAirport : this.state.departureAirport,
+            arrivalAirport : this.state.arrivalAirport,
+            departureDate : this.state.departureDate,
+            arrivalDate : this.state.arrivalDate,
+            adults : this.state.adults,
+            children : this.state.children,
+            cabinclass : this.state.cabinclass
+          }
+          this.setState({
+            depSearch: Dep_search
+          })
 
 
-      // const Return_search = {
-      //   departureAirport :   this.state.arrivalAirport,
-      //   arrivalAirport :this.state.departureAirport ,
-      //   departureDate : this.state.departureDate,
-      //   arrivalDate : this.state.arrivalDate,
-      //   adults : this.state.adults,
-      //   children : this.state.children,
-      //   cabinclass : this.state.cabinclass
-      // }
-      // axios.post('http://localhost:5000/guest/arrFlights',Return_search)
-      // .then(result =>{
-      //   console.log('Result data of return search:',result.data)
-      //   console.log('the Return search :',Return_search)
-      //   this.setState({
-      //    retArray: result.data
-      //   })}
-      //   )
-      // .catch(function (error) {
-      //   console.log(error+" yes error in axios post arrFlights");
-      // })
-     
-      
+          const Return_search = {
+            departureAirport : this.state.arrivalAirport,
+            arrivalAirport :this.state.departureAirport ,
+            departureDate : this.state.departureDate,
+            arrivalDate : this.state.arrivalDate,
+            adults : this.state.adults,
+            children : this.state.children,
+            cabinclass : this.state.cabinclass
+          }
+          this.setState({
+            retSearch: Return_search
+          })
 
-      this.setState({
-        redirectToMasterForm: true
-       });
-      //  localStorage.setItem("depArray",this.state.depArray);
-      //  localStorage.setItem("retArray",this.state.retArray );
-
-
-     
-     alert('YOU DID IT YOU SEARCHED!!!!!' );
+          this.setState({
+            redirectToMasterForm:true
+          });
+    //  alert('YOU DID IT YOU SEARCHED!!!!!' );
       
       }
 
 
      render() {
-      console.log(this.state.redirectToMasterForm);
-        console.log("depArray:");
-        console.log(this.state.depArray);
-        console.log("retArray:");
-      console.log(this.state.retArray);
       const redirectToMasterForm = this.state.redirectToMasterForm;
       if (redirectToMasterForm) {
-        
-        
+      //   console.log("depSearch:");
+      //   console.log(this.state.depSearch);
+      //   console.log("retSearch:");
+      // console.log(this.state.retSearch);
+        //window.localStorage.clear();
         return (  
-          
-          <>
-            <Redirect
-              to={{
-              pathname: "/MasterForm",
-            }}
-          />
-          </>
+           <Redirect
+           to={{
+           pathname: "/DepFlights",
+           state: { 
+             depSearch: this.state.depSearch,
+             retSearch: this.state.retSearch
+                   }
+           }}
+           />
 
         
         )
@@ -175,7 +148,7 @@ export default class SearchPage extends Component {
         <div>
       <div class="IMGdiv">
         <div class="searchForum">
-        <h1>Search</h1>
+        <h1>Find Flights</h1>
         <form onSubmit={this.onSubmit}>
   
           <div class="depAirdiv" className="form-group"> 
@@ -272,19 +245,24 @@ export default class SearchPage extends Component {
     <div class="offerImg">
 
 <h1 id="offerText">
-A NEW TRIP BEGINS WITH
-40,000 BONUS MILES Earn 40,000 bonus miles plus enjoy your first checked bag free on Delta flights. 
-See offer Terms Apply.         
-$$$$$$[PS. get a higher quality img]$$$$$$
+A NEW TRIP BEGINS WITH 40,000 BONUS SHAWARMILES <br></br>
+plus enjoy your first checked bag free on ShawarmaAir flights. 
+
+
 </h1>
-
-
-
-
-
-
-    
   </div>
+  <br></br>
+  <br></br>
+  <br></br>
+  <br></br>
+  <br></br>
+  <br></br>
+  <br></br>
+  <br></br>
+  <br></br>
+
+
+
     </div>
         
       

@@ -17,7 +17,8 @@ const Flight = props => (
     <td>
       <Link to={"/edit/"+props.flight._id}>edit</Link> | <a href="#" onClick={() => {props.deleteFlight(props.flight._id) }}>delete</a>
     </td>
-    <td> {props.flight.economy_seats._id} </td>
+    <td> {props.flight.dates} </td>
+    <td>{props.flight.dates }</td>
   </tr>
 )
 

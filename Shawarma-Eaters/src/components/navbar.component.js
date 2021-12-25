@@ -6,7 +6,9 @@ export default class Navbar extends Component {
   render() {
     return (
       <nav id="navbar" class="navbar" className="navbar navbar-dark bg-dark navbar-expand-lg">
-        <Link to="/" className="navbar-brand">    ShawarmaAir</Link>
+     <div id="logo" src="flyingshawarma" ></div>
+        {/* <div id="logo"class="navbar-brand">  */}
+        <Link to="/" className="navbar-brand">ShawarmaAir</Link>
         <div className="collpase navbar-collapse">
         <ul className="navbar-nav mr-auto">
           <li className="navbar-item">
@@ -29,7 +31,7 @@ export default class Navbar extends Component {
           </li> 
 
           <li className="navbar-item">
-          <Link to="/iternary" className="nav-link">Iternary</Link>
+          <Link to="/summary" className="nav-link">summary</Link>
           </li>
 
           <li className="navbar-item">

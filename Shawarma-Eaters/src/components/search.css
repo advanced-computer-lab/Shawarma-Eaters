@@ -1,14 +1,14 @@
 div.IMGdiv{
     background-image: url("clouds.jpg");
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     width: 100%;
-    height:650px;
+    height:480px;
     /* margin: auto; */
 }
 div.searchForum{
     text-align: center;
-    width: 700px;
+    width: 750px;
     height: fit-content;
     background-color: #01559a;
     border-style: solid;
@@ -16,7 +16,7 @@ div.searchForum{
     /* left: 30px; */
     top: 60px;
     box-sizing: border-box;
-    border-radius: 6px;
+    border-radius: 9px;
     margin: auto;
     font-family: sans-serif;
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;    /* color: #949398; */
@@ -39,10 +39,22 @@ input[type=submit] {
     /* margin: auto; */
 }
 div.offerImg{
-    background-image: url("praguesnow.jpg");
+    background-image: url("planeWindowH614.jpg");
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     width: 100%;
-    height:650px;
-    /* margin: auto; */
+    height:410px;
+    margin: auto;
+    vertical-align: text-bottom;
+
+}
+
+#offerText{
+    font-family: sans-serif;
+    color: rgb(255, 255, 255);
+    margin: auto auto;
+    vertical-align: bottom;
+    position: relative;
+    top: 270px;
+
 }

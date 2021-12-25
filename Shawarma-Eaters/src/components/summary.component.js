@@ -31,7 +31,7 @@ import { FormGroup, Label, Input } from "reactstrap";
 import { Prompt ,Redirect,useLocation,BrowserRouter,withRouter } from 'react-router-dom';
 
 
-export default class iternary extends Component {
+export default class summary extends Component {
     constructor(props) {
         super(props);
     
@@ -91,12 +91,12 @@ export default class iternary extends Component {
   <div id="banner">
     <div id="topbanner"></div>
     <span id="mainbanner">
-      <img src="https://lukw4l.de/utils/media/assets/flightticket/plane_logo.png"></img>
-      Shawarma Eaters Airlines
+      <img src="../src/components/flyingshawarma.png"></img>
+      ShawarmaAir
     </span>
     <span id="tearoffbanner">
       <img src="https://lukw4l.de/utils/media/assets/flightticket/plane_logo.png"></img>
-      Shawarma Eaters Airlines
+      ShawarmaAir
     </span>
   </div>
   <div id="barcode">
@@ -117,7 +117,8 @@ export default class iternary extends Component {
           Flight Number
         </span>
         <span class="body">
-        <Label>Flight Number : {this.state.depFlight.flight_number}</Label> <br></br>
+        {/* <Label>Flight Number : {this.state.depFlight.flight_number}</Label> <br></br> */}
+        hhaa
         </span>
       </div>
       <div class="box">

@@ -33,22 +33,6 @@ export default class CreateFlights extends Component {
     }
   }
 
-  // componentDidMount() {
-  //   axios.get('http://localhost:5000/users/')
-  //     .then(response => {
-  //       if (response.data.length > 0) {
-  //         this.setState({
-  //           users: response.data.map(user => user.username),
-  //           username: response.data[0].username
-  //         })
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     })
-
-  // }
-
   onChangeFlightNo(e) {
    this.setState({
      flight_number: e.target.value
@@ -96,7 +80,6 @@ export default class CreateFlights extends Component {
       depAirport:e.target.value
     })
   }
-  //
 
   onSubmit(e) {
     e.preventDefault();
@@ -135,22 +118,7 @@ export default class CreateFlights extends Component {
               onChange={this.onChangeFlightNo}
               /> 
               </div>
-          {/* <select ref="userInput"
-              required
-              className="form-control"
-              value={this.state.username}
-              onChange={this.onChangeUsername}>
-              {
-                this.state.users.map(function(user) {
-                  return <option 
-                    key={user}
-                    value={user}>{user}
-                    </option>;
-                })
-              }
-          </select> */}
-          
-       
+
         <div className="form-group"> 
         <label>Departure Time: </label>
           <input  type="text"

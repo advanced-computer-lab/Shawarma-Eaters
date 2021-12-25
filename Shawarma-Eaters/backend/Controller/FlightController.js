@@ -131,18 +131,24 @@ const UpdateFlightSeat = (req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 }
 
-const SeatState = (req, res) => {
-  console.log("inside seat state,,,flyNo input: "+req.params.flyNo);
-  occupied = ((req.params.occupied).toLowerCase() === 'true'); // false
-
+const SeatStateBusiness = (req, res) => {
+  console.log("inside seat stateBusiness,,,flyNo input: "+req.params.flyNo);
+  occupied = ((req.params.occupied).toLowerCase() === 'true'); 
   Flight.findOneAndUpdate(
-    //{id:req.params.id,"business_seats.seatnumber":req.params.seatNo},
     {"flight_number":req.params.flyNo,"business_seats.seatnumber":req.params.seatNo},
-    //{$set:{'business_seats.$.occupied': occupied }}, {new: true, useFindAndModify: false})
     {$set:{'business_seats.$.occupied': req.params.occupied }})
     .then(() => res.json('Seat Update in SeatState,,,,Seat no: '+ req.params.seatNo + 'occupied state: '+ req.params.occupied))
     .catch(err => res.status(400).json('Error: ' + err));
   }
+  const SeatStateEconomy = (req, res) => {
+    console.log("inside seat stateEcomomy,,,flyNo input: "+req.params.flyNo);
+    occupied = ((req.params.occupied).toLowerCase() === 'true'); 
+    Flight.findOneAndUpdate(
+      {"flight_number":req.params.flyNo,"economy_seats.seatnumber":req.params.seatNo},
+      {$set:{'economy_seats.$.occupied': req.params.occupied }})
+      .then(() => res.json('Seat Update in SeatState,,,,Seat no: '+ req.params.seatNo + 'occupied state: '+ req.params.occupied))
+      .catch(err => res.status(400).json('Error: ' + err));
+    }
 
 
 module.exports=
@@ -155,5 +161,6 @@ module.exports=
     deleteFlightById2,
     updateFlightById,
     UpdateFlightSeat,
-    SeatState
+    SeatStateBusiness,
+    SeatStateEconomy
 }

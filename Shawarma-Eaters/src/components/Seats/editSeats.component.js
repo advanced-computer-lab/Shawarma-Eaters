@@ -1,11 +1,14 @@
+// import React, { useState } from "react";
 import React, { Component } from 'react';
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from 'axios';
+//import CheckIcon from '@mui/icons-material/Check';
+// import ToggleButton from '@mui/material/ToggleButton';
 import "./seats.css";
 import { Prompt ,Redirect,useLocation,BrowserRouter,withRouter } from 'react-router-dom';
 
-export default class seats extends Component{
+export default class editSeats extends Component{
     constructor(props) {
         super(props);
        
@@ -18,6 +21,12 @@ export default class seats extends Component{
           this.makeSelected=this.makeSelected.bind(this);
 
 
+        //  this.state = {
+        //     seatnumber:'',
+        //     occupied:false
+        //   }
+          
+
           this.state = {
             flight_number: '',
             departure: '',
@@ -26,6 +35,7 @@ export default class seats extends Component{
             number_of_Business_class_seats: 0,
             arrAirport:'',
             depAirport:'',
+            // dates: new Date(),
             users: [], 
             economy_seats: [{ seatnumber: '', occupied:false }],
             business_seats: [{ seatnumber: '', occupied:false }],
@@ -145,62 +155,62 @@ export default class seats extends Component{
 
 }
 
-        startSeats(){
-          //console.log("in startSeats");
+startSeats(){
+  //console.log("in startSeats");
 
-          // To close the not there Business seats 
-          for(let i=12;i>this.state.number_of_Business_class_seats;i--){
-              let x="s"+i;
-              document.getElementById(x).classList.remove("available");
-              document.getElementById(x).classList.add("reserved");
-          }
+  // To close the not there Business seats 
+  for(let i=12;i>this.state.number_of_Business_class_seats;i--){
+      let x="s"+i;
+      document.getElementById(x).classList.remove("available");
+      document.getElementById(x).classList.add("reserved");
+  }
 
-          // To close the not there Economy seats 
-          for(let i=55;i>this.state.number_of_Economy_seats+12;i--){
-              //console.log("startSeats: i:"+i);   
-              let x="s"+i;
-              //console.log(x);
-              document.getElementById(x).classList.remove("available");
-              document.getElementById(x).classList.add("reserved");
-          }
+  // To close the not there Economy seats 
+  for(let i=55;i>this.state.number_of_Economy_seats+12;i--){
+      //console.log("startSeats: i:"+i);   
+      let x="s"+i;
+      //console.log(x);
+      document.getElementById(x).classList.remove("available");
+      document.getElementById(x).classList.add("reserved");
+  }
 
-          // To close the reserved Business seats
-          for(let i=0;i<this.state.number_of_Business_class_seats;i++){
-            let x="s"+(i+1);
-            let cn = document.getElementById(x).className;
+  // To close the reserved Business seats
+  for(let i=0;i<this.state.number_of_Business_class_seats;i++){
+    let x="s"+(i+1);
+    let cn = document.getElementById(x).className;
 
-            if(cn=="available"){
-              // check if the remaining seats are reserved or not
-            // console.log("i:"+i+" business_seats[i].seatnumber "+ this.state.business_seats[i].seatnumber+"  occupied: "+ this.state.business_seats[i].occupied  );
-              if(this.state.business_seats[i].occupied==true){
-                //console.log("this seat is RESERVED by a user  " +x);
-                document.getElementById(x).classList.remove("available");
-                document.getElementById(x).classList.add("reserved");
-              }else{
-                //console.log("this business seat is available  "+x);
-              }
-        }
-        }
+    if(cn=="available"){
+      // check if the remaining seats are reserved or not
+    // console.log("i:"+i+" business_seats[i].seatnumber "+ this.state.business_seats[i].seatnumber+"  occupied: "+ this.state.business_seats[i].occupied  );
+      if(this.state.business_seats[i].occupied==true){
+        //console.log("this seat is RESERVED by a user  " +x);
+        document.getElementById(x).classList.remove("available");
+        document.getElementById(x).classList.add("reserved");
+       }else{
+        //console.log("this business seat is available  "+x);
+      }
+}
+}
 
-        // To close the reserved Economy seats
-        for(let i=0;i<this.state.number_of_Economy_seats;i++){
-          let x="s"+(i+1+11);
-          let cn = document.getElementById(x).className;
+// To close the reserved Economy seats
+for(let i=0;i<this.state.number_of_Economy_seats;i++){
+  let x="s"+(i+1+11);
+  let cn = document.getElementById(x).className;
 
-          if(cn=="available" && i>=12 ){
-            // check if the remaining seats are reserved or not
-          console.log("i:"+i+" economy_seats[i].seatnumber "+ this.state.economy_seats[i].seatnumber+"  occupied: "+ this.state.economy_seats[i].occupied  );
-            
-          if(this.state.economy_seats[i].occupied==true){
-            console.log("this seat is RESERVED by a user  " +x);
-              document.getElementById(x).classList.remove("available");
-              document.getElementById(x).classList.add("reserved");
-            }else{
-              console.log("this economy seat is available  "+x);
-            }
-        }
-        }
-              
+  if(cn=="available" && i>=12 ){
+    // check if the remaining seats are reserved or not
+   console.log("i:"+i+" economy_seats[i].seatnumber "+ this.state.economy_seats[i].seatnumber+"  occupied: "+ this.state.economy_seats[i].occupied  );
+    
+   if(this.state.economy_seats[i].occupied==true){
+     console.log("this seat is RESERVED by a user  " +x);
+      document.getElementById(x).classList.remove("available");
+      document.getElementById(x).classList.add("reserved");
+     }else{
+      console.log("this economy seat is available  "+x);
+    }
+}
+}
+      
 
 
 
@@ -305,7 +315,7 @@ Passport number:38163A13G
 <h3>Flight Details:</h3>
 Flight number:  {this.state.flight_number}
 <br></br>
-{/* dep Flight number From Props: {this.props.location.state.depFlight.flight_number} */}
+dep Flight number From Props: {this.props.location.state.depFlight.flight_number}
 <br></br>
 
 Departure time: {this.state.departure}
@@ -423,7 +433,7 @@ Date: {this.state.dates}
 <Button id="prevButton" color="primary" size="" style={{float:'inline-start',width:'15%'}}   
  onClick={()=>{this.setState({redirectPrev: true});}}>Previous</Button>
                
-<Button id="nextButton" color="primary" size=""  style={{float:'inline-end',width:'15%'}}   
+<Button id="nextButton" color="primary" size="lg"  
 onClick={()=>{   if (JSON.stringify(this.state.retFlight)=="{}"){
                     alert("Please select a flight 1st");
                   }
@@ -431,7 +441,7 @@ onClick={()=>{   if (JSON.stringify(this.state.retFlight)=="{}"){
                     this.setState({redirectNext: true});
 
                   }
-                } } style={{float:'right',width:'15%'}} >Next</Button>
+                } } style={{float:'inline-start'}} >Next</Button>
 
 
 

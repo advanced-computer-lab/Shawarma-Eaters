@@ -17,13 +17,21 @@ import SearchPage from "./components/search-plus.component";
 import CreateUser from "./components/create-user.component";
 
 import Seats from './components/Seats/seats.component';
-import MasterForm from "./components/MasterForm";
+import returnSeats from './components/Seats/returnSeats.component';
+import editSeats from './components/Seats/editSeats.component';
+import editReturnSeats from './components/Seats/editReturnSeats.component';
 
+import Iten from './components/Iten.component';
+
+
+import MasterForm from "./components/MasterForm";
 import BasicTable from "./components/search/table";
 
+import DepFlights from './components/DepFlights.js';
+import RetFlights from './components/RetFlights.js';
 
 import UserProfile from "./components/profile/profile.component";
-import iternary from "./components/iternary.component";
+import summary from "./components/summary.component";
 
 import EmailSend from './components/SendMail/EmailSend';
 import DisplayBookings from './components/MyBookings/test';
@@ -48,13 +56,26 @@ function App() {
       <Route path="/createuser" component={CreateUser} />
       <Route path="/searchplus" component={SearchPage} />
       <Route path="/edituser/:id" component={EditUser} />
-      <Route path="/seats" component={Seats} /> 
+
+      <Route path="/seats" render={(props) => <Seats {...props} />}/> 
+      <Route path="/returnSeats" render={(props) => <returnSeats {...props} />}/> 
+      <Route path="/editSeats" render={(props) => <editSeats {...props} />}/> 
+      <Route path="/editReturnSeats" render={(props) => <editReturnSeats {...props} />}/> 
+      
+      <Route path="/returnSeats" component={returnSeats} /> 
+
       <Route path="/MasterForm" component={MasterForm} />
       <Route path="/profile" component={UserProfile} /> 
-      <Route path="/iternary" component={iternary} />
+      <Route path="/summary" component={summary} />
+
+      <Route path="/Iten" component={Iten} />
+
 
       <Route path="/realFlightList" component={FlightList} />
 
+      <Route path="/DepFlights" render={(props) => <DepFlights {...props}/>}/>
+      <Route path="/RetFlights" render={(props) => <RetFlights {...props}/>}/>
+      
 
 
 
