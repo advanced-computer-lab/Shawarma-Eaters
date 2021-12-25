@@ -39,7 +39,7 @@ const findArrivalFlight = (req,res) => {
         .catch(err => res.status(400).json('Error: ' + err));
     }
     else if (req.body.cabinclass == "Business" ){
-        Flight.find({depAirport: req.body.arrivalAirport,arrAirport: req.body.departureAirport, dates:{$lt: new Date(arrdateUpper),$gt: new Date(arrdateLower)}, number_of_Business_class_seats :{ $gte: Number(req.body.adults) + Number(req.body.children)}})
+        Flight.find({depAirport: req.body.departureAirport,arrAirport: req.body.arrivalAirport, dates:{$lt: new Date(arrdateUpper),$gt: new Date(arrdateLower)}, number_of_Business_class_seats :{ $gte: Number(req.body.adults) + Number(req.body.children)}})
         .then(flight => res.json(flight))
         .catch(err => res.status(400).json('Error: ' + err));
     }

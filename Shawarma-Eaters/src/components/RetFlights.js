@@ -53,9 +53,14 @@ class RetFlights extends Component {
 
     //this.props.depSearch
     componentDidMount(props) {
+      console.log(this.props.location.state.seatsArray);
+      console.log(this.props);
+
         axios.post('http://localhost:5000/guest/arrFlights',this.props.location.state.retSearch).then(result => this.setState({ ret_flights:  result.data})).catch((error) => {
             console.log(error);
           });
+
+          console.log(this.props);
     }
     
 
@@ -71,9 +76,8 @@ class RetFlights extends Component {
                 retSearch: this.props.location.state.retSearch,
                 depFlight : this.props.location.state.depFlight,
 
-                economy_seats_dep: this.props.location.state.economy_seats,
-                business_seats_dep: this.props.location.state.business_seats,
-                
+                depSeats: this.props.location.state.seatsArray,
+
                 users: this.props.location.state.users,
 
                 retFlight : this.state.retFlight
@@ -96,8 +100,9 @@ class RetFlights extends Component {
                 depSearch: this.props.location.state.depSearch ,
                 retSearch: this.props.location.state.retSearch,
                 depFlight : this.props.location.state.depFlight,
-                economy_seats_dep: this.props.location.state.economy_seats,
-                business_seats_dep: this.props.location.state.business_seats,
+
+                // depSeats: this.props.location.state.seatsArray,
+
                 users: this.props.location.state.users
                 }
               }}
@@ -109,8 +114,10 @@ class RetFlights extends Component {
         return (  
             <div>
                 {console.log(this.state.retFlight)}
-                
-                <Button color="primary" size="lg" style={{float:'left'}}    onClick={()=>{this.setState({redirectPrev: true});}}>Previous</Button>
+                {console.log(this.state.seatsArray)}
+
+                <Button color="primary" size="lg" style={{float:'left'}}   
+                onClick={()=>{this.setState({redirectPrev: true});}}>Previous</Button>
                 <Button color="primary" size="lg"  onClick={()=>{   
                   if (JSON.stringify(this.state.retFlight)=="{}"){
                     alert("Please select a flight 1st");
@@ -124,7 +131,8 @@ class RetFlights extends Component {
                 <FormGroup>
 
             {   this.state.ret_flights.length==0?<div>
-        <h1>Sorry no Return flights match your search in our database </h1> <br></br>
+        <h1>Sorry no Return flights match your search in our database </h1> 
+        <br></br>
         <h1>Please go back to our search page</h1>
         <button onClick="window.location.href='/';">Home</button>
         </div>: this.state.ret_flights.map(currentflight =>(
