@@ -58,7 +58,7 @@ const flightColumns = useMemo(
   () =>
     flight[0]
       ? Object.keys(flight[0])
-          .filter((key) => key !== "updatedAt" &&  key !== "createdAt" &&   key !== "dates" &&  key !== "__v" && key !== 'business_seats' && key !== "_id" &&   key !== 'economy_seats')  //key !== "_id" && 
+          .filter((key) => key !== "updatedAt" &&  key !== "createdAt" &&   key !== "dates" &&  key !== "__v" && key !== 'business_seats' &&   key !== 'economy_seats')  //key !== "_id" && 
           .map((key) => {
             let head = key;
             if(key == "arrival_times")
@@ -73,7 +73,7 @@ const flightColumns = useMemo(
               head =  "Departure"
             else if(key == "flight_number")
               head =  "Flight Number"
-              
+            
 
             if (key === "image")
               return {
@@ -112,6 +112,7 @@ const tableHooks = (hooks) => {
         
         {/* <a href={"/edit/"+row.values._id}>
           {console.log('hi1')} */}
+          {console.log('id:::',row.values)}
         <button class = "EditButton" onClick={()=> window.location.href="/edit/"+row.values._id}>Edit</button>
         {setflight(flight)}
         
