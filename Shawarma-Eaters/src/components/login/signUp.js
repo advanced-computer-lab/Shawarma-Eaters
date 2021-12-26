@@ -264,7 +264,6 @@ formValChange = e => {
           <input  onClick={()=>this.submit()} value="Register Now" className="btn btn-success btn-lg btn-block" />
   
            </div>
-           <button type="submit" className="btn btn-block btn-danger">Create User</button>
 
             {/* <div class="form-group">
                 <button  class="btn btn-success btn-lg btn-block">Register Now</button>
