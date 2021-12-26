@@ -132,6 +132,8 @@ const tableInstance = useTable({columns : flightColumns,data : flightData},table
     getTableProps,
     getTableBodyProps,
     headerGroups,
+    getToggleHideAllColumnsProps,
+    allColumns,
     footerGroups,
     rows,
     prepareRow,
@@ -155,7 +157,7 @@ const tableInstance = useTable({columns : flightColumns,data : flightData},table
 
   //   setContacts(newContacts);
   // };
-  
+  //hidden
   if(flight.lenght != 0)
   {
 
@@ -163,6 +165,11 @@ const tableInstance = useTable({columns : flightColumns,data : flightData},table
   return (
 
     <>
+    <div>
+   
+
+        <br />
+      </div>
       <div className = 'BOX'>
         <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
         <table style={{marginRight: 100 + 'em'}} class="primary-nav" {...getTableProps()} >
@@ -211,7 +218,18 @@ const tableInstance = useTable({columns : flightColumns,data : flightData},table
           </tfoot> */}
         </table>
       </div>
+      <div >
+ 
+ {allColumns.map(column => {console.log('column',column);if(column.Header == '_id')return(
+   <div key={column.id}>
+     <label>
+       <input type='checkbox'  {...column.getToggleHiddenProps()} />{column.Header}
+     </label>
+   </div>
+)})}
+</div>
     </>
+    
   )
 }
 else
