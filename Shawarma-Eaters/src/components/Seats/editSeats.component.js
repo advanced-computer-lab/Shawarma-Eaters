@@ -192,6 +192,7 @@ startSeats(){
 }
 }
 
+
 // To close the reserved Economy seats
 for(let i=0;i<this.state.number_of_Economy_seats;i++){
   let x="s"+(i+1+11);
@@ -211,6 +212,19 @@ for(let i=0;i<this.state.number_of_Economy_seats;i++){
 }
 }
       
+//To Show user's booked seats 
+saLen=this.props.location.state.depSeats.length;
+for(let j=0;j<saLen;j++){
+  // saLen=this.props.location.state.seatsArray.length;
+ for(let i=0;i<55;i++){
+  let y=this.props.location.state.depSeats[j];
+  let x="s"+(i+1);
+  if(x==y){
+    document.getElementById(x).classList.remove("available");
+    document.getElementById(x).classList.add("selected");
+          }
+                  }
+}
 
 
 
