@@ -1,21 +1,20 @@
-Code for MERN tutorial.
+Shawarma Airline
+A mock web app supporting reserving fake flights online.
 
-The current version has MVC Model implemented
+How to run the web app:
+Clone the repo
+Run npm install
+Create a MongoDB with name austrian
+Create a .env file containing the following values:
+  ATLAS_URI, the connection url to MongoDB
+  ACCESS_SECRET_TOKEN, the JWT secret key, get it from the sprint description.
+  EMAIL, the email that will be used to send to the user info about the booking of flight-trip
+  PASSWORD , the password of the EMAIL
 
-Video Tutorial: https://www.youtube.com/watch?v=7CqJlxBYj-M
+Run the backend by 'node server'
+Run the frontend by 'npm start'
 
-Article Tutorial: https://medium.com/@beaucarnes/learn-the-mern-stack-by-building-an-exercise-tracker-mern-tutorial-59c13c1237a1
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-```
-### - Run the FrontEnd !
-```
-npm start
-```
-### - Run the server !
-```
-node server.js 
-```
-npm i express cors axios node mongoose body-parser bcryptjs validation
-npm i -D nodemon
-npm install react-scripts --save
+Disclaimer:
+This app is made only for academic purposes. It is not related by any means to any Airlines companies.
+For the payment, all payments are done in test mode, so no real cards are charged.
+Any copyright material used where only to mock the experience, and are not meant to interpersonate any Airlines companies.
