@@ -6,13 +6,13 @@
 ### How to run the web app:
 
 
-Clone the repo
+1-Clone the repo
 
-Run npm install
+2-Run npm install
 
-Create a MongoDB with name austrian
+3-Create a MongoDB cluster
 
-Create a .env file containing the following values:
+4-Create a .env file containing the following values:
 
   ATLAS_URI, the connection url to MongoDB
   
@@ -28,5 +28,5 @@ Run the frontend by 'npm start'
 
 ##### Disclaimer:
 This app is made only for academic purposes. It is not related by any means to any Airlines companies.
-For the payment, all payments are done in test mode, so no real cards are charged.
+For the payment,no real cards are charged.
 Any copyright material used where only to mock the experience, and are not meant to interpersonate any Airlines companies.
