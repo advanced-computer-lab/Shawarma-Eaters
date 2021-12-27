@@ -1,9 +1,9 @@
-Shawarma Airline
+#**Shawarma Airline**
 
 
 A mock web app supporting reserving fake flights online.
 
-How to run the web app:
+**How to run the web app:**
 Clone the repo
 Run npm install
 Create a MongoDB with name austrian
