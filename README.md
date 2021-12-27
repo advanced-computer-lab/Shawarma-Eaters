@@ -7,15 +7,23 @@
 
 
 Clone the repo
+
 Run npm install
+
 Create a MongoDB with name austrian
+
 Create a .env file containing the following values:
+
   ATLAS_URI, the connection url to MongoDB
+  
   ACCESS_SECRET_TOKEN, the JWT secret key, get it from the sprint description.
+  
   EMAIL, the email that will be used to send to the user info about the booking of flight-trip
+  
   PASSWORD , the password of the EMAIL
 
 Run the backend by 'node server'
+
 Run the frontend by 'npm start'
 
 ##### Disclaimer:
