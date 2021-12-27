@@ -58,7 +58,7 @@ const flightColumns = useMemo(
   () =>
     flight[0]
       ? Object.keys(flight[0])
-          .filter((key) => key !== "updatedAt" &&  key !== "createdAt" &&   key !== "dates" &&  key !== "__v" && key !== 'business_seats' && key !== "_id" &&   key !== 'economy_seats')  //key !== "_id" && 
+          .filter((key) => key !== "updatedAt" &&  key !== "createdAt" &&   key !== "dates" &&  key !== "__v" && key !== 'business_seats' &&   key !== 'economy_seats')  //key !== "_id" && 
           .map((key) => {
             let head = key;
             if(key == "arrival_times")
@@ -73,7 +73,7 @@ const flightColumns = useMemo(
               head =  "Departure"
             else if(key == "flight_number")
               head =  "Flight Number"
-              
+            
 
             if (key === "image")
               return {
@@ -112,6 +112,7 @@ const tableHooks = (hooks) => {
         
         {/* <a href={"/edit/"+row.values._id}>
           {console.log('hi1')} */}
+          {console.log('id:::',row.values)}
         <button class = "EditButton" onClick={()=> window.location.href="/edit/"+row.values._id}>Edit</button>
         {setflight(flight)}
         
@@ -131,6 +132,8 @@ const tableInstance = useTable({columns : flightColumns,data : flightData},table
     getTableProps,
     getTableBodyProps,
     headerGroups,
+    getToggleHideAllColumnsProps,
+    allColumns,
     footerGroups,
     rows,
     prepareRow,
@@ -154,7 +157,7 @@ const tableInstance = useTable({columns : flightColumns,data : flightData},table
 
   //   setContacts(newContacts);
   // };
-  
+  //hidden
   if(flight.lenght != 0)
   {
 
@@ -162,6 +165,11 @@ const tableInstance = useTable({columns : flightColumns,data : flightData},table
   return (
 
     <>
+    <div>
+   
+
+        <br />
+      </div>
       <div className = 'BOX'>
         <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
         <table style={{marginRight: 100 + 'em'}} class="primary-nav" {...getTableProps()} >
@@ -210,7 +218,18 @@ const tableInstance = useTable({columns : flightColumns,data : flightData},table
           </tfoot> */}
         </table>
       </div>
+      <div >
+ 
+ {allColumns.map(column => {console.log('column',column);if(column.Header == '_id')return(
+   <div key={column.id}>
+     <label>
+       <input type='checkbox'  {...column.getToggleHiddenProps()} />{column.Header}
+     </label>
+   </div>
+)})}
+</div>
     </>
+    
   )
 }
 else

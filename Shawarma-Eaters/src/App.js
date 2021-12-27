@@ -71,13 +71,13 @@ function App() {
 
       <Route path="/MasterForm" component={MasterForm} />
       <Route path="/profile" component={UserProfile} /> 
+      <Route path="/createuser" component={CreateUser} /> 
 
       <Route path="/iten" render={(props) => <Iten {...props}/>}/>
       <Route path="/summary" render={(props) => <Summary {...props}/>}/>
 
       {/* <Route path="/summary" component={summary} />
       <Route path="/Iten" component={Iten} /> */}
-
 
       <Route path="/realFlightList" component={FlightList} />
 

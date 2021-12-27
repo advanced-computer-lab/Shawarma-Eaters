@@ -235,13 +235,15 @@ formValChange = e => {
                         <span className="invalid-feedback">{isError.username}</span>
                     )}
             </div>
+            <br/>
             <div class="form-group">
                 <input type="email" className={isError.email.length > 0 ? "is-invalid form-control" : "form-control"}  name="email" placeholder="Email" required="required" value={this.state.email} onChange={this.formValChange}/>
                 {isError.email.length > 0 && (
                         <span className="invalid-feedback">{isError.email}</span>
                     )}
             </div>
-            
+            <br/>
+
             <div class="form-group ">
                 <input type="text" className={isError.passport.length > 0 ? "is-invalid form-control" : "form-control"}  name="Passportnumber" placeholder="Passport number:" required="required" value={this.state.passportnumber} onChange={this.formValChange}/>
                 {isError.passport.length > 0 && (
@@ -262,7 +264,6 @@ formValChange = e => {
           <input  onClick={()=>this.submit()} value="Register Now" className="btn btn-success btn-lg btn-block" />
   
            </div>
-           <button type="submit" className="btn btn-block btn-danger">Create User</button>
 
             {/* <div class="form-group">
                 <button  class="btn btn-success btn-lg btn-block">Register Now</button>
