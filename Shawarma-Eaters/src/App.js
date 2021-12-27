@@ -45,6 +45,9 @@ import Login from './components/login/Login';
 function App() {
   const [buttonPopup,SetButtonPopup]= useState(false);
   
+//  window.onbeforeunload = () => {
+//   localStorage.clear()
+// }
   return (
     <Router>
       <div >

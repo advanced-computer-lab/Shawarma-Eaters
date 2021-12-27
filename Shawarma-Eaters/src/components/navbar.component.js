@@ -32,28 +32,25 @@ export default class Navbar extends Component {
           <li className="navbar-item">
           <Link to="/flightlist" className="nav-link">Flight List</Link>
           </li>
-          <li className="navbar-item" color="red">
-          <Link to="/myBookings/61a8d3f3ef7267e7fe6a6d4c" className="nav-link" color="red ">My Bookings</Link>
-          </li> 
           <li className="navbar-item">
           <Link to="/createflights" className="nav-link">Create flights</Link>
           </li>
-          {/* <li className="navbar-item">
-          <Link to="/searchplus" className="nav-link">Search page</Link>
-          </li>  */}
+          { this.state.auth?
+          <>
+          <li className="navbar-item" color="red">
+          <Link to="/myBookings/" className="nav-link" color="red ">My Bookings</Link>
+          </li> 
+          
+          
           <li className="navbar-item">
           <Link to="/edituser/61a8d3f3ef7267e7fe6a6d4c" className="nav-link">My Profile</Link>
           </li> 
+          </>:''
+          }
           <li className="navbar-item">
           </li> 
 
-          <li className="navbar-item">
-          <Link to="/summary" className="nav-link">summary</Link>
-          </li>
-
-          <li className="navbar-item">
-          <Link to="/seats" className="nav-link">Seats</Link>
-          </li>
+       
         </ul>
         <ul className="navbar-nav ms-auto">
           {

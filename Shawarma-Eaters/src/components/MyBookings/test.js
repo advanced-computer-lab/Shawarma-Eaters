@@ -1,5 +1,7 @@
 
 import React, { useEffect, useState } from "react";
+import { Prompt ,Redirect,useLocation,BrowserRouter,withRouter } from 'react-router-dom';
+
 import axios from 'axios';
 import round_trip from './round_trip.png';
 import './MyBooking.css'
@@ -20,6 +22,10 @@ const DisplayBookings = () => {
     const [bookings,setBookings] = useState([{}]);
     const [debFlight,setdebFlight] = useState([{}]);
     const [arrFlight,setarrFlight] = useState([{}]);
+    const [arrIten,setIten] = useState(false);
+    const [tmpBooking,settmpBooking] = useState({});
+
+
 
     
     const getId = (idx) =>{
@@ -101,6 +107,11 @@ const DisplayBookings = () => {
             console.log(bookings);
       
     }
+    const viewIten = (booking)=>
+    {
+        setIten(true);
+        settmpBooking(booking)
+    }
     const Check = (id)=>
     {
         if(window.confirm('are you sure')){
@@ -160,7 +171,10 @@ const DisplayBookings = () => {
                                             </Button>   
                                             <Button className = 'btn btn-success btn-lg btn-block' size="small"  color="primary" onClick={()=> {SendItinerary(booking)}}>
                                                 Send Itinerary via mail
-                                            </Button>                       
+                                            </Button>    
+                                            <Button className = 'btn btn-success btn-lg btn-block' size="small"  color="primary" onClick={()=> {viewIten(booking)}}>
+                                                view Itinerary
+                                            </Button>                     
                                         </div>
 
                                 </div>
@@ -177,7 +191,22 @@ const DisplayBookings = () => {
         })
 
     
+        const redirectEditRet = arrIten;
+        if (redirectEditRet) {
+          return (  
+              <Redirect
+              to={{
+              pathname: "/iten",
+              state: { 
 
+            tmpBooking
+                      }
+              }}
+              />
+  
+  
+          )
+        }
       
 return (
     <>
@@ -197,168 +226,3 @@ return (
 export default DisplayBookings;
 
 
-// import React, { Component } from "react";
-// import {
-//   Form,
-//   Button,
-//   Card,
-//   CardHeader,
-//   CardBody,
-//   CardTitle,
-//   CardText,
-//   CardFooter,
-//   CardImg,
-//   CardSubtitle
-// } from "reactstrap";
-
-// import axios from 'axios';
-
-
-
-// import StepProgressBar from "react-step-progress";
-// // import the stylesheet
-// import "react-step-progress/dist/index.css";
-
-// import MultiStepProgressBar from "./MultiStepProgressBar";
-
-// //import plane from '../imgs/plane.jpg';
-// //import  '../imgs/img.css';
-
-// import { FormGroup, Label, Input } from "reactstrap";
-
-
-// let selected_flight_no=0;
-
-// class MasterForm extends Component {
-//   constructor(props) {
-//     super(props);
-
-//     // Set the intiial input values
-//     this.state = {
-//       bookings: []
-      
-//     };
-
-//     // // Bind new functions for next and previous
-//     // this._next = this._next.bind(this);
-//     // this._prev = this._prev.bind(this);
-//   }
-
-//   componentDidMount() {
-//     axios.get('http://localhost:5000/users/userBookings/'+getId(2))
-//       .then(response => {
-//         this.setState({ bookings: response.data })
-//       })
-//       .catch((error) => {
-//         console.log(error);
-//       });
-     
-//   }
-
-//   // Trigger an alert on form submission
-//   handleSubmit = event => {
-//     event.preventDefault();
-//     if (selected_flight_no==0){
-//       alert(`You did not select your departure flight !`);
-//     }
-//     else{
-//     alert(`Your Departure Flight detail: \n 
-//       Your Flight Number: ${selected_flight_no}`);
-//     }
-//   };
-
-  
-
-
-
-  
-
-//   step1Content() {
-    
-    
-  
-//     return (  
-//     <div>
-//       <p>Please select prefered departure flight</p>
-//       <FormGroup>
-
-//   { this.state.bookings.map(currentflight =>(
-    
-      
-//       <Card>
-//     <CardImg className="card-img-top" top width="100%" src={plane} alt="Card image cap" />
-//     <CardBody>
-//         <CardTitle tag="h5">
-//         Departure Flight
-//         </CardTitle>
-//         <CardSubtitle
-//           className="mb-2 text-muted"
-//           tag="h6"
-//         >
-//           Flight details:
-//         </CardSubtitle>
-
-//         <Label>Flight Number : {currentflight.flight_number}</Label> <br></br>
-     
-//         <Label>Departure : {currentflight.departure}</Label> <br></br>
-           
-//         <Label>Economy seats : {currentflight.number_of_Economy_seats}</Label>  <br></br>      
-
-//         <Label>Business class seats : {currentflight.number_of_Business_class_seats}</Label>  <br></br>
-          
-
-//             <Button size="small" color="primary" onClick={()=> {selected_flight_no=currentflight.flight_number ; alert("Flight Selected !\nPlease proceed to the next page");}}>
-//             Select
-//           </Button>
-//       </CardBody>
-//       </Card>
-      
-
-//       )
-//   )}
-//         </FormGroup>
-      
-//     </div>
-    
-//     );
-//   }
-
-
-//   render() {
-//     return (
-//       <>
-//         <Form onSubmit={this.handleSubmit}>
-//           <Card>
-//             <CardHeader>Choose your departure and return flight</CardHeader>
-//             <CardBody>
-//               <CardTitle>
-//                 <MultiStepProgressBar currentStep={this.state.currentStep} />
-//               </CardTitle>
-              
-
-//               {this.step1Content()}
-              
-//               <Step2
-//                 currentStep={this.state.currentStep}
-
-//               />
-//               <Step3
-//                 currentStep={this.state.currentStep}  
-//               />
-
-
-
-//             </CardBody>
-//             <CardFooter>
-//               {this.previousButton}
-//               {this.nextButton}
-//               {this.submitButton}
-//             </CardFooter>
-//           </Card>
-//         </Form>
-//       </>
-//     );
-//   }
-// }
-
-// export default MasterForm;

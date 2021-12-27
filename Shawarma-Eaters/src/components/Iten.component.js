@@ -47,7 +47,7 @@ class Iten extends React.Component {
 
 
   componentDidMount(props) { 
-    console.log(this.props);
+    console.log('itenBookings:',this.props);
 
     var str = ""+ this.props.location.state.depFlight._id;
     var str2= ""+ this.props.location.state.retFlight._id
@@ -162,7 +162,7 @@ const redirectEditRet = this.state.redirectEditRet;
 
 
 
-     <Itinerary   >
+     <Itinerary>
      <Button color="primary" size="lg" style={{float:'left'}}  onClick={()=>{this.setState({redirectEditDep: true});}}>Edit Departure Flight</Button>
   <br></br>
   <br></br>
@@ -219,4 +219,4 @@ const redirectEditRet = this.state.redirectEditRet;
    }
 } 
 
- export default Iten;
+export default Iten;

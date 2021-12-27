@@ -9,7 +9,7 @@ const getAllBookings = (req,res) => {
 }
 
 const addBook =  (req,res)=> {
-
+  console.log('in adding book ')
     const bookingNumber = req.body.bookingNumber;
     const cost = req.body.cost;
     const outgoingFlightId = req.body.outgoingFlightId;
@@ -18,17 +18,6 @@ const addBook =  (req,res)=> {
 
     const dep_seats= req.body.dep_seats;
    const  ret_seats= req.body.ret_seats;
-
-
-    //what seats ?
-
-//bookingNumber
-//seats
-//outgoingFlightId
-//cost
-//returnFlightId
-//bookingDate
-  
   
     const newBook = new Book({
         bookingNumber,
@@ -39,9 +28,9 @@ const addBook =  (req,res)=> {
         returnFlightId,
         bookingDate
     });
-  
+    
     newBook.save()
-    .then(() => res.json('Book added!'))
+    .then(() => {res.json('Book added!');console.log('book added2')})
     .catch(err => res.status(400).json('Error: ' + err));
   };
 
