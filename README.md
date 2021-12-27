@@ -1,7 +1,7 @@
 # Shawarma Airline
 
 
-##### > A mock web app supporting reserving fake flights online.
+ > A mock web app supporting reserving fake flights online.
 
 ### How to run the web app:
 
