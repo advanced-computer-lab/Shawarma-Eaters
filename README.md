@@ -22,9 +22,9 @@
 
       PASSWORD , the password of the EMAIL
 
-- [] Run the backend by 'node server'
+- ***Run the backend by 'node server'***
 
-- [] Run the frontend by 'npm start'
+- ***Run the frontend by 'npm start'***
 
 ##### Disclaimer:
 This app is made only for academic purposes. It is not related by any means to any Airlines companies.
