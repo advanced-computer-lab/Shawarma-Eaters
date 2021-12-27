@@ -1,18 +1,18 @@
 # Shawarma Airline
 
 
-##### A mock web app supporting reserving fake flights online.
+##### > A mock web app supporting reserving fake flights online.
 
 ### How to run the web app:
 
 
-1-Clone the repo
+- 1-Clone the repo
 
-2-Run npm install
+- 2-Run npm install
 
-3-Create a MongoDB cluster
+- 3-Create a MongoDB cluster
 
-4-Create a .env file containing the following values:
+- 4-Create a .env file containing the following values:
 
       ATLAS_URI, the connection url to MongoDB
 
