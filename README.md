@@ -1,9 +1,9 @@
 # Shawarma Airline
 
 
-A mock web app supporting reserving fake flights online.
+###A mock web app supporting reserving fake flights online.
 
-**How to run the web app:**
+## **How to run the web app:**
 
 
 Clone the repo
@@ -18,7 +18,7 @@ Create a .env file containing the following values:
 Run the backend by 'node server'
 Run the frontend by 'npm start'
 
-Disclaimer:
+####Disclaimer:
 This app is made only for academic purposes. It is not related by any means to any Airlines companies.
 For the payment, all payments are done in test mode, so no real cards are charged.
 Any copyright material used where only to mock the experience, and are not meant to interpersonate any Airlines companies.
